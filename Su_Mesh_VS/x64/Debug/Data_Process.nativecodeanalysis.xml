@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+      <FILENAME>io.h</FILENAME>
+      <LINE>698</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>6385</DEFECTCODE>
+    <DESCRIPTION>正在从 "names" 读取无效数据。</DESCRIPTION>
+    <FUNCTION>CGAL::IO::mode_name</FUNCTION>
+    <DECORATED>?mode_name@IO@CGAL@@YAPEBDW4Mode@12@@Z</DECORATED>
+    <FUNCLINE>694</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>4</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>696</LINE>
+        <COLUMN>27</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>697</LINE>
+        <COLUMN>2</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>进入此分支(假定“&lt;分支条件&gt;”)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>698</LINE>
+        <COLUMN>2</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>从“names[-1]”中读取无效(可读范围是 0 到 2)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+      <FILENAME>io.h</FILENAME>
+      <LINE>698</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>33010</DEFECTCODE>
+    <DESCRIPTION>已取消选中充当索引的枚举 m 的下限。</DESCRIPTION>
+    <FUNCTION>CGAL::IO::mode_name</FUNCTION>
+    <DECORATED>?mode_name@IO@CGAL@@YAPEBDW4Mode@12@@Z</DECORATED>
+    <FUNCLINE>694</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>694</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>696</LINE>
+        <COLUMN>27</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>696</LINE>
+        <COLUMN>37</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>696</LINE>
+        <COLUMN>27</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>697</LINE>
+        <COLUMN>2</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>Combination</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>基于条件“0 &lt;= m”进行分支。“false”分支已被占用
+检查了枚举值 "m" 是否有上限边界。</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>697</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>697</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>697</LINE>
+        <COLUMN>2</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>Branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>基于条件“result.possibly”进行分支。“true”分支已被占用</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>697</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>D:\CGAL-5.5.2\include\CGAL\IO\</FILEPATH>
+        <FILENAME>io.h</FILENAME>
+        <LINE>698</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\Intersections_2\</FILEPATH>
+      <FILENAME>Segment_2_Segment_2.h</FILENAME>
+      <LINE>79</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Intersections::internal::S2S2_inter_info::config。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Intersections::internal::S2S2_inter_info::{ctor}</FUNCTION>
+    <DECORATED>??0S2S2_inter_info@internal@Intersections@CGAL@@QEAA@H@Z</DECORATED>
+    <FUNCLINE>79</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Intersections::internal::S2S2_inter_info::config</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\Intersections_2\</FILEPATH>
+      <FILENAME>Segment_2_Segment_2.h</FILENAME>
+      <LINE>86</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Intersections::internal::S2S2_inter_info::config。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Intersections::internal::S2S2_inter_info::{ctor}</FUNCTION>
+    <DECORATED>??0S2S2_inter_info@internal@Intersections@CGAL@@QEAA@HH@Z</DECORATED>
+    <FUNCLINE>86</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Intersections::internal::S2S2_inter_info::config</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\Intersections_2\internal\</FILEPATH>
+      <FILENAME>Straight_2.h</FILENAME>
+      <LINE>75</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Intersections::internal::Straight_2_base_::main_dir_。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Intersections::internal::Straight_2_base_::{ctor}</FUNCTION>
+    <DECORATED>??0Straight_2_base_@internal@Intersections@CGAL@@IEAA@XZ</DECORATED>
+    <FUNCLINE>75</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Intersections::internal::Straight_2_base_::main_dir_</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\Intersections_2\internal\</FILEPATH>
+      <FILENAME>Straight_2.h</FILENAME>
+      <LINE>75</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Intersections::internal::Straight_2_base_::dir_sign_。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Intersections::internal::Straight_2_base_::{ctor}</FUNCTION>
+    <DECORATED>??0Straight_2_base_@internal@Intersections@CGAL@@IEAA@XZ</DECORATED>
+    <FUNCLINE>75</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Intersections::internal::Straight_2_base_::dir_sign_</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>224</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 &lt;&lt; ，然后将结果转换到 8 字节值。在调用运算符 &lt;&lt; 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::*</FUNCTION>
+    <DECORATED>??DCGAL@@YA?AVMP_Float@0@AEBV10@0@Z</DECORATED>
+    <FUNCLINE>213</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>224</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 &lt;&lt; ，然后将结果转换到 8 字节值。在调用运算符 &lt;&lt; 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::*</FUNCTION>
+    <DECORATED>??DCGAL@@YA?AVMP_Float@0@AEBV10@0@Z</DECORATED>
+    <FUNCLINE>213</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>233</LINE>
+      <COLUMN>59</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::*</FUNCTION>
+    <DECORATED>??DCGAL@@YA?AVMP_Float@0@AEBV10@0@Z</DECORATED>
+    <FUNCLINE>213</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>235</LINE>
+      <COLUMN>39</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::*</FUNCTION>
+    <DECORATED>??DCGAL@@YA?AVMP_Float@0@AEBV10@0@Z</DECORATED>
+    <FUNCLINE>213</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>237</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::*</FUNCTION>
+    <DECORATED>??DCGAL@@YA?AVMP_Float@0@AEBV10@0@Z</DECORATED>
+    <FUNCLINE>213</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>358</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 &lt;&lt; ，然后将结果转换到 8 字节值。在调用运算符 &lt;&lt; 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::to_double_exp</FUNCTION>
+    <DECORATED>?to_double_exp@CGAL@@YA?AU?$pair@NH@std@@AEBVMP_Float@1@@Z</DECORATED>
+    <FUNCLINE>341</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>405</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 &lt;&lt; ，然后将结果转换到 8 字节值。在调用运算符 &lt;&lt; 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::to_interval_exp</FUNCTION>
+    <DECORATED>?to_interval_exp@CGAL@@YA?AU?$pair@U?$pair@NN@std@@H@std@@AEBVMP_Float@1@@Z</DECORATED>
+    <FUNCLINE>367</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>446</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 &lt;&lt; ，然后将结果转换到 8 字节值。在调用运算符 &lt;&lt; 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::INTERN_MP_FLOAT::to_interval</FUNCTION>
+    <DECORATED>?to_interval@INTERN_MP_FLOAT@CGAL@@YA?AU?$pair@NN@std@@AEBV?$Quotient@VMP_Float@CGAL@@@2@@Z</DECORATED>
+    <FUNCLINE>442</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\Filtered_kernel\internal\Static_filters\</FILEPATH>
+      <FILENAME>Static_filter_error.h</FILENAME>
+      <LINE>40</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::internal::Static_filter_error::_d。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::internal::Static_filter_error::{ctor}</FUNCTION>
+    <DECORATED>??0Static_filter_error@internal@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>40</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::internal::Static_filter_error::_d</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\Filtered_kernel\internal\Static_filters\</FILEPATH>
+      <FILENAME>Static_filter_error.h</FILENAME>
+      <LINE>40</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::internal::Static_filter_error::_e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::internal::Static_filter_error::{ctor}</FUNCTION>
+    <DECORATED>??0Static_filter_error@internal@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>40</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::internal::Static_filter_error::_e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\Filtered_kernel\internal\Static_filters\</FILEPATH>
+      <FILENAME>Static_filter_error.h</FILENAME>
+      <LINE>40</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::internal::Static_filter_error::_b。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::internal::Static_filter_error::{ctor}</FUNCTION>
+    <DECORATED>??0Static_filter_error@internal@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>40</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::internal::Static_filter_error::_b</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\Filtered_kernel\internal\Static_filters\</FILEPATH>
+      <FILENAME>Static_filter_error.h</FILENAME>
+      <LINE>67</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 &lt;&lt; ，然后将结果转换到 8 字节值。在调用运算符 &lt;&lt; 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::internal::Static_filter_error::ulp</FUNCTION>
+    <DECORATED>?ulp@Static_filter_error@internal@CGAL@@SANN@Z</DECORATED>
+    <FUNCLINE>56</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\optional\</FILEPATH>
+      <FILENAME>optional.hpp</FILENAME>
+      <LINE>148</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 boost::optional_detail::optional_base&lt;std::pair&lt;double,double&gt; &gt;::m_storage。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>boost::optional_detail::optional_base&lt;std::pair&lt;double,double&gt; &gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$optional_base@U?$pair@NN@std@@@optional_detail@boost@@IEAA@XZ</DECORATED>
+    <FUNCLINE>148</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>boost::optional_detail::optional_base&lt;std::pair&lt;double,double&gt; &gt;::m_storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\optional\</FILEPATH>
+      <FILENAME>optional.hpp</FILENAME>
+      <LINE>148</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Bbox_3&gt; &gt;::m_storage。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Bbox_3&gt; &gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$optional_base@V?$variant@VBbox_3@CGAL@@$$V@boost@@@optional_detail@boost@@IEAA@XZ</DECORATED>
+    <FUNCLINE>148</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Bbox_3&gt; &gt;::m_storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>183</LINE>
+      <COLUMN>30</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::Add_Sub</FUNCTION>
+    <DECORATED>??$Add_Sub@U?$plus@H@std@@@CGAL@@YA?AVMP_Float@0@AEBV10@0AEBU?$plus@H@std@@@Z</DECORATED>
+    <FUNCLINE>159</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>MP_Float_impl.h</FILENAME>
+      <LINE>183</LINE>
+      <COLUMN>30</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>CGAL::Add_Sub</FUNCTION>
+    <DECORATED>??$Add_Sub@U?$minus@H@std@@@CGAL@@YA?AVMP_Float@0@AEBV10@0AEBU?$minus@H@std@@@Z</DECORATED>
+    <FUNCLINE>159</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\multiprecision\</FILEPATH>
+      <FILENAME>cpp_int.hpp</FILENAME>
+      <LINE>416</LINE>
+      <COLUMN>3</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>此类函数不应 throw。声明它为 "noexcept" (f.6)。</DESCRIPTION>
+    <FUNCTION>boost::multiprecision::backends::cpp_int_base&lt;0,-1,1,0,std::allocator&lt;unsigned long&gt;,0&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$cpp_int_base@$0A@$0?0$00$0A@V?$allocator@K@std@@$0A@@backends@multiprecision@boost@@QEAA@$$QEAU0123@@Z</DECORATED>
+    <FUNCLINE>416</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\multiprecision\</FILEPATH>
+      <FILENAME>cpp_int.hpp</FILENAME>
+      <LINE>417</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26437</DEFECTCODE>
+    <DESCRIPTION>请勿使用切片(es.63)。</DESCRIPTION>
+    <FUNCTION>boost::multiprecision::backends::cpp_int_base&lt;0,-1,1,0,std::allocator&lt;unsigned long&gt;,0&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$cpp_int_base@$0A@$0?0$00$0A@V?$allocator@K@std@@$0A@@backends@multiprecision@boost@@QEAA@$$QEAU0123@@Z</DECORATED>
+    <FUNCLINE>416</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>boost_mp.h</FILENAME>
+      <LINE>194</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26498</DEFECTCODE>
+    <DESCRIPTION>函数 std::numeric_limits&lt;double&gt;::infinity 是 constexpr，如果需要编译时计算，请将变量 inf 标记为 constexpr (con.5)。</DESCRIPTION>
+    <FUNCTION>CGAL::Boost_MP_internal::are_bounds_correct</FUNCTION>
+    <DECORATED>??$are_bounds_correct@V?$Quotient@V?$number@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@Boost_MP_internal@CGAL@@YA_NNNAEBV?$Quotient@V?$number@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@1@@Z</DECORATED>
+    <FUNCLINE>191</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\lexical_cast\detail\</FILEPATH>
+      <FILENAME>converter_lexical_streams.hpp</FILENAME>
+      <LINE>163</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 boost::detail::lexical_istream_limited_src&lt;char,std::char_traits&lt;char&gt;,0,21&gt;::buffer。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>boost::detail::lexical_istream_limited_src&lt;char,std::char_traits&lt;char&gt;,0,21&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$lexical_istream_limited_src@DU?$char_traits@D@std@@$0A@$0BF@@detail@boost@@QEAA@XZ</DECORATED>
+    <FUNCLINE>163</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>boost::detail::lexical_istream_limited_src&lt;char,std::char_traits&lt;char&gt;,0,21&gt;::buffer</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\optional\</FILEPATH>
+      <FILENAME>optional.hpp</FILENAME>
+      <LINE>148</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Point_3&lt;CGAL::Epick&gt;,CGAL::Segment_3&lt;CGAL::Epick&gt; &gt; &gt;::m_storage。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Point_3&lt;CGAL::Epick&gt;,CGAL::Segment_3&lt;CGAL::Epick&gt; &gt; &gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$optional_base@V?$variant@V?$Point_3@VEpick@CGAL@@@CGAL@@V?$Segment_3@VEpick@CGAL@@@2@@boost@@@optional_detail@boost@@IEAA@XZ</DECORATED>
+    <FUNCLINE>148</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Point_3&lt;CGAL::Epick&gt;,CGAL::Segment_3&lt;CGAL::Epick&gt; &gt; &gt;::m_storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Equal_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Equal_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Equal_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Equal_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Equal_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Is_degenerate_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Is_degenerate_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Is_degenerate_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Is_degenerate_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Is_degenerate_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Coplanar_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Coplanar_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Coplanar_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Coplanar_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Coplanar_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Are_parallel_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Are_parallel_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Are_parallel_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Are_parallel_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Are_parallel_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Has_on_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Has_on_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Has_on_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Has_on_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Has_on_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Orientation_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Orientation_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Orientation_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Orientation_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\optional\</FILEPATH>
+      <FILENAME>optional.hpp</FILENAME>
+      <LINE>148</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Point_3&lt;CGAL::Epick&gt;,CGAL::Line_3&lt;CGAL::Epick&gt; &gt; &gt;::m_storage。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Point_3&lt;CGAL::Epick&gt;,CGAL::Line_3&lt;CGAL::Epick&gt; &gt; &gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$optional_base@V?$variant@V?$Point_3@VEpick@CGAL@@@CGAL@@V?$Line_3@VEpick@CGAL@@@2@@boost@@@optional_detail@boost@@IEAA@XZ</DECORATED>
+    <FUNCLINE>148</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>boost::optional_detail::optional_base&lt;boost::variant&lt;CGAL::Point_3&lt;CGAL::Epick&gt;,CGAL::Line_3&lt;CGAL::Epick&gt; &gt; &gt;::m_storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Has_on_bounded_side_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Has_on_bounded_side_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Has_on_bounded_side_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Has_on_bounded_side_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CommonKernelFunctors::Has_on_bounded_side_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\multiprecision\cpp_int\</FILEPATH>
+      <FILENAME>bitwise.hpp</FILENAME>
+      <LINE>439</LINE>
+      <COLUMN>22</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>boost::multiprecision::backends::left_shift_generic</FUNCTION>
+    <DECORATED>??$left_shift_generic@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@YAXAEAU?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@012@_K@Z</DECORATED>
+    <FUNCLINE>397</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\multiprecision\cpp_int\</FILEPATH>
+      <FILENAME>bitwise.hpp</FILENAME>
+      <LINE>444</LINE>
+      <COLUMN>19</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>boost::multiprecision::backends::left_shift_generic</FUNCTION>
+    <DECORATED>??$left_shift_generic@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@YAXAEAU?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@012@_K@Z</DECORATED>
+    <FUNCLINE>397</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Do_intersect_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Do_intersect_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Do_intersect_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CommonKernelFunctors@CGAL@@V?$Do_intersect_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CommonKernelFunctors::Do_intersect_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Collinear_are_ordered_along_line_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Collinear_are_ordered_along_line_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Collinear_are_ordered_along_line_3@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Collinear_are_ordered_along_line_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@U?$NT_converter@NV?$number@U?$rational_adaptor@U?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@backends@multiprecision@boost@@@backends@multiprecision@boost@@$00@multiprecision@boost@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::CartesianKernelFunctors::Collinear_are_ordered_along_line_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt;,CGAL::NT_converter&lt;double,boost::multiprecision::number&lt;boost::multiprecision::backends::rational_adaptor&lt;boost::multiprecision::backends::cpp_int_backend&lt;0,0,1,0,std::allocator&lt;unsigned long&gt; &gt; &gt;,1&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Coplanar_orientation_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Coplanar_orientation_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2e</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\CGAL-5.5.2\include\CGAL\</FILEPATH>
+      <FILENAME>Filtered_predicate.h</FILENAME>
+      <LINE>65</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>未初始化变量 CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a。始终初始化成员变量(type.6)。</DESCRIPTION>
+    <FUNCTION>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Filtered_predicate@V?$Coplanar_orientation_3@U?$Simple_cartesian@VMP_Float@CGAL@@@CGAL@@@CartesianKernelFunctors@CGAL@@V?$Coplanar_orientation_3@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@CGAL@@@23@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@VMP_Float@CGAL@@@2@U?$NT_converter@NVMP_Float@CGAL@@@2@@3@V?$Cartesian_converter@U?$Type_equality_wrapper@U?$Cartesian_base_no_ref_count@NVEpick@CGAL@@@CGAL@@VEpick@2@@CGAL@@U?$Simple_cartesian@V?$Interval_nt@$0A@@CGAL@@@2@U?$NT_converter@NV?$Interval_nt@$0A@@CGAL@@@2@@3@$00@CGAL@@QEAA@XZ</DECORATED>
+    <FUNCLINE>65</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CGAL::Filtered_predicate&lt;CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt; &gt;,CGAL::CartesianKernelFunctors::Coplanar_orientation_3&lt;CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::MP_Float&gt;,CGAL::NT_converter&lt;double,CGAL::MP_Float&gt; &gt;,CGAL::Cartesian_converter&lt;CGAL::Type_equality_wrapper&lt;CGAL::Cartesian_base_no_ref_count&lt;double,CGAL::Epick&gt;,CGAL::Epick&gt;,CGAL::Simple_cartesian&lt;CGAL::Interval_nt&lt;0&gt; &gt;,CGAL::NT_converter&lt;double,CGAL::Interval_nt&lt;0&gt; &gt; &gt;,1&gt;::c2a</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\math\special_functions\</FILEPATH>
+      <FILENAME>next.hpp</FILENAME>
+      <LINE>527</LINE>
+      <COLUMN>32</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 - ，然后将结果转换到 8 字节值。在调用运算符 - 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>boost::math::detail::float_distance_imp</FUNCTION>
+    <DECORATED>??$float_distance_imp@NV?$policy@Udefault_policy@policies@math@boost@@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@@policies@math@boost@@@detail@math@boost@@YANAEBN0AEBU?$integral_constant@_N$00@std@@AEBV?$policy@Udefault_policy@policies@math@boost@@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@@policies@12@@Z</DECORATED>
+    <FUNCLINE>469</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\math\special_functions\</FILEPATH>
+      <FILENAME>next.hpp</FILENAME>
+      <LINE>527</LINE>
+      <COLUMN>24</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 - ，然后将结果转换到 8 字节值。在调用运算符 - 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>boost::math::detail::float_distance_imp</FUNCTION>
+    <DECORATED>??$float_distance_imp@NV?$policy@Udefault_policy@policies@math@boost@@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@@policies@math@boost@@@detail@math@boost@@YANAEBN0AEBU?$integral_constant@_N$00@std@@AEBV?$policy@Udefault_policy@policies@math@boost@@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@U1234@@policies@12@@Z</DECORATED>
+    <FUNCLINE>469</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\multiprecision\cpp_int\</FILEPATH>
+      <FILENAME>divide.hpp</FILENAME>
+      <LINE>555</LINE>
+      <COLUMN>65</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>算术溢出: 使用 4 字节值上的运算符 + ，然后将结果转换到 8 字节值。在调用运算符 + 之前将值强制转换为宽类型可避免溢出(io.2)。</DESCRIPTION>
+    <FUNCTION>boost::multiprecision::backends::eval_modulus</FUNCTION>
+    <DECORATED>??$eval_modulus@$0A@$0A@$00$0A@V?$allocator@K@std@@$0A@$0A@$00$0A@V12@@backends@multiprecision@boost@@YAXAEAU?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@012@AEBU3012@K@Z</DECORATED>
+    <FUNCLINE>549</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\boost_1_82_0\boost\multiprecision\cpp_int\</FILEPATH>
+      <FILENAME>multiply.hpp</FILENAME>
+      <LINE>495</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26450</DEFECTCODE>
+    <DESCRIPTION>算术溢出: “*”操作导致编译时溢出。请使用宽类型存储操作数(io.1)。</DESCRIPTION>
+    <FUNCTION>boost::multiprecision::backends::eval_multiply</FUNCTION>
+    <DECORATED>??$eval_multiply@$0A@$0A@$00$0A@V?$allocator@K@std@@$0A@$0A@$00$0A@V12@$0A@$0A@$00$0A@V12@@backends@multiprecision@boost@@YAXAEAU?$cpp_int_backend@$0A@$0A@$00$0A@V?$allocator@K@std@@@012@AEBU3012@1@Z</DECORATED>
+    <FUNCLINE>391</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

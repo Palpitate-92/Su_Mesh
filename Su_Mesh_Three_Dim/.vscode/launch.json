@@ -1,0 +1,65 @@
+{
+  // 使用 IntelliSense 了解相关属性。
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "makefile: 生成和调试多文件",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${fileDirname}/Su_Mesh.exe",
+      "args": [],
+      "stopOnEntry": false,
+      "cwd": "${fileDirname}",
+      "sourceMap": {
+        ".": "${fileDirname}"
+      },
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "makefile",
+    },
+    {
+      "name": "LLDB: 生成和调试单文件",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopOnEntry": false,
+      "cwd": "${fileDirname}",
+      "sourceMap": {
+        ".": "${fileDirname}"
+      },
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "Clang++: 编译单文件",
+      // "postDebugTask": "删除文件",
+    },
+    {
+      "name": "LLDB: 生成和调试多文件",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopOnEntry": false,
+      "cwd": "${fileDirname}",
+      "sourceMap": {
+        ".": "${fileDirname}"
+      },
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "Clang++: 编译多文件",
+      // "postDebugTask": "删除文件",
+    },
+    {
+      "name": "LLDB: 调试已编译的 mesh.exe",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopOnEntry": false,
+      "cwd": "${fileDirname}",
+      "sourceMap": {
+        ".": "${fileDirname}"
+      },
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}

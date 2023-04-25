@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\20758\Desktop\Su_Mesh\Su_Mesh_VS\src\</FILEPATH>
+      <FILENAME>Shewchuk.cpp</FILENAME>
+      <LINE>1301</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>6262</DEFECTCODE>
+    <DESCRIPTION>函数使用堆叠的 "26444" 字节。请考虑将一些数据移动到堆。</DESCRIPTION>
+    <FUNCTION>_SHEWCHUK::incircleadapt</FUNCTION>
+    <DECORATED>?incircleadapt@_SHEWCHUK@@QEAANPEAN000N@Z</DECORATED>
+    <FUNCLINE>1301</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\20758\Desktop\Su_Mesh\Su_Mesh_VS\src\</FILEPATH>
+      <FILENAME>Shewchuk.cpp</FILENAME>
+      <LINE>1898</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>6262</DEFECTCODE>
+    <DESCRIPTION>函数使用堆叠的 "181300" 字节。请考虑将一些数据移动到堆。</DESCRIPTION>
+    <FUNCTION>_SHEWCHUK::insphereexact</FUNCTION>
+    <DECORATED>?insphereexact@_SHEWCHUK@@QEAANPEAN0000@Z</DECORATED>
+    <FUNCLINE>1898</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\20758\Desktop\Su_Mesh\Su_Mesh_VS\src\</FILEPATH>
+      <FILENAME>Shewchuk.cpp</FILENAME>
+      <LINE>2130</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>6262</DEFECTCODE>
+    <DESCRIPTION>函数使用堆叠的 "33324" 字节。请考虑将一些数据移动到堆。</DESCRIPTION>
+    <FUNCTION>_SHEWCHUK::insphereadapt</FUNCTION>
+    <DECORATED>?insphereadapt@_SHEWCHUK@@QEAANPEAN0000N@Z</DECORATED>
+    <FUNCLINE>2130</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

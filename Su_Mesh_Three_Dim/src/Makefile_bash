@@ -1,0 +1,39 @@
+#预定义变量
+CXX = clang++
+
+#预定义处理args
+CPPFLAGS=-g
+CPPFLAGS+= -Wall
+CPPFLAGS+= -pedantic
+CPPFLAGS+= -pthread
+CPPFLAGS+= -fuse-ld=lld
+CPPFLAGS+= -stdlib=libc++
+CPPFLAGS+= -std=c++2b
+
+#预定义目标
+TARGET = Su_Mesh.exe
+OBJS_DIR = ./obj
+BIN_DIR = ./bin
+SRCS = $(wildcard *.cpp)
+OBJS = $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
+
+all:CHECK_BIN_DIR CHECK_OBJS_DIR $(BIN_DIR)/$(TARGET)
+
+CHECK_BIN_DIR:
+	@mkdir -p $(BIN_DIR)
+
+CHECK_OBJS_DIR:
+	@mkdir -p $(OBJS_DIR)
+
+$(BIN_DIR)/$(TARGET):$(OBJS)
+	@$(CXX) $(CPPFLAGS) $^ -o $@ && $(BIN_DIR)/$(TARGET)
+
+$(OBJS_DIR)/%.o:%.cpp                                                                                   
+	@$(CXX) $(CPPFLAGS) -c $< -o $@  
+
+.PHONY:clean
+
+clean:
+	@rm -rf $(BIN_DIR)
+	@rm -rf $(OBJS_DIR)
+

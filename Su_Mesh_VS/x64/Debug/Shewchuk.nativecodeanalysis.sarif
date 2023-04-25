@@ -1,0 +1,129 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "函数使用堆叠的 \"26444\" 字节。请考虑将一些数据移动到堆。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/20758/Desktop/Su_Mesh/Su_Mesh_VS/src/Shewchuk.cpp"
+                },
+                "region": {
+                  "startLine": 1301,
+                  "startColumn": 17,
+                  "endLine": 1301,
+                  "endColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "_SHEWCHUK::incircleadapt",
+                  "decoratedName": "?incircleadapt@_SHEWCHUK@@QEAANPEAN000N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "函数使用堆叠的 \"181300\" 字节。请考虑将一些数据移动到堆。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/20758/Desktop/Su_Mesh/Su_Mesh_VS/src/Shewchuk.cpp"
+                },
+                "region": {
+                  "startLine": 1898,
+                  "startColumn": 17,
+                  "endLine": 1898,
+                  "endColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "_SHEWCHUK::insphereexact",
+                  "decoratedName": "?insphereexact@_SHEWCHUK@@QEAANPEAN0000@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "函数使用堆叠的 \"33324\" 字节。请考虑将一些数据移动到堆。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/20758/Desktop/Su_Mesh/Su_Mesh_VS/src/Shewchuk.cpp"
+                },
+                "region": {
+                  "startLine": 2130,
+                  "startColumn": 17,
+                  "endLine": 2130,
+                  "endColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "_SHEWCHUK::insphereadapt",
+                  "decoratedName": "?insphereadapt@_SHEWCHUK@@QEAANPEAN0000N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32217.1",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/20758/Desktop/Su_Mesh/Su_Mesh_VS/src/Shewchuk.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "502a9a71a59693744e039ab560b6417263c476cf672af1f9ec8d075a011fb530"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/20758/desktop/su_mesh/su_mesh_vs/include/shewchuk.h"
+          },
+          "hashes": {
+            "sha-256": "11fd94f9ab314e6214d9dec2da98d511337a6d64d5b3a6bc08e35451047549c8"
+          }
+        }
+      ]
+    }
+  ]
+}
