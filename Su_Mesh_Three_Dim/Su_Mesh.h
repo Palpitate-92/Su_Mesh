@@ -32,7 +32,7 @@
 // 全局类，实现网格数据结构的保存与使用
 class _SU_MESH
 {
-  private:
+private:
   std::vector<ELEM> elem;                         // 声明ELEM类容器，存放全部四面体单元
   int elem_num = 0;                               // 定义网格单元数，并初始化为0，0为未输入网格单元
   std::vector<int> elemNum_invalid;               // 定义一个容器，储存节点插入过程中形成的无效网格单元编号，下一次节点插入时首先填补该容器所包含节点单元编号的空缺
@@ -50,7 +50,7 @@ class _SU_MESH
   int boundaryFace_num = -1;                                       // 定义初始六面体表面三角形网格数目
   int Delaunay_Frame_numPos[8] = {-1, -1, -1, -1, -1, -1, -1, -1}; // 声明一个变量，储存初始Delaunay三角化边框8个节点在node容器内的位置
 
-  public:
+public:
   void check();
   _IOS file_ios;                        // 声明文件类
   _BOUNDARY_POINT boundary_point;       // 声明边界点类
@@ -63,7 +63,7 @@ class _SU_MESH
 
   int counter = 0;
 
-  private:
+private:
   friend class _IOS;
   friend class _BOUNDARY_POINT;
   friend class _INSERT_POINT;

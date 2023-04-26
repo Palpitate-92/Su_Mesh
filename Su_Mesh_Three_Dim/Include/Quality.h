@@ -48,11 +48,9 @@ public:
 	// 目标函数的一阶数值导数，自变量为节点node_tp的坐标
 	double target_Function_first_derivative(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, int position);
 	// 精度为O(h2)的目标函数二阶导数中心差分公式
-	double target_Function_h2_second(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain,
-		double delta_Value, NODE node_Delta_1, NODE node_Delta_2);
+	double target_Function_h2_second(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, double delta_Value, NODE node_Delta_1, NODE node_Delta_2);
 	// 精度为O(h4)的目标函数二阶导数中心差分公式
-	double target_Function_h4_second(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain,
-		double delta_Value, NODE node_Delta_1, NODE node_Delta_2);
+	double target_Function_h4_second(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, double delta_Value, NODE node_Delta_1, NODE node_Delta_2);
 	// 目标函数的二阶数值导数，自变量为节点node_tp的坐标
 	double target_Function_second_derivative(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, int position_1, int position_2);
 	// 构造步长辅助函数，ϕ(α) = f(xk + αdk)，a即step步长，xk是当前点位置，dk是牛顿方向，f函数即目标函数，辅助函数节点坐标加上步长后的目标函数
@@ -62,14 +60,11 @@ public:
 	// 基于修正牛顿法，利用最优步长和最速下降方向，来求每次迭代的节点坐标变化
 	NODE get_Node_Delta(double optimal_step, double steepest_descent[3][1]);
 	// 用三次多项式插值法在区间内查找下一次迭代的步长值
-	double cubic_interpolation_step(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, double steepest_descent[3][1],
-		double step_LowerLimit, double step_UpperLimit);
+	double cubic_interpolation_step(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, double steepest_descent[3][1], double step_LowerLimit, double step_UpperLimit);
 	// 在包含最优解的区间内进一步搜索最优解
-	double Zoom(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, double steepest_descent[3][1],
-		double step_LowerLimit, double step_UpperLimit);
+	double Zoom(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, double steepest_descent[3][1], double step_LowerLimit, double step_UpperLimit);
 	// 采用强Wolfe准则，利用牛顿方向，依据修正牛顿法可以直接取初始步长为1，确定类最优步长
-	double Line_Search_Algorithm_with_Wolfe(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain,
-		double steepest_descent[3][1], double Init_step);
+	double Line_Search_Algorithm_with_Wolfe(_SU_MESH* su_mesh, NODE node_tp, std::vector<FACE> face_Optimization_Domain, double steepest_descent[3][1], double Init_step);
 	// 构造局部优化域，有劣质单元的所有节点来作为待优化节点
 	void Construct_Local_Optimization_Domain_All(_SU_MESH* su_mesh, std::vector<int> Init_inferior_elem, std::vector<int>* Laplacian_Smoothing_nodeNum);
 	// 智能Laplacian光顺，给定一个节点，实行Laplacian光顺，并且将该节点移动到其相邻节点的几何中心前，若不能提高相邻网格质量，则不予移动操作，移动成功返回true
