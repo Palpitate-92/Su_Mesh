@@ -689,10 +689,8 @@ void _QUALITY::Construct_Local_Optimization_Domain_All(
 bool _QUALITY::Laplacian_Smoothing(_SU_MESH* su_mesh,
 	int Laplacian_Smoothing_nodeNum)
 {
-	std::vector<int>
-		elemNum_IncludeNode;          // 声明一个容器，用来储存包含待优化节点的所有网格单元编号
-	std::vector<FACE>
-		face_Optimization_Domain;     // 创建一个容器，用来储存局部优化域的边界面
+	std::vector<int> elemNum_IncludeNode;          // 声明一个容器，用来储存包含待优化节点的所有网格单元编号
+	std::vector<FACE> face_Optimization_Domain;     // 创建一个容器，用来储存局部优化域的边界面
 	FACE face_tp;
 	double lowest_quality_before = 1; // 定义一个变量，储存节点优化前的局部优化域的最小单元质量，初始化为1
 	double lowest_quality_after = 1;  // 定义一个变量，储存节点优化后的局部优化域的最小单元质量，初始化为1
@@ -1214,7 +1212,7 @@ std::vector<int> _QUALITY::Face_Transform_23(_SU_MESH* su_mesh, FACE face_tp)
 	su_mesh->elem_num = su_mesh->elem_num + 1;
 	int value_tp;
 	// 修改所有相邻信息
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < DIM + 1; j++)
 		{
@@ -1224,8 +1222,7 @@ std::vector<int> _QUALITY::Face_Transform_23(_SU_MESH* su_mesh, FACE face_tp)
 				mesh_process.Node_Opposite_Face(elem_new[i], elem_new[i].form[j]));
 			if (value_tp == -1)
 			{
-				std::cout << "Face_Transform_23 run error, please check the "
-					"program!\n";
+				std::cout << "Face_Transform_23 run error, please check the program!\n";
 				exit(-1);
 			}
 			su_mesh->elem.at(elem_new[i].neig[j]).neig[value_tp] = elemNum_include_face.at(i);

@@ -251,6 +251,9 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH* su_mesh, EDGE edge_rec
 	while (!flag)
 	{
 		std::vector<Pathl>().swap(path_tp2); // 初始化path_tp2，并释放容器空间
+		if (path_tp1.empty())
+			break;
+		intersection_judge = false;
 		for (std::vector<Pathl>::iterator iter = path_tp1.begin(); iter != path_tp1.end(); ++iter)
 		{
 			// 先得到当前路径元所代表的网格单元
@@ -280,10 +283,10 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH* su_mesh, EDGE edge_rec
 			// 若第一个相交图形是点，则需要判断当前路径元内与该点相对的3条网格边与1个网格面跟待恢复边界边的相交情况
 			else if (iter->type[0] == 1)
 			{
-				// if (data_process.Edge_Elem_Intersection(su_mesh->node.at(edge_recovery.form[0]), su_mesh->node.at(edge_recovery.form[1]),
-				//                                         su_mesh->node.at(elem_tp.form[0]), su_mesh->node.at(elem_tp.form[1]),
-				//                                         su_mesh->node.at(elem_tp.form[2]), su_mesh->node.at(elem_tp.form[3])) == 1)
-				//   continue;
+				if (data_process.Edge_Elem_Intersection(su_mesh->node.at(edge_recovery.form[0]), su_mesh->node.at(edge_recovery.form[1]),
+					su_mesh->node.at(elem_tp.form[0]), su_mesh->node.at(elem_tp.form[1]),
+					su_mesh->node.at(elem_tp.form[2]), su_mesh->node.at(elem_tp.form[3])) == 1)
+					continue;
 				intersection_judge = false;
 				// 先判断相对网格面的3条网格边，由于第一个相交图形是点，所以直接用待恢复边界边的第一个节点编号来查找相对网格面
 				face_tp = mesh_process.Node_Opposite_Face(elem_tp, edge_recovery.form[0]);
@@ -416,6 +419,7 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH* su_mesh, EDGE edge_rec
 				if (!intersection_judge)
 				{
 					for (int i = 0; i < 2; i++)
+					{
 						for (int j = i + 1; j < 3; j++)
 						{
 							face_tp.form[0] = face_inintersection.form[i];
@@ -435,6 +439,9 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH* su_mesh, EDGE edge_rec
 							if (intersection_judge)
 								break;
 						}
+						if (intersection_judge)
+							break;
+					}
 				}
 				if (iter->type[1] == -1)
 					iter->type[1] = 0;
@@ -570,12 +577,6 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH* su_mesh, EDGE edge_rec
 				// 修改单元所有节点的elem值
 				mesh_process.Renew_NodeElem(su_mesh, path.at(i).elem_num);
 			}
-			// 简易判断网格各种信息是否有效
-			mesh_process.Check_Elem_Form_Order(su_mesh);
-			mesh_process.Check_ElemAdjacency_accuracy(su_mesh);
-			mesh_process.Check_NodeElem_accuracy(su_mesh);
-			if (!mesh_process.Check_Dangling_Node(su_mesh))
-				std::cout << "There are dangling nodes in the current triangulation!\n";
 		}
 		// 若该图形是面，则可以直接进行T23变换，实现当前边界恢复
 		else if (path.front().type[1] == 3)
@@ -626,22 +627,22 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary(_SU_MESH* su_mesh)
 	for (std::vector<EDGE>::iterator iter = edge_wait_recovery.begin(); iter != edge_wait_recovery.end(); ++iter)
 		Recovery_Boundary_edge(su_mesh, *iter);
 	// 再恢复边界面
-	std::vector<FACE> face_wait_recovery; // 储存待恢复的边界面
-	std::vector<int> elemNum_IncludeFace;
-	for (std::vector<FACE>::iterator iter = su_mesh->boundary_face.begin(); iter != su_mesh->boundary_face.end(); ++iter)
-	{
-		std::vector<int>().swap(elemNum_IncludeFace);
-		mesh_process.FindAwl(su_mesh, *iter, &elemNum_IncludeFace, "fast");
-		if (elemNum_IncludeFace.empty())
-			face_wait_recovery.push_back(*iter);
-	}
-	if (!face_wait_recovery.empty())
-	{
-		std::cout << "There are boundary surfaces to restore!\n";
-		exit(-1);
-	}
+	//std::vector<FACE> face_wait_recovery; // 储存待恢复的边界面
+	//std::vector<int> elemNum_IncludeFace;
+	//for (std::vector<FACE>::iterator iter = su_mesh->boundary_face.begin(); iter != su_mesh->boundary_face.end(); ++iter)
+	//{
+	//	std::vector<int>().swap(elemNum_IncludeFace);
+	//	mesh_process.FindAwl(su_mesh, *iter, &elemNum_IncludeFace, "fast");
+	//	if (elemNum_IncludeFace.empty())
+	//		face_wait_recovery.push_back(*iter);
+	//}
+	//if (!face_wait_recovery.empty())
+	//{
+	//	std::cout << "There are boundary surfaces to restore!\n";
+	//	exit(-1);
+	//}
 	// 一个个恢复边界面
-	for (std::vector<FACE>::iterator iter = face_wait_recovery.begin(); iter != face_wait_recovery.end(); ++iter)
-		Recovery_Boundary_face(su_mesh, *iter);
+	//for (std::vector<FACE>::iterator iter = face_wait_recovery.begin(); iter != face_wait_recovery.end(); ++iter)
+	//	Recovery_Boundary_face(su_mesh, *iter);
 	return;
 }
