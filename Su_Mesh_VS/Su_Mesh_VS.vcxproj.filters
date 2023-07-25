@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Boundary_Point.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Boundary_Recovery.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cavity.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Data_Process.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Insert_Point.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interior_Point.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ios.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh_Process.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quality.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shewchuk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\structure.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Su_Mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\Boundary_Point.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Boundary_Recovery.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Cavity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Data_Process.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Insert_Point.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Interior_Point.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ios.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Mesh_Process.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Quality.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shewchuk.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\structure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Su_Mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
