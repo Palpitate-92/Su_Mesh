@@ -237,7 +237,6 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH* su_mesh, EDGE edge_rec
 		path_tp1.push_back(pathl_tp);
 	}
 	// 查找路径
-	int elem_form;
 	int elemNum_tp, nodeNum_tp;
 	bool flag = false;
 	bool intersection_judge = false;
@@ -260,10 +259,10 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH* su_mesh, EDGE edge_rec
 			elemNum_tp = iter->elem_num;
 			elem_tp = su_mesh->elem.at(elemNum_tp);
 			// 判断路径是否查找完毕，若当前路径元包含待恢复边界边的第二个点，代表在这个方向上路径查找到头了，存入当前路径元，并直接开始下一循环
-			if ((elem_form = mesh_process.Elem_Include_Node(elem_tp, edge_recovery.form[1])) != -1)
+			if (mesh_process.Elem_Include_Node(elem_tp, edge_recovery.form[1]) != -1)
 			{
 				iter->type[1] = 1;
-				iter->pot[1] = su_mesh->node.at(elem_tp.form[elem_form]);
+				iter->pot[1] = su_mesh->node.at(edge_recovery.form[1]);
 				iter->node_num[iter->type[0]] = edge_recovery.form[1]; // 点只需要1个节点编号
 				path.push_back(*iter);                                 // 当前路径元是有效路径元，存入路径
 				flag = true;
@@ -271,7 +270,7 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH* su_mesh, EDGE edge_rec
 			}
 			// 查找当前路径元与待恢复边界边的第二个相交图形，根据第一个相交图形种类来决定接下来的相交判断，并按照以下规则进行处理
 			// 1.若不存在第二个相交图形且第一个相交图形是点则跳过当前路径元
-			// 2.若不存在第二个相交图形且第一个相交图形是线则将可以判断完后不关有没有第二个相交图形，都直接将当前路径元压入path
+			// 2.若不存在第二个相交图形且第一个相交图形是线则将可以判断完后不管有没有第二个相交图形，都直接将当前路径元压入path
 			// 3.边的相交优先级高于面，毕竟与边相交就一定与面相交，这里的面相交其实主要指的是与面内部相交
 			// 有必要说明的是，path_tp1内所有路径元都一定与待恢复边界边相交，哪怕只是一个顶点的相交，所以type[0]的值必定有效
 			// 并且从路径的特性上来讲，若第一个相交图形是点，则该点必定是待恢复边界边的第一个点，同理，若第二个相交图形是点，则该点必定是待恢复边界边的第二个点
@@ -599,13 +598,13 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH* su_mesh, EDGE edge_rec
 	return;
 }
 
-std::vector<int> _BOUNDARY_RECOVERY::FindSet(_SU_MESH* su_mesh, FACE face__recovery)
+std::vector<int> _BOUNDARY_RECOVERY::FindSet(_SU_MESH* su_mesh, FACE face_recovery)
 {
 	std::vector<int> s;
 	return s;
 }
 
-void _BOUNDARY_RECOVERY::Recovery_Boundary_face(_SU_MESH* su_mesh, FACE face__recovery)
+void _BOUNDARY_RECOVERY::Recovery_Boundary_face(_SU_MESH* su_mesh, FACE face_recovery)
 {
 	return;
 }
@@ -645,4 +644,10 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary(_SU_MESH* su_mesh)
 	//for (std::vector<FACE>::iterator iter = face_wait_recovery.begin(); iter != face_wait_recovery.end(); ++iter)
 	//	Recovery_Boundary_face(su_mesh, *iter);
 	return;
+}
+
+
+bool _BOUNDARY_RECOVERY::operator==(const _BOUNDARY_RECOVERY& other) const
+{
+	return false;
 }

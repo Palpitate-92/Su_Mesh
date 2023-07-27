@@ -107,7 +107,7 @@ bool _DATA_PROCESS::Edge_Edge_Intersection(Point* intersection_point, NODE node_
 		else
 		{
 			std::cout << "Edge-to-edge intersection judgment error!\n";
-			//exit(-1);
+			exit(-1);
 		}
 	}
 	else

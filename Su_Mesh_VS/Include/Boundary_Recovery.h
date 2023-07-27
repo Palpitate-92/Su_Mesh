@@ -31,13 +31,17 @@ public:
 	// 恢复边界边
 	void Recovery_Boundary_edge(_SU_MESH* su_mesh, EDGE edge_recovery);
 	// 查找集（set）
-	std::vector<int> FindSet(_SU_MESH* su_mesh, FACE face__recovery);
+	std::vector<int> FindSet(_SU_MESH* su_mesh, FACE face_recovery);
 	// 恢复边界面
-	void Recovery_Boundary_face(_SU_MESH* su_mesh, FACE face__recovery);
+	void Recovery_Boundary_face(_SU_MESH* su_mesh, FACE face_recovery);
 	// 边界恢复
 	void Recovery_Boundary(_SU_MESH* su_mesh);
 
 private:
+public:
+
+	_BOUNDARY_RECOVERY() = default;
+	bool operator==(const _BOUNDARY_RECOVERY& other) const;
 };
 
 #endif

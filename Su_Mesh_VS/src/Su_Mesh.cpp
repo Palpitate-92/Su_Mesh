@@ -139,4 +139,5 @@ int main()
   2.光标选中想要注释的所有代码，alt+shift+a，取消同理。
   3.光标选中想要注释的所有代码，(1）ctrl+k（2）ctrl+c，取消是（1）ctrl+k（2）ctrl+u。
   4.迭代器和下标之间转换主要是使用stl中的advance和distance函数来进行的，advance是将iterator移动指定个元素，distance是计算两个iterator直接的距离。
+  5.折叠所有代码 先ctrl+m 再ctrl+o(这是字母O) 2.展开所有代码 先ctrl+m 再ctrl+l(这是字母L)
   */

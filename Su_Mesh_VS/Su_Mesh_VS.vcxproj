@@ -107,13 +107,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\CGAL-5.5.2\auxiliary\gmp\include;C:\Users\20758\Desktop\Su_Mesh\Su_Mesh_VS\Include;D:\CGAL-5.5.2\include;D:\boost_1_82_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\CGAL-5.6-beta1\auxiliary\gmp\include;D:\CGAL-5.6-beta1\include;D:\boost_1_82_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4819;4244;4828</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D:\CGAL-5.5.2\auxiliary\gmp\lib\libmpfr-4.lib;D:\CGAL-5.5.2\auxiliary\gmp\lib\libgmp-10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>D:\CGAL-5.6-beta1\auxiliary\gmp\lib\libmpfr-4.lib;D:\CGAL-5.6-beta1\auxiliary\gmp\lib\libgmp-10.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
