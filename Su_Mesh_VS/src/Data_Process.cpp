@@ -107,7 +107,7 @@ bool _DATA_PROCESS::Edge_Edge_Intersection(Point* intersection_point, NODE node_
 		else
 		{
 			std::cout << "Edge-to-edge intersection judgment error!\n";
-			//exit(-1);
+			exit(-1);
 		}
 	}
 	else
@@ -178,7 +178,6 @@ int _DATA_PROCESS::Edge_Elem_Intersection(NODE node_A, NODE node_B, NODE node_C,
 		exit(-1);
 	}
 }
-
 
 void _DATA_PROCESS::Matrix_transpose(double matrix_1[3][1], double matrix_2[3])
 {
@@ -256,7 +255,6 @@ void _DATA_PROCESS::matrix_product(double matrix_1[3][3], double matrix_2[3][1],
 	return;
 }
 
-
 void _DATA_PROCESS::matrix_product(double matrix_1[3][3], double matrix_2[3][3], double product[3][3])
 {
 	for (int i = 0; i < 3; i++)
@@ -264,7 +262,6 @@ void _DATA_PROCESS::matrix_product(double matrix_1[3][3], double matrix_2[3][3],
 			product[i][j] = matrix_1[i][0] * matrix_2[0][j] + matrix_1[i][1] * matrix_2[1][j] + matrix_1[i][2] * matrix_2[2][j];
 	return;
 }
-
 
 double _DATA_PROCESS::matrix_product(double matrix_1[3], double matrix_2[3][3], double matrix_3[3][1])
 {
