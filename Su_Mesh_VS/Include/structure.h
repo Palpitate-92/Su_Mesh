@@ -11,10 +11,12 @@
 // 声明四面体网格单元类
 class ELEM
 {
-private:
+protected:
     int form[DIM + 1]; // 存储单元包含的节点
     int neig[DIM + 1]; // 存储单元的相邻单元，与form对应
-    double quality;    // 储存单元质量
+
+private:
+    double quality; // 储存单元质量
 
 public:
     ELEM(); // 构造函数，初始化所有值
@@ -148,7 +150,7 @@ private:
 };
 
 // 声明路径元（pathl）类
-class Pathl
+class Pathl : public ELEM
 {
 private:
     int elem_num;       // 储存该路径元所代表的网格单元编号
@@ -161,7 +163,8 @@ private:
 public:
     Pathl();
     bool operator==(const int &value) const; // 重载“==”运算符
-    ~Pathl(){};
+    Pathl operator=(const ELEM &elem);       // 重载“=”运算符
+    ~Pathl() { free(Decom_elem); };
 
 private:
     friend class _SU_MESH;

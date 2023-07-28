@@ -31,7 +31,7 @@ public:
     // 查找路径（path）
     std::vector<Pathl> FindPath(_SU_MESH *su_mesh, EDGE edge_recovery);
     // 路径元分解，包含6种类型，单边型（包含点边型）、对边型、邻边型、点面型、边面型和双面型
-    bool Decompose_Pathl(_SU_MESH *su_mesh, Pathl pathl);
+    bool Decompose_Pathl(Pathl pathl);
     // 恢复边界边
     void Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_recovery);
     // 查找集（set）

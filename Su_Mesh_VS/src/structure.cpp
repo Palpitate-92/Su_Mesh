@@ -196,6 +196,11 @@ Point Point::operator=(const NODE &node)
 
 Pathl::Pathl()
 {
+    for (int i = 0; i < DIM + 1; i++)
+    {
+        form[i] = -1;
+        neig[i] = -1;
+    }
     elem_num = -1;
     type[0] = -1, type[1] = -1;
     memset(pot, 0, sizeof(pot));
@@ -208,4 +213,11 @@ Pathl::Pathl()
 bool Pathl::operator==(const int &value) const
 {
     return (elem_num == value);
+}
+
+Pathl Pathl::operator=(const ELEM &elem)
+{
+    memcpy(form, elem.form, sizeof(elem.form));
+    memcpy(neig, elem.neig, sizeof(elem.neig));
+    return *this;
 }
