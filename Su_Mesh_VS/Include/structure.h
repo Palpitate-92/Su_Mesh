@@ -51,6 +51,7 @@ private:
 public:
     NODE();
     NODE(double x, double y, double z);
+    NODE(const Point &pot);
     NODE operator+(const NODE &node) const;         // 重载+运算符，支持节点之间运算
     NODE operator-(const NODE &node) const;         // 重载-运算符，支持节点之间运算
     NODE operator+(const double value[3][1]) const; // 重载+运算符，支持节点类与普通数组的运算
@@ -147,6 +148,7 @@ private:
     friend class _QUALITY;
     friend class _DATA_PROCESS;
     friend class Pathl;
+    friend class NODE;
 };
 
 // 声明路径元（pathl）类
@@ -164,7 +166,7 @@ public:
     Pathl();
     bool operator==(const int &value) const; // 重载“==”运算符
     Pathl operator=(const ELEM &elem);       // 重载“=”运算符
-    ~Pathl() { free(Decom_elem); };
+    ~Pathl();
 
 private:
     friend class _SU_MESH;

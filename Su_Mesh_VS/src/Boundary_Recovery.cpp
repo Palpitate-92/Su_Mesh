@@ -511,40 +511,40 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH *su_mesh, EDGE edge_rec
     return path;
 }
 
-bool _BOUNDARY_RECOVERY::Decompose_Pathl(Pathl pathl)
+void _BOUNDARY_RECOVERY::Decompose_Pathl(Pathl *pathl)
 {
     _MESH_PROCESS mesh_process;
     // 通过路径元type域值，判断当前路径元类型，对不同类型进行不同形式的分解
     // 单边型（包含点边型，边点型）
-    if ((pathl.type[0] == 1 && pathl.type[1] == 2) || (pathl.type[0] == 2 && pathl.type[1] == 0) || (pathl.type[0] == 2 && pathl.type[1] == 1))
+    if ((pathl->type[0] == 1 && pathl->type[1] == 2) || (pathl->type[0] == 2 && pathl->type[1] == 0) || (pathl->type[0] == 2 && pathl->type[1] == 1))
     {
         // 单边型会分解成两个网格单元
-        pathl.Decom_elem_num = 2;
-        pathl.Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl.Decom_elem_num);
+        pathl->Decom_elem_num = 2;
+        pathl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl->Decom_elem_num);
         // 取出待分解的那条网格边，对于单边和点边型、边点型，其获得方式不同
         EDGE ExplodeEdge;
         // 点边型
-        if (pathl.type[0] == 1)
-            memcpy(ExplodeEdge.form, pathl.node_num + 1, sizeof(ExplodeEdge.form));
+        if (pathl->type[0] == 1)
+            memcpy(ExplodeEdge.form, pathl->node_num + 1, sizeof(ExplodeEdge.form));
         // 单边型，边点型
         else
-            memcpy(ExplodeEdge.form, pathl.node_num, sizeof(ExplodeEdge.form));
+            memcpy(ExplodeEdge.form, pathl->node_num, sizeof(ExplodeEdge.form));
         // 得到待分解网格边在当前路径元内的相对网格边
-        EDGE ExplodeOppoEdge = mesh_process.Edge_Opposite_Edge(pathl, ExplodeEdge);
+        EDGE ExplodeOppoEdge = mesh_process.Edge_Opposite_Edge(*pathl, ExplodeEdge);
         // 得到分解后的两个网格单元
-        if (pathl.Decom_elem)
+        if (pathl->Decom_elem)
         {
-            *pathl.Decom_elem = ELEM(ExplodeOppoEdge.form[0], ExplodeOppoEdge.form[1], ExplodeEdge.form[0], STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeEdge.form[1])]);
-            *(pathl.Decom_elem + 1) = ELEM(ExplodeOppoEdge.form[0], ExplodeOppoEdge.form[1], ExplodeEdge.form[1], STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeEdge.form[0])]);
+            *pathl->Decom_elem = ELEM(ExplodeOppoEdge.form[0], ExplodeOppoEdge.form[1], ExplodeEdge.form[0], STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeEdge.form[1])]);
+            *(pathl->Decom_elem + 1) = ELEM(ExplodeOppoEdge.form[0], ExplodeOppoEdge.form[1], ExplodeEdge.form[1], STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeEdge.form[0])]);
         }
     }
     // 对边型和邻边型的两个相交图形都是边
-    else if (pathl.type[0] == 2 && pathl.type[1] == 2)
+    else if (pathl->type[0] == 2 && pathl->type[1] == 2)
     {
         // 首先得到待分解的两条网格边
         EDGE ExplodeEdge_1, ExplodeEdge_2;
-        memcpy(ExplodeEdge_1.form, pathl.node_num, sizeof(ExplodeEdge_1.form));
-        memcpy(ExplodeEdge_2.form, pathl.node_num + 2, sizeof(ExplodeEdge_2.form));
+        memcpy(ExplodeEdge_1.form, pathl->node_num, sizeof(ExplodeEdge_1.form));
+        memcpy(ExplodeEdge_2.form, pathl->node_num + 2, sizeof(ExplodeEdge_2.form));
         // 通过待分解边的节点编号来分辨对边型和邻边型
         // 邻边型的两条待分解边包含一个相同节点，对边型则没有相同节点
         // 首先判断两条待分解边是否包含相同节点，若包含，则记录该相同节点编号，再记录 在该两条待分解边组成的网格面中 该相同节点相对的网格边
@@ -565,116 +565,116 @@ bool _BOUNDARY_RECOVERY::Decompose_Pathl(Pathl pathl)
         {
             // 得到与这两条待分解边组成的网格面在当前路径元内相对的节点编号
             FACE face_tp{ExplodeSameNode_num, OppoEdge.form[0], OppoEdge.form[1]};
-            int ExplodeOppoNode_num = pathl.form[mesh_process.Face_Opposite_Node(pathl, face_tp)];
+            int ExplodeOppoNode_num = pathl->form[mesh_process.Face_Opposite_Node(*pathl, face_tp)];
             // 邻边型会分解成三个网格单元
-            pathl.Decom_elem_num = 3;
-            pathl.Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl.Decom_elem_num);
+            pathl->Decom_elem_num = 3;
+            pathl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl->Decom_elem_num);
             // 得到分解后的三个网格单元
-            if (pathl.Decom_elem)
+            if (pathl->Decom_elem)
             {
-                *pathl.Decom_elem = ELEM(ExplodeSameNode_num, ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-                *(pathl.Decom_elem + 1) = ELEM(OppoEdge.form[0], ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-                *(pathl.Decom_elem + 2) = ELEM(OppoEdge.form[0], OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeSameNode_num)]);
+                *pathl->Decom_elem = ELEM(ExplodeSameNode_num, ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                *(pathl->Decom_elem + 1) = ELEM(OppoEdge.form[0], ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                *(pathl->Decom_elem + 2) = ELEM(OppoEdge.form[0], OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeSameNode_num)]);
             }
         }
         // 否则则是对边型
         else
         {
             // 对边型会分解成四个网格单元
-            pathl.Decom_elem_num = 4;
-            pathl.Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl.Decom_elem_num);
+            pathl->Decom_elem_num = 4;
+            pathl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl->Decom_elem_num);
             // 得到分解后的四个网格单元
-            if (pathl.Decom_elem)
+            if (pathl->Decom_elem)
             {
-                *pathl.Decom_elem = ELEM(ExplodeEdge_1.form[0], ExplodeEdge_2.form[0], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-                *(pathl.Decom_elem + 1) = ELEM(ExplodeEdge_1.form[0], ExplodeEdge_2.form[1], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-                *(pathl.Decom_elem + 2) = ELEM(ExplodeEdge_1.form[1], ExplodeEdge_2.form[0], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-                *(pathl.Decom_elem + 3) = ELEM(ExplodeEdge_1.form[1], ExplodeEdge_2.form[1], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                *pathl->Decom_elem = ELEM(ExplodeEdge_1.form[0], ExplodeEdge_2.form[0], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                *(pathl->Decom_elem + 1) = ELEM(ExplodeEdge_1.form[0], ExplodeEdge_2.form[1], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                *(pathl->Decom_elem + 2) = ELEM(ExplodeEdge_1.form[1], ExplodeEdge_2.form[0], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                *(pathl->Decom_elem + 3) = ELEM(ExplodeEdge_1.form[1], ExplodeEdge_2.form[1], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
             }
         }
     }
     // 点面型（面点型）
-    else if ((pathl.type[0] == 1 && pathl.type[1] == 3) || (pathl.type[0] == 3 && pathl.type[1] == 1))
+    else if ((pathl->type[0] == 1 && pathl->type[1] == 3) || (pathl->type[0] == 3 && pathl->type[1] == 1))
     {
         // 点面型（面点型）会分解成三个网格单元
-        pathl.Decom_elem_num = 3;
-        pathl.Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl.Decom_elem_num);
+        pathl->Decom_elem_num = 3;
+        pathl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl->Decom_elem_num);
         // 取出待分解的那个网格面，点面型、面点型，其获得方式不同
         FACE ExplodeFace;
         // 点面型
-        if (pathl.type[0] == 1)
-            memcpy(ExplodeFace.form, pathl.node_num + 1, sizeof(ExplodeFace.form));
+        if (pathl->type[0] == 1)
+            memcpy(ExplodeFace.form, pathl->node_num + 1, sizeof(ExplodeFace.form));
         // 面点型
         else
-            memcpy(ExplodeFace.form, pathl.node_num, sizeof(ExplodeFace.form));
+            memcpy(ExplodeFace.form, pathl->node_num, sizeof(ExplodeFace.form));
         // 得到待分解网格面在当前路径元内的相对网格节点编号
-        int ExplodeOppoNode_num = pathl.form[mesh_process.Face_Opposite_Node(pathl, ExplodeFace)];
+        int ExplodeOppoNode_num = pathl->form[mesh_process.Face_Opposite_Node(*pathl, ExplodeFace)];
         // 得到分解后的三个网格单元
-        if (pathl.Decom_elem)
+        if (pathl->Decom_elem)
         {
-            *pathl.Decom_elem = ELEM(ExplodeOppoNode_num, ExplodeFace.form[0], ExplodeFace.form[1], STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeFace.form[2])]);
-            *(pathl.Decom_elem + 1) = ELEM(ExplodeOppoNode_num, ExplodeFace.form[0], ExplodeFace.form[2], STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeFace.form[1])]);
-            *(pathl.Decom_elem + 2) = ELEM(ExplodeOppoNode_num, ExplodeFace.form[1], ExplodeFace.form[2], STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeFace.form[0])]);
+            *pathl->Decom_elem = ELEM(ExplodeOppoNode_num, ExplodeFace.form[0], ExplodeFace.form[1], STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeFace.form[2])]);
+            *(pathl->Decom_elem + 1) = ELEM(ExplodeOppoNode_num, ExplodeFace.form[0], ExplodeFace.form[2], STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeFace.form[1])]);
+            *(pathl->Decom_elem + 2) = ELEM(ExplodeOppoNode_num, ExplodeFace.form[1], ExplodeFace.form[2], STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeFace.form[0])]);
         }
     }
     // 边面型（面边型）
-    else if ((pathl.type[0] == 2 && pathl.type[1] == 3) || (pathl.type[0] == 3 && pathl.type[1] == 2))
+    else if ((pathl->type[0] == 2 && pathl->type[1] == 3) || (pathl->type[0] == 3 && pathl->type[1] == 2))
     {
         // 边面型（面边型）会分解成四个网格单元
-        pathl.Decom_elem_num = 4;
-        pathl.Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl.Decom_elem_num);
+        pathl->Decom_elem_num = 4;
+        pathl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl->Decom_elem_num);
         // 取出待分解的那个网格面，边面型、面边型，其获得方式不同，同时取出待分解的网格边
         EDGE ExplodeEdge;
         FACE ExplodeFace;
         // 边面型
-        if (pathl.type[0] == 2)
+        if (pathl->type[0] == 2)
         {
-            memcpy(ExplodeEdge.form, pathl.node_num, sizeof(ExplodeEdge.form));
-            memcpy(ExplodeFace.form, pathl.node_num + 2, sizeof(ExplodeFace.form));
+            memcpy(ExplodeEdge.form, pathl->node_num, sizeof(ExplodeEdge.form));
+            memcpy(ExplodeFace.form, pathl->node_num + 2, sizeof(ExplodeFace.form));
         }
         // 面边型
         else
         {
-            memcpy(ExplodeFace.form, pathl.node_num, sizeof(ExplodeFace.form));
-            memcpy(ExplodeEdge.form, pathl.node_num + 3, sizeof(ExplodeEdge.form));
+            memcpy(ExplodeFace.form, pathl->node_num, sizeof(ExplodeFace.form));
+            memcpy(ExplodeEdge.form, pathl->node_num + 3, sizeof(ExplodeEdge.form));
         }
         // 得到待分解网格面在当前路径元内的相对网格节点编号
-        int ExplodeOppoNode_num = pathl.form[mesh_process.Face_Opposite_Node(pathl, ExplodeFace)];
+        int ExplodeOppoNode_num = pathl->form[mesh_process.Face_Opposite_Node(*pathl, ExplodeFace)];
         // 得到待分解网格面与待分解网格边同时包含的节点编号
         int ExplodeSameNode_num = ExplodeOppoNode_num == ExplodeEdge.form[0] ? ExplodeEdge.form[1] : ExplodeEdge.form[0];
         // 得到待分解网格边在当前路径元内的相对网格边
-        EDGE ExplodeOppoEdge = mesh_process.Edge_Opposite_Edge(pathl, ExplodeEdge);
+        EDGE ExplodeOppoEdge = mesh_process.Edge_Opposite_Edge(*pathl, ExplodeEdge);
         // 得到分解后的四个网格单元
-        if (pathl.Decom_elem)
+        if (pathl->Decom_elem)
         {
-            *pathl.Decom_elem = ELEM(ExplodeFace.form[0], ExplodeFace.form[1], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-            *(pathl.Decom_elem + 1) = ELEM(ExplodeFace.form[0], ExplodeFace.form[2], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-            *(pathl.Decom_elem + 2) = ELEM(ExplodeFace.form[1], ExplodeFace.form[2], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-            *(pathl.Decom_elem + 3) = ELEM(ExplodeOppoNode_num, ExplodeOppoEdge.form[0], ExplodeOppoEdge.form[1], STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeSameNode_num)]);
+            *pathl->Decom_elem = ELEM(ExplodeFace.form[0], ExplodeFace.form[1], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            *(pathl->Decom_elem + 1) = ELEM(ExplodeFace.form[0], ExplodeFace.form[2], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            *(pathl->Decom_elem + 2) = ELEM(ExplodeFace.form[1], ExplodeFace.form[2], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            *(pathl->Decom_elem + 3) = ELEM(ExplodeOppoNode_num, ExplodeOppoEdge.form[0], ExplodeOppoEdge.form[1], STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeSameNode_num)]);
         }
     }
     // 双面型
-    else if (pathl.type[0] == 3 && pathl.type[1] == 3)
+    else if (pathl->type[0] == 3 && pathl->type[1] == 3)
     {
         // 双面型会分解成五个网格单元
-        pathl.Decom_elem_num = 5;
-        pathl.Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl.Decom_elem_num);
+        pathl->Decom_elem_num = 5;
+        pathl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * pathl->Decom_elem_num);
         // 取出待分解的两个网格面
         FACE ExplodeFace_1, ExplodeFace_2;
-        memcpy(ExplodeFace_1.form, pathl.node_num, sizeof(ExplodeFace_1.form));
-        memcpy(ExplodeFace_2.form, pathl.node_num + 3, sizeof(ExplodeFace_2.form));
+        memcpy(ExplodeFace_1.form, pathl->node_num, sizeof(ExplodeFace_1.form));
+        memcpy(ExplodeFace_2.form, pathl->node_num + 3, sizeof(ExplodeFace_2.form));
         // 得到两个待分解网格面的相邻网格边
         EDGE ExplodeAdjacentEdge = mesh_process.face_AdjacentEdge(ExplodeFace_1, ExplodeFace_2);
         // 得到该相邻网格边的相对网格边
-        EDGE ExplodeAdjacentOppoEdge = mesh_process.Edge_Opposite_Edge(pathl, ExplodeAdjacentEdge);
+        EDGE ExplodeAdjacentOppoEdge = mesh_process.Edge_Opposite_Edge(*pathl, ExplodeAdjacentEdge);
         // 得到分解后的五个网格单元
-        if (pathl.Decom_elem)
+        if (pathl->Decom_elem)
         {
-            *pathl.Decom_elem = ELEM(ExplodeFace_1.form[0], ExplodeFace_1.form[1], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-            *(pathl.Decom_elem + 1) = ELEM(ExplodeFace_1.form[0], ExplodeFace_1.form[2], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-            *(pathl.Decom_elem + 2) = ELEM(ExplodeFace_1.form[1], ExplodeFace_1.form[2], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
-            *(pathl.Decom_elem + 3) = ELEM(ExplodeAdjacentEdge.form[0], ExplodeAdjacentOppoEdge.form[0], ExplodeAdjacentOppoEdge.form[1], STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeAdjacentEdge.form[1])]);
-            *(pathl.Decom_elem + 4) = ELEM(ExplodeAdjacentEdge.form[1], ExplodeAdjacentOppoEdge.form[0], ExplodeAdjacentOppoEdge.form[1], STEINER_NOD, -1, -1, -1, pathl.neig[mesh_process.Elem_Include_Node(pathl, ExplodeAdjacentEdge.form[0])]);
+            *pathl->Decom_elem = ELEM(ExplodeFace_1.form[0], ExplodeFace_1.form[1], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            *(pathl->Decom_elem + 1) = ELEM(ExplodeFace_1.form[0], ExplodeFace_1.form[2], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            *(pathl->Decom_elem + 2) = ELEM(ExplodeFace_1.form[1], ExplodeFace_1.form[2], STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            *(pathl->Decom_elem + 3) = ELEM(ExplodeAdjacentEdge.form[0], ExplodeAdjacentOppoEdge.form[0], ExplodeAdjacentOppoEdge.form[1], STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeAdjacentEdge.form[1])]);
+            *(pathl->Decom_elem + 4) = ELEM(ExplodeAdjacentEdge.form[1], ExplodeAdjacentOppoEdge.form[0], ExplodeAdjacentOppoEdge.form[1], STEINER_NOD, -1, -1, -1, pathl->neig[mesh_process.Elem_Include_Node(*pathl, ExplodeAdjacentEdge.form[0])]);
         }
     }
     else
@@ -682,17 +682,78 @@ bool _BOUNDARY_RECOVERY::Decompose_Pathl(Pathl pathl)
         std::cout << "Pathl decompose error!\n";
         exit(-1);
     }
-    return true;
+    return;
+}
+
+void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, Pathl pathl, std::vector<int> *elemNum_adjacent, std::vector<FACE> *face_adjacent)
+{
+    // 声明两个迭代器
+    int elemNum_iter = -1;
+    std::vector<FACE>::iterator face_iter;
+    _MESH_PROCESS mesh_process;
+    // 依据当前路径元分解形成的网格单元数目，声明一个指针，储存这些网格单元将要使用的网格单元编号
+    int *pathl_elem_num = (int *)malloc(sizeof(int) * pathl.Decom_elem_num);
+    // 如果内存开辟失败，则停止程序并报错
+    if (pathl_elem_num == NULL)
+        std::cout << "Pathl generate grid cell error!\n", exit(-1);
+    int pathl_elem_num_iter = 0; // 一个迭代器
+    // 通过路径元type域值，判断当前路径元类型，对不同类型进行不同形式的网格生成过程
+    // 以下代码中若涉及到直接修改相邻信息的语句，其网格单元的顺序确定都是按照Decompose_Pathl()函数中路径元分解时确定的顺序来的
+    // 单边型（包含点边型，边点型）
+    if ((pathl.type[0] == 1 && pathl.type[1] == 2) || (pathl.type[0] == 2 && pathl.type[1] == 0) || (pathl.type[0] == 2 && pathl.type[1] == 1))
+    {
+        // 单边型、点边型、边点型的网格生成步骤相同，但其steiner点的储存位置不同
+        // 首先将steiner点压入node容器，并储存该steiner点在网格中的节点编号
+        if (pathl.type[0] == 1)
+            su_mesh->node.push_back(NODE(*(pathl.pot + 1)));
+        else
+            su_mesh->node.push_back(NODE(*pathl.pot));
+        int steiner_node_num = su_mesh->node_num++;
+        // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息
+        pathl.Decom_elem->form[3] = steiner_node_num;
+        (pathl.Decom_elem + 1)->form[3] = steiner_node_num;
+        // 将新生成的两个网格单元在elem容器内替换掉路径元所代表网格单元所在位置,或者压入elem
+        su_mesh->elem.at(pathl.elem_num) = *pathl.Decom_elem;
+        su_mesh->elem.push_back(*(pathl.Decom_elem + 1));
+        // 得到新生成的网格单元使用的网格单元编号
+        *pathl_elem_num = pathl.elem_num;
+        *(pathl_elem_num + 1) = su_mesh->elem_num++;
+        // 更新这两个网格单元的相邻信息
+        su_mesh->elem.at(*pathl_elem_num).neig[2] = *(pathl_elem_num + 1);
+        //su_mesh->elem.at(pathl.Decom_elem->neig[3]).neig[mesh_process.AdjacentElem_pos(su_mesh->elem.at(pathl.Decom_elem->neig[3]), pathl.elem_num)] = pathl.elem_num;
+        su_mesh->elem.at(*(pathl_elem_num + 1)).neig[2] = *pathl_elem_num;
+        su_mesh->elem.at((pathl.Decom_elem + 1)->neig[3]).neig[mesh_process.AdjacentElem_pos(su_mesh->elem.at((pathl.Decom_elem + 1)->neig[3]), pathl.elem_num)] = *(pathl_elem_num + 1);
+    }
+    // 对边型和邻边型的两个相交图形都是边
+    else if (pathl.type[0] == 2 && pathl.type[1] == 2)
+    {
+    }
+    // 点面型（面点型）
+    else if ((pathl.type[0] == 1 && pathl.type[1] == 3) || (pathl.type[0] == 3 && pathl.type[1] == 1))
+    {
+    }
+    // 边面型（面边型）
+    else if ((pathl.type[0] == 2 && pathl.type[1] == 3) || (pathl.type[0] == 3 && pathl.type[1] == 2))
+    {
+    }
+    // 双面型
+    else if (pathl.type[0] == 3 && pathl.type[1] == 3)
+    {
+    }
+    else
+    {
+        std::cout << "Pathl generate grid cell error!\n";
+        exit(-1);
+    }
+    free(pathl_elem_num);
+    pathl_elem_num = NULL;
+    return;
 }
 
 void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_recovery)
 {
     // 首先查找待恢复边界边的路径（path），记录其与路径元（pathl）的相交图形与相交点
     std::vector<Pathl> path = FindPath(su_mesh, edge_recovery);
-
-    for (std::vector<Pathl>::iterator iter = path.begin(); iter != path.end(); ++iter)
-        Decompose_Pathl(*iter);
-
     _MESH_PROCESS mesh_process;
     // 如果路径中只有两个路径元，则可以实现约束边界恢复
     if (path.size() == 2)
@@ -777,13 +838,23 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_rec
         }
     }
     // 如果路径中有四个路径元
-    else if (path.size() == 4)
-    {
-    }
+    //else if (path.size() == 4)
+    //{
+    //}
     else
     {
-        std::cout << path.size() << ' ';
-        //std::cout << "The size of the existing path is greater than 2!\n";
+        // 遍历每个路径元，分别进行分解和生成网格单元，同时确保相邻信息的准确性
+        // 声明两个容器，分别存储待更新相邻信息的网格面与相对应的网格单元编号
+        std::vector<int> elemNum_adjacent;
+        std::vector<FACE> face_adjacent;
+        //elem_new[0].neig[1] = elemNum_adjacent.at(elemNum_iter = std::distance(face_adjacent.begin(), face_iter = std::find(face_adjacent.begin(), face_adjacent.end(), face_tp[1])));
+        for (std::vector<Pathl>::iterator iter = path.begin(); iter != path.end(); ++iter)
+        {
+            // 先对路径元进行分解操作
+            Decompose_Pathl(&(*iter));
+            // 再依据路径元当前类型，将分解后的网格压入elem容器，形成路径元的完整分解生成过程
+            Pathl_Generate_GridCell(su_mesh, *iter, &elemNum_adjacent, &face_adjacent);
+        }
     }
     return;
 }

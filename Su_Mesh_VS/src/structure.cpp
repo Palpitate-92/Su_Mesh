@@ -75,6 +75,13 @@ NODE::NODE(double x, double y, double z)
     spac = 0;
 }
 
+NODE::NODE(const Point &pot)
+{
+    std::copy(pot.pos, pot.pos + 3, pos);
+    elem = -1;
+    spac = -1;
+}
+
 NODE NODE::operator+(const NODE &node) const
 {
     NODE node_tp;
@@ -221,3 +228,9 @@ Pathl Pathl::operator=(const ELEM &elem)
     memcpy(neig, elem.neig, sizeof(elem.neig));
     return *this;
 }
+
+Pathl::~Pathl()
+{
+    free(Decom_elem);
+    Decom_elem = NULL;
+};
