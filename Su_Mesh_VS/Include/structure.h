@@ -56,6 +56,7 @@ public:
     NODE operator-(const NODE &node) const;         // 重载-运算符，支持节点之间运算
     NODE operator+(const double value[3][1]) const; // 重载+运算符，支持节点类与普通数组的运算
     NODE operator*(const double value) const;       // 重载*运算符，支持节点类与数字的运算
+    bool operator==(const NODE &node) const;        // 重载==运算符，支持节点类与数字的运算
     ~NODE(){};
 
 private:
@@ -155,12 +156,13 @@ private:
 class Pathl : public ELEM
 {
 private:
-    int elem_num;       // 储存该路径元所代表的网格单元编号
-    int type[2];        // 储存路径元与边界边的相交图形，-1代表未判断，0代表无相交，1代表点，2代表边，3代表面，最多会有两个相交图形
-    Point pot[2];       // 储存路径元与边界边的相交交点，与type对应
-    int node_num[6];    // 与type值对应，存储相交图形的组成节点编号，点则只有1个节点，边需要2个节点，面则需要3个节点，两个相交图形都是面时需要最多的节点编号，为6个，
-    ELEM *Decom_elem;   // 储存该路径元分解后的网格单元
-    int Decom_elem_num; // 储存该路径元分解后的网格单元数目
+    int elem_num;              // 储存该路径元所代表的网格单元编号
+    int type[2];               // 储存路径元与边界边的相交图形，-1代表未判断，0代表无相交，1代表点，2代表边，3代表面，最多会有两个相交图形
+    Point pot[2];              // 储存路径元与边界边的相交交点，与type对应
+    int node_num[6];           // 与type值对应，存储相交图形的组成节点编号，点则只有1个节点，边需要2个节点，面则需要3个节点，两个相交图形都是面时需要最多的节点编号，为6个，
+    ELEM *Decom_elem;          // 储存该路径元分解后的网格单元
+    int Decom_elem_num;        // 储存该路径元分解后的网格单元数目
+    char Decom_type_two_sides; // 当该路径元是邻边型时，储存该路径元的分解类型，有“S”型和“Z”型，两种类型相互拓扑，若是对边型，则储存“D”
 
 public:
     Pathl();

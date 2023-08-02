@@ -126,6 +126,11 @@ NODE NODE::operator*(const double value) const
     return node_tp;
 }
 
+bool NODE::operator==(const NODE &node) const
+{
+    return (pos[0] == node.pos[0] && pos[1] == node.pos[1] && pos[2] == node.pos[2]);
+}
+
 FACE::FACE()
 {
     for (int i = 0; i < DIM; i++)
@@ -215,6 +220,7 @@ Pathl::Pathl()
         node_num[i] = -1;
     Decom_elem = NULL;
     Decom_elem_num = 0;
+    Decom_type_two_sides = '\0';
 }
 
 bool Pathl::operator==(const int &value) const

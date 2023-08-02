@@ -126,8 +126,7 @@ int main()
  * * for (std::vector<ELEM>::iterator elem_iter = elem->begin(); elem_iter !=elem->end();++elem_iter)
  * * std::vector<NODE>().swap(node_Insert);               //
  * 初始化node_Insert，并释放容器空间
- * * if (std::find(elemNum_succ.begin(), elemNum_succ.end(), elem_tp.neig[i])
- * == elemNum_succ.end())
+ * * if (std::find(elemNum_succ.begin(), elemNum_succ.end(), elem_tp.neig[i])== elemNum_succ.end())
  * * i=std::distance(elemNum_succ.begin(),iter)
  * * std::vector<NODE>().swap(node_Insert);               //
  * 初始化node_Insert，并释放容器空间
