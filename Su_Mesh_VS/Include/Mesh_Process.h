@@ -23,6 +23,8 @@ public:
     int ELEM_Include_Node(ELEM elem_tp, int nodeNum_tp);
     // 给定一个网格单元与网格单元的任意一条边，返回该边的相对边
     EDGE Edge_Opposite_Edge(ELEM elem_tp, EDGE edge_tp);
+    // 给定一个网格面与网格面的任意一条边，返回与该边相对的节点编号
+    int Face_Opposite_Node(FACE face_tp, EDGE edge_tp);
     // 给定一个网格面与网格面的任意一个节点编号，判断该网格面是否包含该节点编号，并返回该节点编号在该网格面的form中位置，返回-1则代表不包含
     int FACE_Include_Node(FACE face_tp, int nodeNum_tp);
     // 给定一个网格面与网格面的任意一个节点编号，返回与该节点相对的网格边

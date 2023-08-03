@@ -105,6 +105,18 @@ EDGE _MESH_PROCESS::Edge_Opposite_Edge(ELEM elem_tp, EDGE edge_tp)
     return edge;
 }
 
+int _MESH_PROCESS::Face_Opposite_Node(FACE face_tp, EDGE edge_tp)
+{
+    face_tp.Sort();
+    edge_tp.Sort();
+    if (face_tp.form[0] != edge_tp.form[0])
+        return face_tp.form[0];
+    else if (face_tp.form[1] != edge_tp.form[1])
+        return face_tp.form[1];
+    else
+        return face_tp.form[2];
+}
+
 int _MESH_PROCESS::FACE_Include_Node(FACE face_tp, int nodeNum_tp)
 {
     for (int i = 0; i < DIM; i++)
