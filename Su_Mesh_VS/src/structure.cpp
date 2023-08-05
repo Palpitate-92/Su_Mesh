@@ -218,7 +218,7 @@ Pathl::Pathl()
     memset(pot, 0, sizeof(pot));
     for (int i = 0; i < 6; i++)
         node_num[i] = -1;
-    Decom_elem = NULL;
+    Decom_elem = nullptr;
     Decom_elem_num = 0;
     Decom_type_two_sides = '\0';
 }
@@ -237,6 +237,9 @@ Pathl Pathl::operator=(const ELEM &elem)
 
 Pathl::~Pathl()
 {
-    free(Decom_elem);
-    Decom_elem = NULL;
+    if (Decom_elem != nullptr)
+    {
+        free(Decom_elem);
+        Decom_elem = nullptr;
+    }
 };

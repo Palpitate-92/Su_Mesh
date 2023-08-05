@@ -33,7 +33,7 @@ public:
     // 路径元分解，包含6种类型，单边型（包含点边型）、对边型、邻边型、点面型、边面型和双面型
     void Decompose_Pathl(std::vector<Pathl> *path);
     // 依据路径元类型，将分解后的网格压入elem容器，形成路径元的完整分解生成过程
-    void Pathl_Generate_GridCell(_SU_MESH *su_mesh, Pathl pathl, std::vector<int> *elemNum_adjacent, std::vector<FACE> *face_adjacent);
+    void Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Pathl> *path);
     // 恢复边界边
     void Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_recovery);
     // 查找集（set）
