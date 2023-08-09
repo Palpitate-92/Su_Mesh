@@ -39,6 +39,8 @@ public:
     FACE elem_AdjacentFace(ELEM elem_tp1, ELEM elem_tp2);
     // 给定两个网格面，返回该两个网格面的相邻边
     EDGE face_AdjacentEdge(FACE face_tp1, FACE face_tp2);
+    // 得到该网格单元四个节点的密度控制信息的均值
+    double get_aver_spac(_SU_MESH *su_mesh, ELEM elem_tp);
     // 给定一个网格单元编号，使该网格单元内所有节点的elem指向该网格单元
     void Renew_NodeElem(_SU_MESH *su_mesh, int elemNum_tp);
     // 给定一个节点和一个节点编号，以节点编号对应节点的elem值为起始，在当前三角化内查找一个外接球包含给定节点的网格单元
@@ -57,6 +59,9 @@ public:
     void FindAwl(_SU_MESH *su_mesh, FACE face_tp, std::vector<int> *elemNum_IncludeFace, std::string judgment);
     // 更新包含某个网格面的网格单元的相邻关系
     bool Update_Djacency(_SU_MESH *su_mesh, FACE face_tp, std::string judgment);
+
+    // 简易判断网格各种信息是否有效
+    void Judge_the_validity_of_information(_SU_MESH *su_mesh);
     // 检查每个网格单元的节点编号顺序是否是从小到大排序
     void Check_Elem_Form_Order(_SU_MESH *su_mesh);
     // 检查elem类中相邻信息的准确性

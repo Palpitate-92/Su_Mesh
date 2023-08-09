@@ -200,6 +200,24 @@ Point::Point()
         pos[i] = 0;
 }
 
+Point Point::operator+(const Point &point)
+{
+    Point point_tp;
+    point_tp.pos[0] = pos[0] + point.pos[0];
+    point_tp.pos[1] = pos[1] + point.pos[1];
+    point_tp.pos[2] = pos[2] + point.pos[2];
+    return point_tp;
+}
+
+Point Point::operator/(const double &value)
+{
+    Point point_tp;
+    point_tp.pos[0] = pos[0] / value;
+    point_tp.pos[1] = pos[1] / value;
+    point_tp.pos[2] = pos[2] / value;
+    return point_tp;
+}
+
 Point Point::operator=(const NODE &node)
 {
     std::copy(node.pos, node.pos + 3, pos);
@@ -235,11 +253,18 @@ Pathl Pathl::operator=(const ELEM &elem)
     return *this;
 }
 
+double Pathl::get_pot_distance()
+{
+    return double(sqrt(pow(pot[0].pos[0] - pot[1].pos[0], 2) + pow(pot[0].pos[1] - pot[1].pos[1], 2) + pow(pot[0].pos[2] - pot[1].pos[2], 2)));
+}
+
 Pathl::~Pathl()
 {
-    if (Decom_elem != nullptr)
-    {
-        free(Decom_elem);
-        Decom_elem = nullptr;
-    }
+    //if (Decom_elem != nullptr)
+    //{
+    //    free(Decom_elem);
+    //    Decom_elem = nullptr;
+    //}
+    free(Decom_elem);
+    Decom_elem = nullptr;
 };

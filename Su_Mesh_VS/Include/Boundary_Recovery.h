@@ -32,6 +32,9 @@ public:
     std::vector<Pathl> FindPath(_SU_MESH *su_mesh, EDGE edge_recovery);
     // 路径元分解，包含6种类型，单边型（包含点边型）、对边型、邻边型、点面型、边面型和双面型
     void Decompose_Pathl(std::vector<Pathl> *path);
+    // 再对路径进行修复操作
+    // 1.目前主要是对双面型路径元进行修复，将其转换为单边型路径元，避免由于双面型路径元两个面上的相交交点距离过近，远远小于模型整体网格量度，导致误差的出现
+    void Repair_Path(double shortest_dis, std::vector<Pathl> *path);
     // 依据路径元类型，将分解后的网格压入elem容器，形成路径元的完整分解生成过程
     void Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Pathl> *path);
     // 恢复边界边

@@ -52,19 +52,25 @@ int main()
     //exit(-1);
 
     // 将所有节点坐标向上取整
-    su_mesh.boundary_point.Rounding(&su_mesh);
+    //su_mesh.boundary_point.Rounding(&su_mesh);
     // 输出当前三角化信息文件
     su_mesh.file_ios.Write_File(&su_mesh, "1111\\Ini_Delaunay");
     // * 边界点插入
     su_mesh.boundary_point.Insert_BoundaryPoint(&su_mesh);
     // 输出当前三角化信息文件
     su_mesh.file_ios.Write_File(&su_mesh, "1111\\Boundary_Delaunay");
+    // 标记所有外部网格单元
+
     // 先移除初始Delaunay三角化的8个顶角节点与包含这些节点的所有网格单元，简化边界恢复步骤
     su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh, 1);
     // 输出当前三角化信息文件
     //su_mesh.file_ios.Write_File(&su_mesh, "Removal_1_Delaunay");
     // * 边界恢复
     su_mesh.boundary_recovery.Recovery_Boundary(&su_mesh);
+
+    // 简易判断网格各种信息是否有效
+    su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
+
     // 移除剩余外部单元并缩减容器
     su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh, 2);
     // 输出当前三角化信息文件
@@ -72,11 +78,7 @@ int main()
     // 内部点生成与插入
     su_mesh.interior_point.AutoRefine(&su_mesh);
     // 简易判断网格各种信息是否有效
-    su_mesh.mesh_process.Check_Elem_Form_Order(&su_mesh);
-    su_mesh.mesh_process.Check_ElemAdjacency_accuracy(&su_mesh);
-    su_mesh.mesh_process.Check_NodeElem_accuracy(&su_mesh);
-    if (!su_mesh.mesh_process.Check_Dangling_Node(&su_mesh))
-        std::cout << "There are dangling nodes in the current triangulation!\n";
+    su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
     // 网格优化前，首先计算各初始网格单元质量
     su_mesh.quality.Calculate_Shape_Quality(&su_mesh);
     // 输出网格质量优化前信息文件 Before_Quality
@@ -99,11 +101,7 @@ int main()
     std::cout << "Output optimized triangulated mesh element quality information:\n";
     su_mesh.quality.Quality_Information(&su_mesh);
     // 简易判断网格各种信息是否有效
-    su_mesh.check();
-    su_mesh.mesh_process.Check_ElemAdjacency_accuracy(&su_mesh);
-    su_mesh.mesh_process.Check_NodeElem_accuracy(&su_mesh);
-    if (!su_mesh.mesh_process.Check_Dangling_Node(&su_mesh))
-        std::cout << "There are dangling nodes in the current triangulation!\n";
+    su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
     // 输出网格质量优化后信息文件 Final_Delaunay
     su_mesh.file_ios.Write_File(&su_mesh, "1111\\Final_Delaunay");
     return 0;

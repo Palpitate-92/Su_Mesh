@@ -115,6 +115,7 @@ int _MESH_PROCESS::Face_Opposite_Node(FACE face_tp, EDGE edge_tp)
         return face_tp.form[1];
     else
         return face_tp.form[2];
+    return -1;
 }
 
 int _MESH_PROCESS::FACE_Include_Node(FACE face_tp, int nodeNum_tp)
@@ -234,6 +235,14 @@ EDGE _MESH_PROCESS::face_AdjacentEdge(FACE face_tp1, FACE face_tp2)
         if (arr[i + 1] == arr[i])
             edge_tp.form[cnt++] = arr[i];
     return edge_tp;
+}
+
+double _MESH_PROCESS::get_aver_spac(_SU_MESH *su_mesh, ELEM elem_tp)
+{
+    double aver_spac = 0;
+    for (int i = 0; i < 4; i++)
+        aver_spac += su_mesh->node.at(elem_tp.form[i]).spac;
+    return aver_spac / 4.0;
 }
 
 void _MESH_PROCESS::Renew_NodeElem(_SU_MESH *su_mesh, int elemNum_tp)
@@ -423,6 +432,16 @@ bool _MESH_PROCESS::Update_Djacency(_SU_MESH *su_mesh, FACE face_tp, std::string
     else if (elemNum_IncludeFace.size() == 1) // 初始Delaunay三角化四边形边框边
         su_mesh->elem.at(elemNum_IncludeFace.at(0)).neig[Face_Opposite_Node(su_mesh->elem.at(elemNum_IncludeFace.at(0)), face_tp)] = -1;
     return true;
+}
+
+void _MESH_PROCESS::Judge_the_validity_of_information(_SU_MESH *su_mesh)
+{
+    Check_Elem_Form_Order(su_mesh);
+    Check_ElemAdjacency_accuracy(su_mesh);
+    Check_NodeElem_accuracy(su_mesh);
+    if (!Check_Dangling_Node(su_mesh))
+        std::cout << "There are dangling nodes in the current triangulation!\n";
+    return;
 }
 
 void _MESH_PROCESS::Check_Elem_Form_Order(_SU_MESH *su_mesh)

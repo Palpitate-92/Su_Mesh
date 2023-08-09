@@ -134,7 +134,9 @@ private:
 
 public:
     Point();
-    Point operator=(const NODE &node); // 重载“=”运算符
+    Point operator+(const Point &point);  // 重载“+”运算符
+    Point operator/(const double &value); // 重载“/”运算符
+    Point operator=(const NODE &node);    // 重载“=”运算符
     ~Point(){};
 
 private:
@@ -168,6 +170,7 @@ public:
     Pathl();
     bool operator==(const int &value) const; // 重载“==”运算符
     Pathl operator=(const ELEM &elem);       // 重载“=”运算符
+    double get_pot_distance();               // 得到路径元两个相交交点间距离
     ~Pathl();
 
 private:

@@ -727,6 +727,69 @@ void _BOUNDARY_RECOVERY::Decompose_Pathl(std::vector<Pathl> *path)
     return;
 }
 
+void _BOUNDARY_RECOVERY::Repair_Path(double shortest_dis, std::vector<Pathl> *path)
+{
+    _MESH_PROCESS mesh_process;
+    bool repair_judgment = false; // 定义一个变量，用于判断该路径是否需要修复
+    // 目前主要是对双面型路径元进行修复，将其转换为单边型路径元，避免由于双面型路径元两个面上的相交交点距离过近，远远小于模型整体网格量度，导致误差的出现
+    int face_face_pathl = 0; // 定义一个变量，用于路径内储存双面型路径元数量
+    // 首先查找双面型路径元，再对其两个相交交点间距离进行判断
+    for (std::vector<Pathl>::iterator pathl = path->begin(); pathl != path->end(); ++pathl)
+    {
+        if (pathl->type[0] == 3 && pathl->type[1] == 3)
+        {
+            // 利用网格模型最短边界边长度来判定是否需要对该路径进行修复
+            if (pathl->get_pot_distance() < shortest_dis * 0.5)
+                repair_judgment = true;
+            face_face_pathl++;
+        }
+        else
+            continue;
+    }
+    if (repair_judgment && face_face_pathl == int(path->size() - 2))
+    {
+        EDGE edge_common;    // 查找一个共同边
+        Point average_point; // 储存所有相交点的平均节点位置
+        edge_common = mesh_process.face_AdjacentEdge(FACE(path->at(0).node_num[1], path->at(0).node_num[2], path->at(0).node_num[3]), FACE(path->at(1).node_num[3], path->at(1).node_num[4], path->at(1).node_num[5]));
+        edge_common.Sort();
+        for (std::vector<Pathl>::iterator pathl = path->begin() + 1; pathl != path->end(); ++pathl)
+        {
+            if (mesh_process.Face_Opposite_Node(FACE(pathl->node_num[0], pathl->node_num[1], pathl->node_num[2]), edge_common) == -1)
+                std::cout << "Repair path run error, check the accuracy of the path!\n", exit(-1);
+            average_point = average_point + pathl->pot[0];
+        }
+        // 得到所有相交点的平均节点位置
+        average_point = average_point / double(path->size() - 1);
+        // 修复所有双面型路径元
+        for (std::vector<Pathl>::iterator pathl = path->begin(); pathl != path->end(); ++pathl)
+        {
+            if (pathl == path->begin())
+            {
+                pathl->type[1] = 2;
+                pathl->pot[1] = average_point;
+                memcpy(pathl->node_num + 1, edge_common.form, sizeof(edge_common.form));
+            }
+            else if (pathl == path->end() - 1)
+            {
+                pathl->type[0] = 2;
+                pathl->pot[0] = average_point;
+                memcpy(pathl->node_num, edge_common.form, sizeof(edge_common.form));
+                *(pathl->node_num + 2) = *(pathl->node_num + 3);
+                *(pathl->node_num + 3) = -1;
+            }
+            else
+            {
+                pathl->type[0] = 2, pathl->type[1] = 0;
+                pathl->pot[0] = average_point;
+                for (int i = 0; i < 6; i++)
+                    pathl->node_num[i] = -1;
+                memcpy(pathl->node_num, edge_common.form, sizeof(edge_common.form));
+            }
+        }
+    }
+    return;
+}
+
 void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Pathl> *path)
 {
     // 声明两个迭代器
@@ -761,6 +824,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 else
                 {
                     su_mesh->node.push_back(NODE(*(pathl.pot + 1)));
+                    su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     steiner_node_num = su_mesh->node_num++;
                 }
             }
@@ -771,12 +835,14 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 else
                 {
                     su_mesh->node.push_back(NODE(*pathl.pot));
+                    su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     steiner_node_num = su_mesh->node_num++;
                 }
             }
             // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息
             (pathl.Decom_elem + 0)->form[3] = steiner_node_num;
             (pathl.Decom_elem + 1)->form[3] = steiner_node_num;
+            su_mesh->node.at(steiner_node_num).elem = pathl.elem_num;
             // 先更新所有能在该步骤下进行更新的相邻信息，再将新生成的两个网格单元插入elem容器
             // 得到新生成的网格单元使用的网格单元编号
             int pathl_elem_num[] = {pathl.elem_num, su_mesh->elem_num};
@@ -799,6 +865,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
             su_mesh->elem.at(pathl.elem_num) = *(pathl.Decom_elem + 0);
             su_mesh->elem.push_back(*(pathl.Decom_elem + 1));
             su_mesh->elem_num++;
+            for (int i = 0; i < pathl.Decom_elem_num; i++)
+                mesh_process.Renew_NodeElem(su_mesh, pathl_elem_num[i]);
         }
         // 对边型和邻边型的两个相交图形都是边
         else if (pathl.type[0] == 2 && pathl.type[1] == 2)
@@ -808,13 +876,14 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
             int *steiner_node_num = new int[2];
             for (int i = 0; i < 2; i++)
             {
-                if (*(su_mesh->node.end() - 0) == NODE(*(pathl.pot + i)))
+                if (*(su_mesh->node.end() - 1) == NODE(*(pathl.pot + i)))
                     *(steiner_node_num + i) = su_mesh->node_num - 1;
-                else if (*(su_mesh->node.end() - 1) == NODE(*(pathl.pot + i)))
+                else if (*(su_mesh->node.end() - 2) == NODE(*(pathl.pot + i)))
                     *(steiner_node_num + i) = su_mesh->node_num - 2;
                 else
                 {
                     su_mesh->node.push_back(NODE(*(pathl.pot + i)));
+                    su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     *(steiner_node_num + i) = su_mesh->node_num++;
                 }
             }
@@ -825,6 +894,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 // 首先更新节点信息
                 for (int i = 0; i < 4; i++)
                     (pathl.Decom_elem + i)->form[2] = *(steiner_node_num + 0), (pathl.Decom_elem + i)->form[3] = *(steiner_node_num + 1);
+                su_mesh->node.at(*(steiner_node_num + 0)).elem = pathl.elem_num, su_mesh->node.at(*(steiner_node_num + 1)).elem = pathl.elem_num;
                 // 得到新生成的网格单元使用的网格单元编号
                 int pathl_elem_num[] = {pathl.elem_num, su_mesh->elem_num, su_mesh->elem_num + 1, su_mesh->elem_num + 2};
                 // 更新相邻信息
@@ -851,6 +921,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->elem.push_back(*(pathl.Decom_elem + i));
                     su_mesh->elem_num++;
                 }
+                for (int i = 0; i < pathl.Decom_elem_num; i++)
+                    mesh_process.Renew_NodeElem(su_mesh, pathl_elem_num[i]);
             }
             // 邻边“S”型
             else if (pathl.Decom_type_two_sides = 'S')
@@ -859,6 +931,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 for (int i = 0; i < 2; i++)
                     (pathl.Decom_elem + i)->form[2] = *(steiner_node_num + 0), (pathl.Decom_elem + i)->form[3] = *(steiner_node_num + 1);
                 (pathl.Decom_elem + 2)->form[3] = *(steiner_node_num + 0);
+                su_mesh->node.at(*(steiner_node_num + 0)).elem = pathl.elem_num, su_mesh->node.at(*(steiner_node_num + 1)).elem = pathl.elem_num;
                 // 得到新生成的网格单元使用的网格单元编号
                 int pathl_elem_num[] = {pathl.elem_num, su_mesh->elem_num, su_mesh->elem_num + 1};
                 // 更新相邻信息
@@ -887,6 +960,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->elem.push_back(*(pathl.Decom_elem + i));
                     su_mesh->elem_num++;
                 }
+                for (int i = 0; i < pathl.Decom_elem_num; i++)
+                    mesh_process.Renew_NodeElem(su_mesh, pathl_elem_num[i]);
             }
             // 邻边“Z”型
             else if (pathl.Decom_type_two_sides = 'Z')
@@ -895,6 +970,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 for (int i = 0; i < 2; i++)
                     (pathl.Decom_elem + i)->form[2] = *(steiner_node_num + 0), (pathl.Decom_elem + i)->form[3] = *(steiner_node_num + 1);
                 (pathl.Decom_elem + 2)->form[3] = *(steiner_node_num + 0);
+                su_mesh->node.at(*(steiner_node_num + 0)).elem = pathl.elem_num, su_mesh->node.at(*(steiner_node_num + 1)).elem = pathl.elem_num;
                 // 得到新生成的网格单元使用的网格单元编号
                 int pathl_elem_num[] = {pathl.elem_num, su_mesh->elem_num, su_mesh->elem_num + 1};
                 // 更新相邻信息
@@ -923,6 +999,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->elem.push_back(*(pathl.Decom_elem + i));
                     su_mesh->elem_num++;
                 }
+                for (int i = 0; i < pathl.Decom_elem_num; i++)
+                    mesh_process.Renew_NodeElem(su_mesh, pathl_elem_num[i]);
             }
             else
                 std::cout << "Bilateral pathl's Decom_type_two_sides set error!\n", exit(-1);
@@ -942,6 +1020,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 else
                 {
                     su_mesh->node.push_back(NODE(*(pathl.pot + 1)));
+                    su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     steiner_node_num = su_mesh->node_num++;
                 }
             }
@@ -952,20 +1031,22 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 else
                 {
                     su_mesh->node.push_back(NODE(*pathl.pot));
+                    su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     steiner_node_num = su_mesh->node_num++;
                 }
             }
             // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息
             for (int i = 0; i < 3; i++)
                 (pathl.Decom_elem + i)->form[3] = steiner_node_num;
+            su_mesh->node.at(steiner_node_num).elem = pathl.elem_num;
             // 先更新所有能在该步骤下进行更新的相邻信息，再将新生成的两个网格单元插入elem容器
             // 得到新生成的网格单元使用的网格单元编号
             int pathl_elem_num[] = {pathl.elem_num, su_mesh->elem_num, su_mesh->elem_num + 1};
             // 更新这三个网格单元的相邻信息
-            (pathl.Decom_elem + 0)->neig[1] = pathl_elem_num[1], (pathl.Decom_elem + 0)->neig[2] = pathl_elem_num[2];
-            (pathl.Decom_elem + 1)->neig[1] = pathl_elem_num[1], (pathl.Decom_elem + 1)->neig[2] = pathl_elem_num[0];
+            (pathl.Decom_elem + 0)->neig[1] = pathl_elem_num[2], (pathl.Decom_elem + 0)->neig[2] = pathl_elem_num[1];
+            (pathl.Decom_elem + 1)->neig[1] = pathl_elem_num[2], (pathl.Decom_elem + 1)->neig[2] = pathl_elem_num[0];
             su_mesh->elem.at((pathl.Decom_elem + 1)->neig[3]).neig[mesh_process.AdjacentElem_pos(su_mesh->elem.at((pathl.Decom_elem + 1)->neig[3]), pathl.elem_num)] = pathl_elem_num[1];
-            (pathl.Decom_elem + 2)->neig[1] = pathl_elem_num[2], (pathl.Decom_elem + 2)->neig[2] = pathl_elem_num[0];
+            (pathl.Decom_elem + 2)->neig[1] = pathl_elem_num[1], (pathl.Decom_elem + 2)->neig[2] = pathl_elem_num[0];
             su_mesh->elem.at((pathl.Decom_elem + 2)->neig[3]).neig[mesh_process.AdjacentElem_pos(su_mesh->elem.at((pathl.Decom_elem + 2)->neig[3]), pathl.elem_num)] = pathl_elem_num[2];
             // 点面型、面点型会有三个待判断的网格面
             faceNum_cnt = 3;
@@ -983,6 +1064,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
             su_mesh->elem_num++;
             su_mesh->elem.push_back(*(pathl.Decom_elem + 2));
             su_mesh->elem_num++;
+            for (int i = 0; i < pathl.Decom_elem_num; i++)
+                mesh_process.Renew_NodeElem(su_mesh, pathl_elem_num[i]);
         }
         // 边面型（面边型）
         else if ((pathl.type[0] == 2 && pathl.type[1] == 3) || (pathl.type[0] == 3 && pathl.type[1] == 2))
@@ -993,13 +1076,14 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
             int *steiner_node_num = new int[2];
             for (int i = 0; i < 2; i++)
             {
-                if (*(su_mesh->node.end() - 0) == NODE(*(pathl.pot + i)))
+                if (*(su_mesh->node.end() - 1) == NODE(*(pathl.pot + i)))
                     *(steiner_node_num + i) = su_mesh->node_num - 1;
-                else if (*(su_mesh->node.end() - 1) == NODE(*(pathl.pot + i)))
+                else if (*(su_mesh->node.end() - 2) == NODE(*(pathl.pot + i)))
                     *(steiner_node_num + i) = su_mesh->node_num - 2;
                 else
                 {
                     su_mesh->node.push_back(NODE(*(pathl.pot + i)));
+                    su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     *(steiner_node_num + i) = su_mesh->node_num++;
                 }
             }
@@ -1010,6 +1094,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 (pathl.Decom_elem + 3)->form[3] = *(steiner_node_num + 0);
             else
                 (pathl.Decom_elem + 3)->form[3] = *(steiner_node_num + 1);
+            su_mesh->node.at(*(steiner_node_num + 0)).elem = pathl.elem_num, su_mesh->node.at(*(steiner_node_num + 1)).elem = pathl.elem_num;
             // 先更新所有能在该步骤下进行更新的相邻信息，再将新生成的四个网格单元插入elem容器
             // 得到新生成的网格单元使用的网格单元编号
             int pathl_elem_num[] = {pathl.elem_num, su_mesh->elem_num, su_mesh->elem_num + 1, su_mesh->elem_num + 2};
@@ -1053,6 +1138,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 su_mesh->elem.push_back(*(pathl.Decom_elem + i));
                 su_mesh->elem_num++;
             }
+            for (int i = 0; i < pathl.Decom_elem_num; i++)
+                mesh_process.Renew_NodeElem(su_mesh, pathl_elem_num[i]);
             delete[] steiner_node_num;
         }
         // 双面型
@@ -1063,19 +1150,21 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
             int *steiner_node_num = new int[2];
             for (int i = 0; i < 2; i++)
             {
-                if (*(su_mesh->node.end() - 0) == NODE(*(pathl.pot + i)))
+                if (*(su_mesh->node.end() - 1) == NODE(*(pathl.pot + i)))
                     *(steiner_node_num + i) = su_mesh->node_num - 1;
-                else if (*(su_mesh->node.end() - 1) == NODE(*(pathl.pot + i)))
+                else if (*(su_mesh->node.end() - 2) == NODE(*(pathl.pot + i)))
                     *(steiner_node_num + i) = su_mesh->node_num - 2;
                 else
                 {
                     su_mesh->node.push_back(NODE(*(pathl.pot + i)));
+                    su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     *(steiner_node_num + i) = su_mesh->node_num++;
                 }
             }
             // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息
             for (int i = 0; i < 3; i++)
                 (pathl.Decom_elem + i)->form[2] = *(steiner_node_num + 0), (pathl.Decom_elem + i)->form[3] = *(steiner_node_num + 1);
+            su_mesh->node.at(*(steiner_node_num + 0)).elem = pathl.elem_num, su_mesh->node.at(*(steiner_node_num + 1)).elem = pathl.elem_num;
             for (int i = 3; i < 5; i++)
                 (pathl.Decom_elem + i)->form[3] = *(steiner_node_num + 1);
             // 先更新所有能在该步骤下进行更新的相邻信息，再将新生成的五个网格单元插入elem容器
@@ -1117,6 +1206,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                 su_mesh->elem.push_back(*(pathl.Decom_elem + i));
                 su_mesh->elem_num++;
             }
+            for (int i = 0; i < pathl.Decom_elem_num; i++)
+                mesh_process.Renew_NodeElem(su_mesh, pathl_elem_num[i]);
             delete[] steiner_node_num;
         }
         else
@@ -1159,6 +1250,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
         elemNum_judge = nullptr;
         faceNum_cnt = 0;
     }
+    pathl.Decom_elem = nullptr; // 避免析构函数错误删除内存空间
     return;
 }
 
@@ -1249,17 +1341,16 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_rec
             exit(-1);
         }
     }
-    // 如果路径中有四个路径元
-    //else if (path.size() == 4)
-    //{
-    //}
     else
     {
         // 遍历每个路径元，分别进行分解和生成网格单元，同时确保相邻信息的准确性
-        // 先对路径元进行分解操作
+        // 先对路径进行修复操作
+        //Repair_Path(su_mesh->shortest_border_edge, &path);
+        // 再对路径元进行分解操作
         Decompose_Pathl(&path);
-        // 再依据路径元当前类型，将分解后的网格压入elem容器，形成路径元的完整分解生成过程
+        // 依据路径中各个路径元类型，将分解后的网格压入elem容器，形成路径元的完整分解生成过程
         Pathl_Generate_GridCell(su_mesh, &path);
+        mesh_process.Judge_the_validity_of_information(su_mesh);
     }
     return;
 }
