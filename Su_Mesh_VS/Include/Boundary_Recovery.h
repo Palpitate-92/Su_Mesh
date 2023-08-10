@@ -40,7 +40,7 @@ public:
     // 恢复边界边
     void Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_recovery);
     // 查找集（set）
-    std::vector<int> FindSet(_SU_MESH *su_mesh, FACE face_recovery);
+    std::vector<Setl> FindSet(_SU_MESH *su_mesh, FACE face_recovery);
     // 恢复边界面
     void Recovery_Boundary_face(_SU_MESH *su_mesh, FACE face_recovery);
     // 边界恢复
