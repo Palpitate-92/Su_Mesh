@@ -260,11 +260,41 @@ double Pathl::get_pot_distance()
 
 Pathl::~Pathl()
 {
-    //if (Decom_elem != nullptr)
-    //{
-    //    free(Decom_elem);
-    //    Decom_elem = nullptr;
-    //}
+    free(Decom_elem);
+    Decom_elem = nullptr;
+};
+
+Setl Setl::operator=(const ELEM &elem)
+{
+    memcpy(form, elem.form, sizeof(elem.form));
+    memcpy(neig, elem.neig, sizeof(elem.neig));
+    return *this;
+}
+
+Setl::Setl()
+{
+    for (int i = 0; i < DIM + 1; i++)
+    {
+        form[i] = -1;
+        neig[i] = -1;
+    }
+    elem_num = -1;
+    intersec_num = 0;
+    memset(pot, 0, sizeof(pot));
+    for (int i = 0; i < 8; i++)
+        intersec_edge[i] = -1;
+    vertex_num = 0;
+    for (int i = 0; i < 3; i++)
+        vertex_nodeNum[i] = -1;
+    for (int i = 0; i < 6; i++)
+        contact_edge[i] = -1;
+    Decom_elem = nullptr;
+    Decom_elem_num = 0;
+    Decom_type_two_sides = '\0';
+}
+
+Setl::~Setl()
+{
     free(Decom_elem);
     Decom_elem = nullptr;
 };

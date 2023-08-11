@@ -48,6 +48,7 @@ class FACE;
 class EDGE;
 class Point;
 class Pathl;
+class Setl;
 class _SHEWCHUK;
 class _IOS;
 class _INSERT_POINT;

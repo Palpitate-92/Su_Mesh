@@ -1360,6 +1360,7 @@ std::vector<Setl> _BOUNDARY_RECOVERY::FindSet(_SU_MESH *su_mesh, FACE face_recov
     _MESH_PROCESS mesh_process;
     // 取出待恢复边界面的三个节点
     NODE face_recovery_node[] = {su_mesh->node.at(face_recovery.form[0]), su_mesh->node.at(face_recovery.form[1]), su_mesh->node.at(face_recovery.form[2])};
+    Setl setaa;
     std::vector<Setl> set;     // 待恢复边界面的集
     std::vector<Setl> set_tp1; // 存储候选集元
     // 查找包含待恢复边界面每个节点的Ball，并将其中的网格单元编号
@@ -1374,9 +1375,10 @@ std::vector<Setl> _BOUNDARY_RECOVERY::FindSet(_SU_MESH *su_mesh, FACE face_recov
             Setl setl_tp;
             setl_tp.elem_num = *iter;
             setl_tp = su_mesh->elem.at(setl_tp.elem_num);
-            setl_tp.type[0] = 1;
-            setl_tp.pot[0] = face_recovery_node[i];
-            setl_tp.node_num[0] = face_recovery.form[0]; // 点只需要1个节点编号
+            setl_tp.intersec_num++;
+            setl_tp.vertex_num++;
+            setl_tp.vertex_nodeNum[0] = face_recovery.form[i];
+            setl_tp.contact_edge[0] = face_recovery.form[i]; // 这里这个接触边的第二个顶点不能确定
             set_tp1.push_back(setl_tp);
         }
     }
