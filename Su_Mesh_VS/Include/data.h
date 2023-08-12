@@ -19,6 +19,7 @@ typedef K::Point_3 Point_3;
 typedef K::Segment_3 Segment_3;
 typedef K::Triangle_3 Triangle_3;
 typedef K::Tetrahedron_3 Tetrahedron_3;
+typedef K::Sphere_3 Sphere_3;
 
 // 声明全局变量
 #define DIM 3                                             // 声明维度DIM为常值 3

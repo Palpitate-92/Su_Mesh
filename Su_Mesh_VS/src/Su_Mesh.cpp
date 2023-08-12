@@ -2,37 +2,40 @@
 
 void _SU_MESH::check()
 {
-    // _QUALITY quality;
-    // quality.Optimization_based_Smoothing_The_all(this, 379);
-    // quality.Optimization_based_Smoothing_The_all(this, 450);
-    // std::vector<double> volume;
-    // std::vector<double> Shape_Quality;
-    // double all_volume = 0;
-    // int i = 0;
-    // int cnt = 0;
-    // for (std::vector<ELEM>::iterator elem_iter = elem.begin(); elem_iter != elem.end(); ++elem_iter)
-    // {
-    //   volume.push_back(abs(data_process.tetrahedral_volume(
-    //       node.at(elem_iter->form[0]),
-    //       node.at(elem_iter->form[1]),
-    //       node.at(elem_iter->form[2]),
-    //       node.at(elem_iter->form[3]))));
-    //   all_volume += volume.back();
-    //   if (elem_iter->quality < 0.01)
-    //   {
-    //     cnt++;
-    //     // std::cout << i << '\n';
-    //   }
-    //   Shape_Quality.push_back(elem_iter->quality);
-    //   i++;
-    // }
-    // if (cnt > 0)
-    //   std::cout << cnt << ' ';
-    // std::sort(volume.begin(), volume.end());
-    // std::sort(Shape_Quality.begin(), Shape_Quality.end());
-    // if (abs(all_volume - 1000000.0) > 0.1)
-    //   std::cout << std::fixed << "Mesh total mass error!\n";
-    // std::cout << all_volume << '\n';
+    int a;
+    // 首先定义CGAL的顶点类
+    Point_3 p1{0, 0, 0},
+        p2{0, 1, 0},
+        p3{1, 0, 0},
+        p4{0, 0, 0},
+        p5{0, 1, 0},
+        p6{0, 0, 1},
+        p7{1, 0, 1};
+    // 再定义CGAL的面类
+    Triangle_3 tri(p1, p2, p3);
+    // 定义CGAL的四面体类
+    Tetrahedron_3 tet1(p4, p5, p6, p7);
+    // 计算相交结果
+    const auto result = intersection(tri, tet1);
+    // 如果相交
+    if (result)
+    {
+        if (boost::get<Point_3>(&*result))
+            a = 1;
+        else if (boost::get<Segment_3>(&*result))
+            a = 2;
+        else if (boost::get<Triangle_3>(&*result))
+            a = 3;
+        else if (boost::get<std::vector<CGAL::Point_3<CGAL::Epick>, std::allocator<CGAL::Point_3<CGAL::Epick>>>>(&*result))
+            a = 4;
+        else
+            a = 0;
+    }
+    else
+    {
+        std::cout << "Edge-to-elem intersection judgment error!\n";
+        exit(-1);
+    }
     return;
 }
 

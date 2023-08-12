@@ -224,6 +224,11 @@ Point Point::operator=(const NODE &node)
     return *this;
 }
 
+bool Point::operator==(const NODE &node) const
+{
+    return (pos[0] == node.pos[0] && pos[1] == node.pos[1] && pos[2] == node.pos[2]);
+}
+
 Pathl::Pathl()
 {
     for (int i = 0; i < DIM + 1; i++)

@@ -135,9 +135,10 @@ private:
 
 public:
     Point();
-    Point operator+(const Point &point);  // 重载“+”运算符
-    Point operator/(const double &value); // 重载“/”运算符
-    Point operator=(const NODE &node);    // 重载“=”运算符
+    Point operator+(const Point &point);     // 重载“+”运算符
+    Point operator/(const double &value);    // 重载“/”运算符
+    Point operator=(const NODE &node);       // 重载“=”运算符
+    bool operator==(const NODE &node) const; // 重载“==”运算符
     ~Point(){};
 
 private:
