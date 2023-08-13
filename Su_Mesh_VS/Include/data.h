@@ -37,6 +37,8 @@ extern const double Min_gradient;                         // 最小梯度值，�
 extern const double Min_steepest_descent;                 // 最小最速下降方向值，最速下降方向向量的模小于该值时代表达到极值点处，停止迭代
 extern const double c1;                                   // Armijo准则的常数
 extern const double c2;                                   // Wolfe准则的常数
+extern const double Max_deviation_point_internal;         // 用于判断点是否在三角形内部时的最大误差
+extern const double Max_steiner_point_internal;           // 在恢复边界边时，用于判断是否该对steiner点进行合并，该值为一比值，与模型最短边界边相乘值即为最大需合并的steiner点间距离
 
 // extern const int DIM;   // 声明维度DIM为常值 3
 // #define Pi; // 声明圆周率 3.14159265358979

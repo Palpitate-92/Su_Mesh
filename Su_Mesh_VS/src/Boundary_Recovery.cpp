@@ -86,6 +86,8 @@ void _BOUNDARY_RECOVERY::ReplaceNode_two(_SU_MESH *su_mesh, int nodeNum_one, int
 
 void _BOUNDARY_RECOVERY::ReplaceElem_two(_SU_MESH *su_mesh, int elemNum_one, int elemNum_two)
 {
+    if (elemNum_one == elemNum_two)
+        return;
     std::vector<int> elemNum_ElemOne;      // 创建一个容器，用来储存第一个网格单元的相邻网格单元编号
     std::vector<int> elemNum_ElemOne_neig; // 创建一个容器，用来储存第一个网格单元在其相邻网格单元的neig中位置
     std::vector<int> elemNum_ElemTwo;      // 创建一个容器，用来储存第二个网格单元的相邻网格单元编号
@@ -154,26 +156,26 @@ void _BOUNDARY_RECOVERY::Removal_LastElem(_SU_MESH *su_mesh, int elemNum_after)
     return;
 }
 
-void _BOUNDARY_RECOVERY::Removal_NodeElem(_SU_MESH *su_mesh, std::vector<int> elemNum_Remove, int nodeNum_Remove[8], int type)
+void _BOUNDARY_RECOVERY::Removal_NodeElem(_SU_MESH *su_mesh, std::vector<int> elemNum_Remove, int *nodeNum_Remove, int nodeRemove_num, int type)
 {
     int cnt_node = 0; // 记录待删除节点的个数
     if (type == 1)
     {
         // 为简化删除节点流程，当查找到待删除节点时，使用容器内最后一个有效节点来替换此位置，在程序结束时，删除最后cnt_node个节点，最大限度地保证了整个网格的相邻信息不变
         // 为避免不必要的麻烦，将nodeNum_Remove降序排序，从nodeNum_Remove的最后一个节点编号开始检索替换
-        std::sort(nodeNum_Remove, nodeNum_Remove + 8, std::greater<>());
+        std::sort(nodeNum_Remove, nodeNum_Remove + nodeRemove_num, std::greater<>());
         // 将nodeNum_Remove内所有节点放到node容器最后
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < nodeRemove_num; i++)
         {
             // 将该节点与node容器的最后一个有效节点交换位置
             // 如果该节点就位于node容器的最后一个有效节点位置，则不交换
-            if (nodeNum_Remove[i] == su_mesh->node_num - 1 - cnt_node)
+            if (*(nodeNum_Remove + i) == su_mesh->node_num - 1 - cnt_node)
             {
                 cnt_node++;
                 continue;
             }
             else
-                ReplaceNode_two(su_mesh, nodeNum_Remove[i], su_mesh->node_num - 1 - cnt_node++);
+                ReplaceNode_two(su_mesh, *(nodeNum_Remove + i), su_mesh->node_num - 1 - cnt_node++);
         }
     }
     int cnt_elem = 0; // 记录待删除网格单元的个数
@@ -203,7 +205,8 @@ void _BOUNDARY_RECOVERY::Removal_NodeElem(_SU_MESH *su_mesh, std::vector<int> el
 
 void _BOUNDARY_RECOVERY::Removal_ExGrid(_SU_MESH *su_mesh, int type) // 去掉外部单元并缩减容器
 {
-    int nodeNum_Remove[8];
+    int *nodeNum_Remove = new int[8];
+    int nodeRemove_num = 8;
     std::vector<int> elemNum_Remove; // 声明一个容器，用来储存待移除网格单元编号
     if (type == 1)
     {
@@ -214,7 +217,9 @@ void _BOUNDARY_RECOVERY::Removal_ExGrid(_SU_MESH *su_mesh, int type) // 去掉�
     }
     if (type == 2)
         elemNum_Remove = External_Elem_Lookup(su_mesh);
-    Removal_NodeElem(su_mesh, elemNum_Remove, nodeNum_Remove, type); // 在node容器内删除节点与单元并更新所有信息
+    Removal_NodeElem(su_mesh, elemNum_Remove, nodeNum_Remove, nodeRemove_num, type); // 在node容器内删除节点与单元并更新所有信息
+    delete[] nodeNum_Remove;
+    nodeNum_Remove = nullptr;
     return;
 }
 
@@ -790,12 +795,13 @@ void _BOUNDARY_RECOVERY::Repair_Path(double shortest_dis, std::vector<Pathl> *pa
     return;
 }
 
-void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Pathl> *path)
+void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Pathl> *path, EDGE edge_recovery)
 {
+    _MESH_PROCESS mesh_process;
+    _DATA_PROCESS data_process;
     // 声明两个迭代器
     int elemNum_iter = -1;
     std::vector<FACE>::iterator face_iter;
-    _MESH_PROCESS mesh_process;
     FACE *face_judge = nullptr;
     int *elemNum_judge = nullptr;
     int faceNum_cnt = 0;
@@ -803,6 +809,10 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
     // 声明两个容器，分别存储待更新相邻信息的网格面与相对应的网格单元编号
     std::vector<int> elemNum_adjacent;
     std::vector<FACE> face_adjacent;
+    // 声明一个数组，储存路径上节点编号
+    int *path_nodeNum = (int *)malloc(sizeof(int) * (int(path->size()) + 2));
+    int path_nodeNum_iter = 0;
+    *(path_nodeNum + path_nodeNum_iter++) = edge_recovery.form[0];
     for (std::vector<Pathl>::iterator path_iter = path->begin(); path_iter != path->end(); ++path_iter)
     {
         pathl = *path_iter;
@@ -826,6 +836,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->node.push_back(NODE(*(pathl.pot + 1)));
                     su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     steiner_node_num = su_mesh->node_num++;
+                    // 根据steiner点编号，更新路径节点信息
+                    *(path_nodeNum + path_nodeNum_iter++) = steiner_node_num;
                 }
             }
             else
@@ -837,6 +849,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->node.push_back(NODE(*pathl.pot));
                     su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     steiner_node_num = su_mesh->node_num++;
+                    // 根据steiner点编号，更新路径节点信息
+                    *(path_nodeNum + path_nodeNum_iter++) = steiner_node_num;
                 }
             }
             // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息
@@ -885,6 +899,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->node.push_back(NODE(*(pathl.pot + i)));
                     su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     *(steiner_node_num + i) = su_mesh->node_num++;
+                    // 根据steiner点编号，更新路径节点信息
+                    *(path_nodeNum + path_nodeNum_iter++) = *(steiner_node_num + i);
                 }
             }
             // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息，然后更新相邻信息，插入elem容器，最后储存待判断网格面
@@ -1022,6 +1038,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->node.push_back(NODE(*(pathl.pot + 1)));
                     su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     steiner_node_num = su_mesh->node_num++;
+                    // 根据steiner点编号，更新路径节点信息
+                    *(path_nodeNum + path_nodeNum_iter++) = steiner_node_num;
                 }
             }
             else
@@ -1033,6 +1051,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->node.push_back(NODE(*pathl.pot));
                     su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     steiner_node_num = su_mesh->node_num++;
+                    // 根据steiner点编号，更新路径节点信息
+                    *(path_nodeNum + path_nodeNum_iter++) = steiner_node_num;
                 }
             }
             // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息
@@ -1085,6 +1105,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->node.push_back(NODE(*(pathl.pot + i)));
                     su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     *(steiner_node_num + i) = su_mesh->node_num++;
+                    // 根据steiner点编号，更新路径节点信息
+                    *(path_nodeNum + path_nodeNum_iter++) = *(steiner_node_num + i);
                 }
             }
             // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息
@@ -1159,6 +1181,8 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     su_mesh->node.push_back(NODE(*(pathl.pot + i)));
                     su_mesh->node.back().spac = mesh_process.get_aver_spac(su_mesh, su_mesh->elem.at(pathl.elem_num));
                     *(steiner_node_num + i) = su_mesh->node_num++;
+                    // 根据steiner点编号，更新路径节点信息
+                    *(path_nodeNum + path_nodeNum_iter++) = *(steiner_node_num + i);
                 }
             }
             // 根据steiner点编号，更新路径元分解生成的网格单元的节点信息
@@ -1251,6 +1275,108 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
         faceNum_cnt = 0;
     }
     pathl.Decom_elem = nullptr; // 避免析构函数错误删除内存空间
+    // 更新路径节点信息，最后一个节点
+    *(path_nodeNum + path_nodeNum_iter++) = edge_recovery.form[1];
+    NODE node_tp;
+    int nodeNum_tp;
+    int elemNum_neig_tp[2];
+    EDGE edge_tp;
+    ELEM elem_tp;
+    bool merge_judge = false; // 判断上次循环是否进行了合并操作
+    std::vector<int> elemNum_IncludeNode;
+    std::vector<int> elemNum_IncludeEdge;
+    std::vector<int> elemNum_wait_delete;
+    int *nodeNum_wait_delete = new int[path_nodeNum_iter]; // 储存合并结束后需要删除的节点编号
+    int nodeNum_wait_delete_cnt = 0;
+    // 利用路径节点信息，判断这些新插入的steiner点间距离，若过短，则进行合并操作
+    for (int i = 1; i < path_nodeNum_iter - 2; i++)
+    {
+        // 取出待判断边
+        if (merge_judge)
+            edge_tp = EDGE(nodeNum_tp, *(path_nodeNum + i + 1));
+        else
+            edge_tp = EDGE(*(path_nodeNum + i), *(path_nodeNum + i + 1));
+        merge_judge = false;
+        std::vector<int>().swap(elemNum_IncludeEdge);
+        mesh_process.FindRing(su_mesh, edge_tp, &elemNum_IncludeEdge, "fast");
+        if (elemNum_IncludeEdge.empty())
+            std::cout << "Pathl generate gridCell merge fail, elemNum_IncludeEdge search error!\n", exit(-1);
+        // 通过该边长度判断是否需要合并，低于模型最短边界边的一定倍数值时需要合并
+        if (data_process.get_dist(su_mesh->node.at(edge_tp.form[0]).pos, su_mesh->node.at(edge_tp.form[1]).pos) <= su_mesh->shortest_border_edge * Max_steiner_point_internal)
+        {
+            node_tp = (su_mesh->node.at(edge_tp.form[0]) + su_mesh->node.at(edge_tp.form[1])) * 0.5;
+            nodeNum_tp = edge_tp.form[0];
+            *(nodeNum_wait_delete + nodeNum_wait_delete_cnt++) = edge_tp.form[1]; // 待删除节点编号，节点留在整个流程结束后再删除
+            // elemNum_IncludeEdge内的网格单元在节点合并结束后都会成为无效单元，需要进行删除操作
+            // 先将这些网格单元替换到elem容器末尾，以便后续删除操作，并记录下这些网格单元在替换后的网格单元编号
+            std::vector<int>().swap(elemNum_wait_delete);
+            int cnt_elem = 0; // 记录待删除网格单元的个数
+            std::sort(elemNum_IncludeEdge.begin(), elemNum_IncludeEdge.end());
+            for (int j = int(elemNum_IncludeEdge.size()) - 1; j >= 0; j--)
+            {
+                // 将该网格单元与elem容器的最后一个有效网格单元交换位置
+                // 如果该网格单元就位于elem容器的最后一个有效网格单元位置，则不交换
+                if (elemNum_IncludeEdge.at(j) == su_mesh->elem.size() - 1 - cnt_elem)
+                {
+                    cnt_elem++;
+                    elemNum_wait_delete.push_back(elemNum_IncludeEdge.at(j));
+                    continue;
+                }
+                ReplaceElem_two(su_mesh, elemNum_IncludeEdge.at(j), su_mesh->elem_num - 1 - cnt_elem);
+                elemNum_wait_delete.push_back(su_mesh->elem_num - 1 - cnt_elem);
+                cnt_elem++;
+            }
+            // 修改合并后的节点信息
+            su_mesh->node.at(nodeNum_tp) = node_tp;
+            // 储存待修改节点信息的网格单元
+            std::vector<int>().swap(elemNum_IncludeNode);
+            mesh_process.FindBall_fast(su_mesh, edge_tp.form[1], &elemNum_IncludeNode);
+            // 修改节点合并后相关网格单元的相邻信息
+            for (std::vector<int>::iterator iter = elemNum_wait_delete.begin(); iter != elemNum_wait_delete.end(); ++iter)
+            {
+                elem_tp = su_mesh->elem.at(*iter);
+                elemNum_neig_tp[0] = elem_tp.neig[mesh_process.ELEM_Include_Node(elem_tp, edge_tp.form[1])];
+                elemNum_neig_tp[1] = elem_tp.neig[mesh_process.ELEM_Include_Node(elem_tp, edge_tp.form[0])];
+                su_mesh->elem.at(elemNum_neig_tp[0]).neig[mesh_process.AdjacentElem_pos(su_mesh->elem.at(elemNum_neig_tp[0]), *iter)] = elemNum_neig_tp[1];
+                su_mesh->elem.at(elemNum_neig_tp[1]).neig[mesh_process.AdjacentElem_pos(su_mesh->elem.at(elemNum_neig_tp[1]), *iter)] = elemNum_neig_tp[0];
+                mesh_process.Renew_NodeElem(su_mesh, elemNum_neig_tp[0]);
+                mesh_process.Renew_NodeElem(su_mesh, elemNum_neig_tp[1]);
+            }
+            // 删除相关网格单元
+            for (int k = 0; k < cnt_elem; k++)
+                su_mesh->elem.pop_back(), su_mesh->elem_num--;
+            // 修改网格单元节点编号信息
+            for (std::vector<int>::iterator iter = elemNum_IncludeNode.begin(); iter != elemNum_IncludeNode.end(); ++iter)
+                if (*iter < su_mesh->elem_num)
+                    su_mesh->elem.at(*iter).form[mesh_process.ELEM_Include_Node(su_mesh->elem.at(*iter), edge_tp.form[1])] = nodeNum_tp, su_mesh->elem.at(*iter).Sort();
+            merge_judge = true;
+        }
+    }
+    // 删除无效节点，先将其替换到node容器末尾，再进行删除操作
+    std::sort(nodeNum_wait_delete, nodeNum_wait_delete + nodeNum_wait_delete_cnt, std::greater<>());
+    for (int i = 0; i < nodeNum_wait_delete_cnt; i++)
+    {
+        nodeNum_tp = su_mesh->node_num - 1;
+        // 如果本来就在末尾，则直接删除
+        if (*(nodeNum_wait_delete + i) == nodeNum_tp)
+        {
+            su_mesh->node.pop_back();
+            su_mesh->node_num--;
+            continue;
+        }
+        std::vector<int>().swap(elemNum_IncludeNode);
+        mesh_process.FindBall_fast(su_mesh, nodeNum_tp, &elemNum_IncludeNode); // 查找包含node容器末尾节点的所有网格单元编号
+        // 修改elem容器内值
+        for (std::vector<int>::iterator iter = elemNum_IncludeNode.begin(); iter != elemNum_IncludeNode.end(); ++iter)
+            su_mesh->elem.at(*iter).form[mesh_process.Elem_Include_Node(su_mesh->elem.at(*iter), nodeNum_tp)] = *(nodeNum_wait_delete + i), su_mesh->elem.at(*iter).Sort();
+        // 替换节点位置
+        std::swap(su_mesh->node.at(nodeNum_tp), su_mesh->node.at(*(nodeNum_wait_delete + i)));
+        su_mesh->node.pop_back();
+        su_mesh->node_num--;
+    }
+    free(path_nodeNum);
+    path_nodeNum = nullptr;
+    delete[] nodeNum_wait_delete;
     return;
 }
 
@@ -1349,8 +1475,8 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_rec
         // 再对路径元进行分解操作
         Decompose_Pathl(&path);
         // 依据路径中各个路径元类型，将分解后的网格压入elem容器，形成路径元的完整分解生成过程
-        Pathl_Generate_GridCell(su_mesh, &path);
-        //mesh_process.Judge_the_validity_of_information(su_mesh);
+        Pathl_Generate_GridCell(su_mesh, &path, edge_recovery);
+        mesh_process.Judge_the_validity_of_information(su_mesh);
     }
     return;
 }
@@ -1358,6 +1484,7 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_rec
 std::vector<Setl> _BOUNDARY_RECOVERY::FindSet(_SU_MESH *su_mesh, FACE face_recovery)
 {
     _MESH_PROCESS mesh_process;
+    _DATA_PROCESS data_process;
     // 取出待恢复边界面的三个节点
     NODE face_recovery_node[] = {su_mesh->node.at(face_recovery.form[0]), su_mesh->node.at(face_recovery.form[1]), su_mesh->node.at(face_recovery.form[2])};
     std::vector<Setl> set;          // 待恢复边界面的集
@@ -1383,6 +1510,7 @@ std::vector<Setl> _BOUNDARY_RECOVERY::FindSet(_SU_MESH *su_mesh, FACE face_recov
     // 查找集
     int elemNum_tp;
     bool vertex_node_judge; // 顶点判断
+    bool point_judge;
     ELEM elem_tp;
     EDGE edge_tp;
     Point intersection_point;
@@ -1390,7 +1518,6 @@ std::vector<Setl> _BOUNDARY_RECOVERY::FindSet(_SU_MESH *su_mesh, FACE face_recov
     NODE node_tp[2];
     std::vector<Setl> set_tp2; // 存储候选集元
     std::vector<int> elemNum_IncludeEdge;
-    _DATA_PROCESS data_process;
     while (!set_tp1.empty())
     {
         std::vector<Setl>().swap(set_tp2); // 初始化set_tp2，并释放容器空间
@@ -1400,10 +1527,10 @@ std::vector<Setl> _BOUNDARY_RECOVERY::FindSet(_SU_MESH *su_mesh, FACE face_recov
             elemNum_tp = iter->elem_num;
             elem_tp = su_mesh->elem.at(elemNum_tp);
             // 先判断当前网格单元是否是集元，利用该网格单元与待恢复边界面的交点数判断
-            if (data_process.Face_Elem_Intersection(face_recovery_node[0], face_recovery_node[1], face_recovery_node[2],
-                                                    su_mesh->node.at(elem_tp.form[0]), su_mesh->node.at(elem_tp.form[1]),
-                                                    su_mesh->node.at(elem_tp.form[2]), su_mesh->node.at(elem_tp.form[3])) < 3)
-                continue;
+            //if (data_process.Face_Elem_Intersection(face_recovery_node[0], face_recovery_node[1], face_recovery_node[2],
+            //                                        su_mesh->node.at(elem_tp.form[0]), su_mesh->node.at(elem_tp.form[1]),
+            //                                        su_mesh->node.at(elem_tp.form[2]), su_mesh->node.at(elem_tp.form[3])) < 3)
+            //    continue;
             // 查找集元与待恢复边界面的相交边、接触边以及相交交点、接触顶点
             intersec_cnt = 0, vertex_cnt = 0;
             for (int i = 0; i < 4; i++)
@@ -1439,10 +1566,35 @@ std::vector<Setl> _BOUNDARY_RECOVERY::FindSet(_SU_MESH *su_mesh, FACE face_recov
                         intersec_cnt++;
                     }
                 }
-            /*
-            * 用三角形面积判断点是否在三角形内部，进一步修复上述循环后的集元
-            *
-            */
+            // 用三角形面积判断集元的顶点是否在三角形内部（待恢复边界面就是三角形），进一步修复上述循环后的集元
+            // 并且判断集元的顶点是否是待恢复边界面的顶点，若是且没被储存在集元内，则进行储存
+            if (vertex_cnt != 3)
+                for (int i = 0; i < 4; i++)
+                {
+                    point_judge = false;
+                    // 先判断当前顶点是否已被储存
+                    for (int j = 0; j < vertex_cnt; j++)
+                        if (iter->vertex_nodeNum[j] == elem_tp.form[i])
+                            point_judge = true;
+                    if (point_judge)
+                        continue;
+                    // 判断当前顶点是否是待恢复边界面的顶点
+                    if (elem_tp.form[i] == face_recovery.form[0] || elem_tp.form[i] == face_recovery.form[1] || elem_tp.form[i] == face_recovery.form[2])
+                        point_judge = true;
+                    // 再判断当前顶点是否在待恢复边界面内部
+                    if (data_process.point_internal_triangle(face_recovery_node[0], face_recovery_node[1], face_recovery_node[2], su_mesh->node.at(elem_tp.form[i])))
+                        point_judge = true;
+                    if (point_judge)
+                    {
+                        iter->intersec_num++;
+                        iter->vertex_num++;
+                        iter->vertex_nodeNum[vertex_cnt] = elem_tp.form[i];
+                        iter->contact_edge[vertex_cnt * 2] = elem_tp.form[i], iter->contact_edge[vertex_cnt * 2 + 1] = (i == 0 ? elem_tp.form[1] : elem_tp.form[0]);
+                        vertex_cnt++;
+                    }
+                    if (vertex_cnt == 3)
+                        break;
+                }
 
             // 再一次验证集元的准确性，若是集元，则其intersec_cnt与vertex_cnt相加为3或者4
             if (intersec_cnt + vertex_cnt == 3 || intersec_cnt + vertex_cnt == 4)
@@ -1487,11 +1639,44 @@ std::vector<Setl> _BOUNDARY_RECOVERY::FindSet(_SU_MESH *su_mesh, FACE face_recov
     return set;
 }
 
+void _BOUNDARY_RECOVERY::Decompose_Setl(std::vector<Setl> *set)
+{
+    // 集元包含5种类型，分别是0、1、2、3、4条边刺穿待恢复边界面
+    _MESH_PROCESS mesh_process;
+    for (std::vector<Setl>::iterator setl = set->begin(); setl != set->end(); ++setl)
+    {
+        // 当没有边刺穿待恢复边界面时，该集元不需要分解
+        if (setl->intersec_num - setl->vertex_num == 0)
+            continue;
+        else
+            std::cout << "1 ";
+    }
+    return;
+}
+
+void _BOUNDARY_RECOVERY::Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Setl> *set)
+{
+    return;
+}
+
 void _BOUNDARY_RECOVERY::Recovery_Boundary_face(_SU_MESH *su_mesh, FACE face_recovery)
 {
     // 首先查找待恢复边界面的集（set），记录其与集元（setl）相交点及其数量
     std::vector<Setl> set = FindSet(su_mesh, face_recovery);
-    _MESH_PROCESS mesh_process;
+    //_MESH_PROCESS mesh_process;
+    // 如果集中只有两个集元，则可以通过Swap32实现约束边界恢复
+    if (set.size() == 3)
+    {
+    }
+    else
+    {
+        // 遍历每个集元，分别进行分解和生成网格单元，同时确保相邻信息的准确性
+        // 对集元进行分解操作
+        Decompose_Setl(&set);
+        // 依据集中各个集元类型，将分解后的网格压入elem容器，形成集元的完整分解生成过程
+        Setl_Generate_GridCell(su_mesh, &set);
+        //mesh_process.Judge_the_validity_of_information(su_mesh);
+    }
     return;
 }
 
@@ -1514,16 +1699,16 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary(_SU_MESH *su_mesh)
     // 再恢复边界面
     std::vector<FACE> face_wait_recovery; // 储存待恢复的边界面
     std::vector<int> elemNum_IncludeFace;
-    for (std::vector<FACE>::iterator iter = su_mesh->boundary_face.begin(); iter != su_mesh->boundary_face.end(); ++iter)
-    {
-        std::vector<int>().swap(elemNum_IncludeFace);
-        mesh_process.FindAwl(su_mesh, *iter, &elemNum_IncludeFace, "fast");
-        if (elemNum_IncludeFace.empty())
-            face_wait_recovery.push_back(*iter);
-    }
-    //mesh_process.Judge_the_validity_of_information(su_mesh);
-    for (std::vector<FACE>::iterator iter = face_wait_recovery.begin(); iter != face_wait_recovery.end(); ++iter)
-        Recovery_Boundary_face(su_mesh, *iter);
+    //for (std::vector<FACE>::iterator iter = su_mesh->boundary_face.begin(); iter != su_mesh->boundary_face.end(); ++iter)
+    //{
+    //    std::vector<int>().swap(elemNum_IncludeFace);
+    //    mesh_process.FindAwl(su_mesh, *iter, &elemNum_IncludeFace, "fast");
+    //    if (elemNum_IncludeFace.empty())
+    //        face_wait_recovery.push_back(*iter);
+    //}
+    ////mesh_process.Judge_the_validity_of_information(su_mesh);
+    //for (std::vector<FACE>::iterator iter = face_wait_recovery.begin(); iter != face_wait_recovery.end(); ++iter)
+    //    Recovery_Boundary_face(su_mesh, *iter);
     return;
 }
 

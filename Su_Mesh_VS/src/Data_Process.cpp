@@ -68,6 +68,18 @@ double _DATA_PROCESS::triangle_area(NODE node_A, NODE node_B, NODE node_C)
     return area / 2;
 }
 
+bool _DATA_PROCESS::point_internal_triangle(NODE node_A, NODE node_B, NODE node_C, NODE point)
+{
+    double tri_all = triangle_area(node_A, node_B, node_C);
+    double tri_1 = triangle_area(node_A, node_B, point);
+    double tri_2 = triangle_area(node_A, node_C, point);
+    double tri_3 = triangle_area(node_B, node_C, point);
+    if (abs(tri_all - tri_1 - tri_2 - tri_3) <= Max_deviation_point_internal)
+        return true;
+    else
+        return false;
+}
+
 double _DATA_PROCESS::tetrahedral_volume(NODE node_A, NODE node_B, NODE node_C, NODE node_D)
 {
     double vector_AD[] = {node_A.pos[0] - node_D.pos[0], node_A.pos[1] - node_D.pos[1], node_A.pos[2] - node_D.pos[2]};

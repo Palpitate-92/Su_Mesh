@@ -22,6 +22,8 @@ public:
     double in_sphere(NODE node_tp1, NODE node_tp2, NODE node_tp3, NODE node_tp4, NODE node_tp);
     // 给定三角形三个顶点位置，返回三角形面积，顶点是逆时针方向的
     double triangle_area(NODE node_A, NODE node_B, NODE node_C);
+    // 利用三角形面积判断点是否在三角形内部
+    bool point_internal_triangle(NODE node_A, NODE node_B, NODE node_C, NODE point);
     // 给定四面体四个顶点位置，返回该四面体有向体积，小于0代表节点顺序出错，不是orient3d()定义的正方向
     double tetrahedral_volume(NODE node_A, NODE node_B, NODE node_C, NODE node_D);
     // 给定两条边的节点坐标，判断该两条边是否相交。此处使用CGAL几何算法库
