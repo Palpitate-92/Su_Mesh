@@ -57,6 +57,28 @@ double _DATA_PROCESS::in_sphere(NODE node_tp1, NODE node_tp2, NODE node_tp3, NOD
     return value;
 }
 
+double _DATA_PROCESS::in_tetrahedron(NODE node_tetrahedron[4], NODE node_tp)
+{
+    _SHEWCHUK shewchuk;
+    // 利用有向体积来判断待判断节点是否在四面体内部
+    // 一个网格单元有四个面，首先储存这四个面，利用数组编号来标定网格面，数组每行前三个标定网格面，第四个是网格面节点顺序标定点
+    int faceNum_tp[4][4] = {{0, 1, 2, 3}, {0, 1, 3, 2}, {0, 2, 3, 1}, {1, 2, 3, 0}};
+    int cnt = 0; // 记录四面体有向体积为正值的数量
+    for (int i = 0; i < 4; i++)
+    {
+        // 修改faceNum_tp的节点顺序，使其正方向排序
+        if (shewchuk.orient3d(node_tetrahedron[faceNum_tp[i][0]].pos, node_tetrahedron[faceNum_tp[i][1]].pos, node_tetrahedron[faceNum_tp[i][2]].pos, node_tetrahedron[faceNum_tp[i][3]].pos) < 0)
+            std::swap(faceNum_tp[i][0], faceNum_tp[i][1]);
+        // 当前网格面节点顺序确定好后，直接判定
+        if (shewchuk.orient3d(node_tetrahedron[faceNum_tp[i][0]].pos, node_tetrahedron[faceNum_tp[i][1]].pos, node_tetrahedron[faceNum_tp[i][2]].pos, node_tp.pos) < 0)
+            return -1;
+        cnt++;
+    }
+    if (cnt == 4)
+        return 1;
+    return 0.0;
+}
+
 double _DATA_PROCESS::triangle_area(NODE node_A, NODE node_B, NODE node_C)
 {
     double vector_AC[] = {node_A.pos[0] - node_C.pos[0], node_A.pos[1] - node_C.pos[1], node_A.pos[2] - node_C.pos[2]};

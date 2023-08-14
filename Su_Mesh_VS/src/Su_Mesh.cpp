@@ -41,6 +41,9 @@ void _SU_MESH::check()
 
 int main()
 {
+    clock_t start, end;
+    start = clock();
+
     _SU_MESH su_mesh;
     _SHEWCHUK Shewchuk;
     // 为保证Shewchuk的自适应精确计算，首先根据目前设定初始化所有值
@@ -67,15 +70,25 @@ int main()
     // 先移除初始Delaunay三角化的8个顶角节点与包含这些节点的所有网格单元，简化边界恢复步骤
     su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh, 1);
     // 输出当前三角化信息文件
-    //su_mesh.file_ios.Write_File(&su_mesh, "Removal_1_Delaunay");
+    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_1_Delaunay");
     // * 边界恢复
     su_mesh.boundary_recovery.Recovery_Boundary(&su_mesh);
 
     // 简易判断网格各种信息是否有效
     su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
 
+    end = clock();
+    double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    // clock()以毫秒的形式展现，因此需要除以 CLOCKS_PER_SEC 来实现转换
+    // static_cast<double>的作用是将结果转换为double类型
+    printf("CPU PROCESSING TIME: %f", elapsedTime);
+
     // 移除剩余外部单元并缩减容器
     su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh, 2);
+
+    // 简易判断网格各种信息是否有效
+    su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
+
     // 输出当前三角化信息文件
     su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_Delaunay");
     // 内部点生成与插入
@@ -107,15 +120,17 @@ int main()
     su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
     // 输出网格质量优化后信息文件 Final_Delaunay
     su_mesh.file_ios.Write_File(&su_mesh, "1111\\Final_Delaunay");
-    return 0;
+
     // #include <ctime>
     // clock_t start, end;
     // start = clock();
-    // end = clock();
-    // double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-    // // clock()以毫秒的形式展现，因此需要除以 CLOCKS_PER_SEC 来实现转换
-    // // static_cast<double>的作用是将结果转换为double类型
-    // printf("CPU PROCESSING TIME: %f", elapsedTime);
+    //end = clock();
+    //double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    // clock()以毫秒的形式展现，因此需要除以 CLOCKS_PER_SEC 来实现转换
+    // static_cast<double>的作用是将结果转换为double类型
+    //printf("CPU PROCESSING TIME: %f", elapsedTime);
+
+    return 0;
 }
 
 /**

@@ -20,6 +20,8 @@ public:
     NODE center_of_gravity(NODE node_tp1, NODE node_tp2, NODE node_tp3, NODE node_tp4);
     // 给定网格单元的四个节点与待判断节点，判断当前网格单元外接球是否包含待插入节点，返回值大于0则包含，小于0不包含，等于0则5点共球
     double in_sphere(NODE node_tp1, NODE node_tp2, NODE node_tp3, NODE node_tp4, NODE node_tp);
+    // 给定网格单元的四个节点与待判断节点，判断当前网格单元是否直接包含待插入节点，返回值大于0则包含，小于0不包含，等于0则出错
+    double in_tetrahedron(NODE node_tetrahedron[4], NODE node_tp);
     // 给定三角形三个顶点位置，返回三角形面积，顶点是逆时针方向的
     double triangle_area(NODE node_A, NODE node_B, NODE node_C);
     // 利用三角形面积判断点是否在三角形内部

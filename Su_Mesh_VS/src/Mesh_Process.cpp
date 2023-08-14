@@ -252,6 +252,48 @@ void _MESH_PROCESS::Renew_NodeElem(_SU_MESH *su_mesh, int elemNum_tp)
     return;
 }
 
+int _MESH_PROCESS::Find_Elem_DirectIncludeNode(_SU_MESH *su_mesh, int elemNum, NODE node_tp)
+{
+    _DATA_PROCESS data_process;
+    int elemNum_tp;
+    ELEM elem_tp;
+    NODE *node_tetrahedron = nullptr;
+    std::vector<int> elemNum_wait; // 创建一个容器，用来储存待判断的网格单元
+    std::vector<int> elemNum_succ; // 创建一个容器，用来储存判断过的单元
+    double judgment;
+    // elemNum值是起始单元查找编号，该值为-1时，代表当前程序在插入第一个边界点，此时则将0插入elemNum_wait
+    elemNum = (elemNum == -1 ? 0 : elemNum);
+    // 再判断elem.at(elemNum)是否有效
+    if (std::find(su_mesh->elemNum_invalid.begin(), su_mesh->elemNum_invalid.end(), elemNum) != su_mesh->elemNum_invalid.end())
+        elemNum = su_mesh->node.back().elem;
+    elemNum_wait.push_back(elemNum); // 压入初始网格单元
+    while (!elemNum_wait.empty())
+    {
+        elemNum_tp = elemNum_wait.front(); // 取出elemNum_wait中的第一个元素并擦除
+        elemNum_wait.erase(elemNum_wait.begin());
+        elem_tp = su_mesh->elem.at(elemNum_tp);
+        // 储存当前四面体的四个节点
+        node_tetrahedron = new NODE[4]{su_mesh->node.at(elem_tp.form[0]), su_mesh->node.at(elem_tp.form[1]), su_mesh->node.at(elem_tp.form[2]), su_mesh->node.at(elem_tp.form[3])};
+        judgment = data_process.in_tetrahedron(node_tetrahedron, node_tp);
+        if (judgment > 0)
+            return elemNum_tp;
+        if (judgment == 0.0)
+            return -1;
+        elemNum_succ.push_back(elemNum_tp);
+        // 将该网格单元周围未被判断过的相邻单元压入elemNum_wait
+        for (int i = 0; i < DIM + 1; i++)
+            if (elem_tp.neig[i] != -1)
+                // 判断该单元是否存在于elemNum_wait，如不存在再往下判断
+                // 在elemNum_succ内查找elemNum_tp对应网格单元相邻网格单元，如果搜到end()，代表没有找到，即该网格没被判断过
+                if (std::find(elemNum_wait.begin(), elemNum_wait.end(), elem_tp.neig[i]) == elemNum_wait.end())
+                    if (std::find(elemNum_succ.begin(), elemNum_succ.end(), elem_tp.neig[i]) == elemNum_succ.end())
+                        elemNum_wait.push_back(elem_tp.neig[i]);
+        delete[] node_tetrahedron;
+        node_tetrahedron = nullptr;
+    }
+    return -1;
+}
+
 int _MESH_PROCESS::Find_OneElem_IncludeNode_nodeNum(_SU_MESH *su_mesh, int nodeNum, NODE node_tp)
 {
     ELEM elem_tp;
@@ -486,14 +528,12 @@ void _MESH_PROCESS::Check_ElemAdjacency_accuracy(_SU_MESH *su_mesh)
                 if (su_mesh->elem.at(elem_tp.neig[j]).neig[Face_Opposite_Node(su_mesh->elem.at(elem_tp.neig[j]), face_tp)] != i)
                     std::cout << "The value of the " << i << " elem is wrong" << std::endl;
             }
-            else
-            {
-                face_tp = Node_Opposite_Face(elem_tp, elem_tp.form[j]);
-                if (face_tp.form[0] >= su_mesh->InitNode_num || face_tp.form[1] >= su_mesh->InitNode_num || face_tp.form[2] >= su_mesh->InitNode_num)
-                    std::cout << "The value of the " << i << " elem is wrong" << std::endl;
-            }
-            if (elem_tp.form[j] > su_mesh->node_num)
-                std::cout << "the value of the node_num is wrong" << std::endl;
+            //else
+            //{
+            //    face_tp = Node_Opposite_Face(elem_tp, elem_tp.form[j]);
+            //    if (face_tp.form[0] >= su_mesh->node_num || face_tp.form[1] >= su_mesh->node_num || face_tp.form[2] >= su_mesh->node_num)
+            //        std::cout << "The value of the " << i << " elem is wrong" << std::endl;
+            //}
         }
     }
     return;

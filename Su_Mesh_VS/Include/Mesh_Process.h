@@ -43,6 +43,9 @@ public:
     double get_aver_spac(_SU_MESH *su_mesh, ELEM elem_tp);
     // 给定一个网格单元编号，使该网格单元内所有节点的elem指向该网格单元
     void Renew_NodeElem(_SU_MESH *su_mesh, int elemNum_tp);
+    // 给定一个节点和一个网格单元编号，以该网格单元编号为起始，在当前三角化内查找一个直接包含给定节点的网格单元
+    // 成功查找到基单元时返回其编号，返回-1代表基单元查找失败
+    int Find_Elem_DirectIncludeNode(_SU_MESH *su_mesh, int elemNum, NODE node_tp);
     // 给定一个节点和一个节点编号，以节点编号对应节点的elem值为起始，在当前三角化内查找一个外接球包含给定节点的网格单元
     // 成功查找到基单元时返回其编号，返回-1代表基单元查找失败，返回-2代表当前插入点与当前三角化的网格单元存在5点共球情况，需要延迟插入该节点
     int Find_OneElem_IncludeNode_nodeNum(_SU_MESH *su_mesh, int nodeNum, NODE node_tp);

@@ -29,6 +29,7 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
+#include <ctime>
 
 // 全局类，实现网格数据结构的保存与使用
 class _SU_MESH
@@ -40,6 +41,7 @@ private:
     std::vector<NODE> node;                         // 声明NODE类容器，存放全部节点
     int node_num = 0;                               // 定义总网格节点数，并初始化为0，0为未输入网格节点
     int InitNode_num = -1;                          // 定义初始节点数目
+    int boundary_recovery_node_num = -1;            // 定义边界恢复后的节点数目
     int nodeNum_before_insert_interior_points = -1; // 定义插入内部点前节点数
     double longest_distance = 0;                    // 存储在密度控制信息下，理想的最大边边长，定义为最长边界边长度的1.3倍
     // 声明一个容器，若当前插入的边界点在查找空腔判断外接球时，出现5点共球的情况，则需要进行回退处理，将该边界点编号压入nodeNum_degradation，延迟插入该边界点
