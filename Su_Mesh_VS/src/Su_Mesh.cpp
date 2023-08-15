@@ -34,7 +34,7 @@ void _SU_MESH::check()
     else
     {
         std::cout << "Edge-to-elem intersection judgment error!\n";
-        exit(-1);
+        system("pause");
     }
     return;
 }
@@ -55,7 +55,7 @@ int main()
 
     // 输出边界边长度信息文件
     //su_mesh.file_ios.Output_boundary_edge_info(&su_mesh);
-    //exit(-1);
+    //system("pause");
 
     // 将所有节点坐标向上取整
     //su_mesh.boundary_point.Rounding(&su_mesh);
@@ -68,9 +68,9 @@ int main()
     // 标记所有外部网格单元
 
     // 先移除初始Delaunay三角化的8个顶角节点与包含这些节点的所有网格单元，简化边界恢复步骤
-    su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh, 1);
+    //su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh, 1);
     // 输出当前三角化信息文件
-    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_1_Delaunay");
+    //su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_1_Delaunay");
     // * 边界恢复
     su_mesh.boundary_recovery.Recovery_Boundary(&su_mesh);
 

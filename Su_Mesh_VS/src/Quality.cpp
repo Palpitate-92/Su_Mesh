@@ -121,7 +121,7 @@ bool _QUALITY::Decompose_Sliver(_SU_MESH *su_mesh, int elemNum)
                 if (adjacent_cnt == 3)
                 {
                     std::cout << "Incorrect mesh found when decomposing thin \"Sliver\" elements!\n";
-                    exit(-1);
+                    system("pause");
                 }
                 elem_in_SliverNeig[adjacent_cnt][0] = i;
                 elem_in_SliverNeig[adjacent_cnt][1] = j;
@@ -147,7 +147,7 @@ bool _QUALITY::Decompose_Sliver(_SU_MESH *su_mesh, int elemNum)
     default:
         std::cout << "Incorrect mesh found when decomposing thin \"Sliver\" "
                      "elements!\n";
-        exit(-1);
+        system("pause");
         break;
     }
     return true;
@@ -231,7 +231,7 @@ bool _QUALITY::Decompose_Sliver_adjacent_cnt1(_SU_MESH *su_mesh, int elemNum, in
             {
                 std::cout << "Decompose_Sliver_adjacent_cnt1 run error, please "
                              "check the program!\n";
-                exit(-1);
+                system("pause");
             }
             su_mesh->elem.at(elem_tp[i].neig[j]).neig[value_tp] = elemNum_tp[i];
         }
@@ -877,7 +877,7 @@ bool _QUALITY::Optimization_based_Smoothing_The_all(_SU_MESH *su_mesh, int Optim
                 iter++;
                 break;
                 std::cout << "target_Function_first_derivative value =-1!\n";
-                exit(-1);
+                system("pause");
             }
         // 梯度向量的模小于最小梯度值时代表达到极值点处，停止迭代
         if (data_process.Vector_Module(gradient_vector) < Min_gradient)
@@ -890,7 +890,7 @@ bool _QUALITY::Optimization_based_Smoothing_The_all(_SU_MESH *su_mesh, int Optim
                     iter++;
                     break;
                     std::cout << "target_Function_second_derivative value =-1!\n";
-                    exit(-1);
+                    system("pause");
                 }
         // 判断hessian矩阵是否正定，若不正定则修改其值使其正定
         data_process.Positivity_Hessian_Matrix(hessian_matrix);
@@ -920,7 +920,7 @@ bool _QUALITY::Optimization_based_Smoothing_The_all(_SU_MESH *su_mesh, int Optim
         if (target_function_value_after == -1)
         {
             std::cout << "target_function_value_after=-1\n";
-            exit(-1);
+            system("pause");
         }
         node_before = node_after;
         iter++;
@@ -1020,12 +1020,12 @@ void _QUALITY::Quality_Optimization_SliverRemoval(_SU_MESH *su_mesh)
         {
             std::cout << "Generalized thin element judgment error, please "
                          "check the program!\n";
-            exit(-1);
+            system("pause");
         }
         if (Decompose_Sliver_judge == false)
         {
             std::cout << "Generalized thin element decomposition failed!\n";
-            exit(-1);
+            system("pause");
         }
     }
     return;
@@ -1197,7 +1197,7 @@ std::vector<int> _QUALITY::Face_Transform_23(_SU_MESH *su_mesh, FACE face_tp)
             if (value_tp == -1)
             {
                 std::cout << "Face_Transform_23 run error, please check the program!\n";
-                exit(-1);
+                system("pause");
             }
             su_mesh->elem.at(elem_new[i].neig[j]).neig[value_tp] = elemNum_include_face.at(i);
         }
@@ -1369,7 +1369,7 @@ std::vector<int> _QUALITY::Face_Transform_32(_SU_MESH *su_mesh, EDGE edge_tp)
             {
                 std::cout << "Face_Transform_32 run error, please check the "
                              "program!\n";
-                exit(-1);
+                system("pause");
             }
             su_mesh->elem.at(elem_new[i].neig[j]).neig[value_tp] = elemNum_include_edge.at(i);
         }
@@ -1512,11 +1512,11 @@ void _QUALITY::Quality_Optimization_Face_Transform(_SU_MESH *su_mesh)
                 {
                 case 1:
                     std::cout << "FindRing run error!\n";
-                    exit(-1);
+                    system("pause");
                     break;
                 case 2:
                     std::cout << "FindRing run error!\n";
-                    exit(-1);
+                    system("pause");
                     break;
                 case 3:
                     if ((min_quality[cnt] = Face_Transform_32_Legality(su_mesh, edge_tp[cnt], elemNum_include_edge)) != -1)
@@ -1563,7 +1563,7 @@ void _QUALITY::Quality_Optimization_Face_Transform(_SU_MESH *su_mesh)
                     {
                     case 1:
                         std::cout << "FindAwl run error!\n";
-                        exit(-1);
+                        system("pause");
                         break;
                     case 2:
                         if ((min_quality[cnt] = Face_Transform_23_Legality(su_mesh, face_tp[cnt - 6], elemNum_include_face)) != -1)
@@ -1733,7 +1733,7 @@ bool _QUALITY::Optimization_based_Smoothing_Compared(_SU_MESH *su_mesh, int Opti
             if ((gradient_now[i][0] = target_Function_first_derivative(su_mesh, node_before, face_Optimization_Domain, i)) == -1)
             {
                 std::cout << "target_Function_first_derivative value =-1!\n";
-                exit(-1);
+                system("pause");
             }
         }
         // 第一次循环计算hessian矩阵
@@ -1744,7 +1744,7 @@ bool _QUALITY::Optimization_based_Smoothing_Compared(_SU_MESH *su_mesh, int Opti
                     if ((H_now[i][j] = target_Function_second_derivative(su_mesh, node_before, face_Optimization_Domain, i, j)) == -1)
                     {
                         std::cout << "target_Function_second_derivative value =-1!\n";
-                        exit(-1);
+                        system("pause");
                     }
         }
         else
@@ -1784,7 +1784,7 @@ bool _QUALITY::Optimization_based_Smoothing_Compared(_SU_MESH *su_mesh, int Opti
         if (target_function_value_after == -1)
         {
             std::cout << "target_function_value_after=-1\n";
-            exit(-1);
+            system("pause");
         }
         node_before = node_after;
         iter++;

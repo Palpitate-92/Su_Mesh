@@ -150,7 +150,7 @@ void _CAVITY::RepairCavity(_SU_MESH *su_mesh, NODE node_Insert, std::vector<int>
     {
         //std::cout << "Cavity is not empty!\n";
         std::vector<int>().swap(*elemNum_Cavity);
-        //exit(-1);
+        //system("pause");
     }
     return;
 }

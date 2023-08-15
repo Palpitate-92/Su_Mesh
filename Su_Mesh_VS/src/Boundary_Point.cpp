@@ -275,7 +275,7 @@ void _BOUNDARY_POINT::Insert_BoundaryPoint(_SU_MESH *su_mesh)
                 if (cnt > 20)
                 {
                     std::cout << "drop-dead halt!\n";
-                    exit(-1);
+                    system("pause");
                 }
                 su_mesh->node.at(*iter) = su_mesh->node.at(*iter) + node_delta;
             }
@@ -284,7 +284,7 @@ void _BOUNDARY_POINT::Insert_BoundaryPoint(_SU_MESH *su_mesh)
             nodeNum_Last_succ = *iter;
         }
         // std::cout << "Boundary points exist and cannot be inserted!\n";
-        // exit(-1);
+        // system("pause");
     }
     return;
 }

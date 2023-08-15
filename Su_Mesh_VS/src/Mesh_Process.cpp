@@ -466,7 +466,7 @@ bool _MESH_PROCESS::Update_Djacency(_SU_MESH *su_mesh, FACE face_tp, std::string
             std::cout << "There is two mesh intersection, the meshes number are "
                       << elemNum_IncludeFace.at(0) << ' '
                       << elemNum_IncludeFace.at(1) << '\n';
-            exit(-1);
+            system("pause");
         }
         su_mesh->elem.at(elemNum_IncludeFace.at(0)).neig[Face_Opposite_Node(su_mesh->elem.at(elemNum_IncludeFace.at(0)), face_tp)] = elemNum_IncludeFace.at(1);
         su_mesh->elem.at(elemNum_IncludeFace.at(1)).neig[Face_Opposite_Node(su_mesh->elem.at(elemNum_IncludeFace.at(1)), face_tp)] = elemNum_IncludeFace.at(0);

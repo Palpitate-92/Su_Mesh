@@ -141,7 +141,7 @@ bool _DATA_PROCESS::Edge_Edge_Intersection(Point *intersection_point, NODE node_
         //else
         //{
         //    std::cout << "Edge-to-edge intersection judgment error!\n";
-        //    exit(-1);
+        //    system("pause");
         //}
     }
     return false;
@@ -175,7 +175,7 @@ bool _DATA_PROCESS::Edge_Face_Intersection(Point *intersection_point, NODE node_
         //else
         //{
         //    std::cout << "Edge-to-face intersection judgment error!\n";
-        //    exit(-1);
+        //    system("pause");
         //}
     }
     return false;
@@ -208,7 +208,7 @@ int _DATA_PROCESS::Edge_Elem_Intersection(NODE node_A, NODE node_B, NODE node_C,
     //else
     //{
     //    std::cout << "Edge-to-elem intersection judgment error!\n";
-    //    exit(-1);
+    //    system("pause");
     //}
 }
 

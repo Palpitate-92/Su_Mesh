@@ -8,7 +8,7 @@ void _IOS::Read_File(_SU_MESH *su_mesh, std::string infileName)
     if (!infile.is_open())
     {                                                             // 判断文件是否存在或者是否成功打开
         std::cout << "error on open " << infileName << std::endl; // 文件不能成功打开
-        exit(-1);
+        system("pause");
     }
     else
     {
@@ -48,7 +48,7 @@ void _IOS::Write_File(_SU_MESH *su_mesh, std::string outfileName)
     {                                                                // 判断文件是是否成功打开
         std::cout << "error on open " << filePath_node << std::endl; // 文件不能成功打开
         system("pause");
-        exit(-1);
+        system("pause");
     }
     else
     {
@@ -72,7 +72,7 @@ void _IOS::Write_File(_SU_MESH *su_mesh, std::string outfileName)
     {                                                               // 判断文件是是否成功打开
         std::cout << "error on open " << filePath_ele << std::endl; // 文件不能成功打开
         system("pause");
-        exit(-1);
+        system("pause");
     }
     else
     {
@@ -98,7 +98,7 @@ void _IOS::Write_File_judge(_SU_MESH *su_mesh, std::string outfileName)
     {                                                                // 判断文件是是否成功打开
         std::cout << "error on open " << filePath_node << std::endl; // 文件不能成功打开
         system("pause");
-        exit(-1);
+        system("pause");
     }
     else
     {
@@ -122,7 +122,7 @@ void _IOS::Write_File_judge(_SU_MESH *su_mesh, std::string outfileName)
     {                                                               // 判断文件是是否成功打开
         std::cout << "error on open " << filePath_ele << std::endl; // 文件不能成功打开
         system("pause");
-        exit(-1);
+        system("pause");
     }
     else
     {
@@ -157,7 +157,7 @@ void _IOS::Output_boundary_edge_info(_SU_MESH *su_mesh)
     {                                                           // 判断文件是是否成功打开
         std::cout << "error on open " << filePath << std::endl; // 文件不能成功打开
         system("pause");
-        exit(-1);
+        system("pause");
     }
     else
     {
@@ -171,7 +171,7 @@ void _IOS::Output_boundary_edge_info(_SU_MESH *su_mesh)
     {                                                                // 判断文件是是否成功打开
         std::cout << "error on open " << filePath_node << std::endl; // 文件不能成功打开
         system("pause");
-        exit(-1);
+        system("pause");
     }
     else
     {

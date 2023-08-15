@@ -193,20 +193,21 @@ private:
 class Setl : public ELEM
 {
 private:
-    int elem_num;              // 储存该集元所代表的网格单元编号
-    int intersec_num;          // 储存该集元与待恢复边界面的交点数，包括顶点
-    Point pot[4];              // 储存集元与边界面的相交交点，不包括包括顶点
-    int intersec_edge[8];      // 储存相交边，与pot对应
-    int vertex_num;            // 储存该集元与待恢复边界面的交点中的顶点数目，这些顶点是该集元本身所拥有的节点
-    int vertex_nodeNum[3];     // 储存顶点编号
-    int contact_edge[6];       // 储存接触边，这些边有且只有一个顶点在待恢复边界面上，与vertex_nodeNum对应
-    ELEM *Decom_elem;          // 储存该集元分解后的网格单元
-    int Decom_elem_num;        // 储存该集元分解后的网格单元数目
-    char Decom_type_two_sides; // 当该集元是邻边型时，储存该集元的分解类型，有“S”型和“Z”型，两种类型相互拓扑，若是对边型，则储存“D”
+    int elem_num;                 // 储存该集元所代表的网格单元编号
+    int intersec_num;             // 储存该集元与待恢复边界面的交点数，包括顶点
+    Point pot[4];                 // 储存集元与边界面的相交交点，不包括包括顶点
+    int intersec_edge[8];         // 储存相交边，与pot对应
+    int vertex_num;               // 储存该集元与待恢复边界面的交点中的顶点数目，这些顶点是该集元本身所拥有的节点
+    int vertex_nodeNum[3];        // 储存顶点编号
+    int contact_edge[6];          // 储存接触边，这些边有且只有一个顶点在待恢复边界面上，与vertex_nodeNum对应
+    ELEM *Decom_elem;             // 储存该集元分解后的网格单元
+    int Decom_elem_num;           // 储存该集元分解后的网格单元数目
+    char Decom_type_two_sides[4]; // 当该集元分解方式是邻边型或该集元有3条边刺穿待恢复边界面时，储存该集元的分解类型，有“S”型和“Z”型，两种类型相互拓扑，数组长度为4是为了匹配网格面编号
 
 public:
     Setl();
-    Setl operator=(const ELEM &elem); // 重载“=”运算符
+    Setl operator=(const ELEM &elem);        // 重载“=”运算符
+    bool operator==(const int &value) const; // 重载“==”运算符
     ~Setl();
 
 private:

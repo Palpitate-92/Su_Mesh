@@ -292,7 +292,7 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH *su_mesh, EDGE edge_rec
             if (iter->type[0] == -1 || iter->type[0] == 0)
             {
                 std::cout << "Path lookup failed!\n";
-                exit(-1);
+                system("pause");
             }
             // 若第一个相交图形是点，该点必是待恢复边界边第一个节点，需要判断当前路径元内与该点相对的3条网格边与1个网格面跟待恢复边界边的相交情况
             else if (iter->type[0] == 1)
@@ -460,7 +460,7 @@ std::vector<Pathl> _BOUNDARY_RECOVERY::FindPath(_SU_MESH *su_mesh, EDGE edge_rec
             if (iter->type[1] == -1)
             {
                 std::cout << "Path lookup failed!\n";
-                exit(-1);
+                system("pause");
             }
             else if (iter->type[1] == 0)
                 continue;
@@ -582,7 +582,7 @@ void _BOUNDARY_RECOVERY::Decompose_Pathl(std::vector<Pathl> *path)
                 int elemNum_tp = pathl->neig[mesh_process.Face_Opposite_Node(*pathl, face_tp)];
                 std::vector<Pathl>::iterator pathl_tp = std::find(path->begin(), path->end(), elemNum_tp);
                 if (pathl_tp == path->end())
-                    std::cout << "Decompose_Pathl run error, the guess is that the path lookup failed!\n", exit(-1);
+                    std::cout << "Decompose_Pathl run error, the guess is that the path lookup failed!\n", system("pause");
                 else
                 {
                     if (pathl_tp->Decom_type_two_sides == 'S')
@@ -723,7 +723,7 @@ void _BOUNDARY_RECOVERY::Decompose_Pathl(std::vector<Pathl> *path)
         else
         {
             std::cout << "Pathl decompose error!\n";
-            exit(-1);
+            system("pause");
         }
     }
     return;
@@ -757,7 +757,7 @@ void _BOUNDARY_RECOVERY::Repair_Path(double shortest_dis, std::vector<Pathl> *pa
         for (std::vector<Pathl>::iterator pathl = path->begin() + 1; pathl != path->end(); ++pathl)
         {
             if (mesh_process.Face_Opposite_Node(FACE(pathl->node_num[0], pathl->node_num[1], pathl->node_num[2]), edge_common) == -1)
-                std::cout << "Repair path run error, check the accuracy of the path!\n", exit(-1);
+                std::cout << "Repair path run error, check the accuracy of the path!\n", system("pause");
             average_point = average_point + pathl->pot[0];
         }
         // 得到所有相交点的平均节点位置
@@ -1016,7 +1016,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     mesh_process.Renew_NodeElem(su_mesh, pathl_elem_num[i]);
             }
             else
-                std::cout << "Bilateral pathl's Decom_type_two_sides set error!\n", exit(-1);
+                std::cout << "Bilateral pathl's Decom_type_two_sides set error!\n", system("pause");
             delete[] steiner_node_num;
         }
         // 点面型（面点型）
@@ -1232,14 +1232,14 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
             delete[] steiner_node_num;
         }
         else
-            std::cout << "Pathl generate grid cell error!\n", exit(-1);
+            std::cout << "Pathl generate grid cell error!\n", system("pause");
         // 更新路径元与路径元之间的相邻信息
         // 在face_adjacent容器内查找这些网格面，若不存在则直接压入容器并将这个网格面代表的网格单元编号一并压入容器elemNum_adjacent，若存在则取出相对于的网格面与网格单元编号，并进行相邻信息更新
         FACE face_tp;
         int elemNum_tp = -1;
         // 保证数据有效
         if (face_judge == nullptr || elemNum_judge == nullptr)
-            std::cout << "Pathl generate grid cell error!\n", exit(-1);
+            std::cout << "Pathl generate grid cell error!\n", system("pause");
         else
             for (int i = 0; i < faceNum_cnt; i++)
             {
@@ -1255,7 +1255,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
                     if (elemNum_iter < int(elemNum_adjacent.size()))
                         elemNum_tp = elemNum_adjacent.at(elemNum_iter);
                     else
-                        std::cout << "Pathl generate grid cell error, the elemNum_iter is out of bounds!\n", exit(-1);
+                        std::cout << "Pathl generate grid cell error, the elemNum_iter is out of bounds!\n", system("pause");
                     // 从容器内删除这两个值
                     face_adjacent.erase(face_iter);
                     elemNum_adjacent.erase(elemNum_adjacent.begin() + elemNum_iter);
@@ -1297,7 +1297,7 @@ void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<
         std::vector<int>().swap(elemNum_IncludeEdge);
         mesh_process.FindRing(su_mesh, edge_tp, &elemNum_IncludeEdge, "fast");
         if (elemNum_IncludeEdge.empty())
-            std::cout << "Pathl generate gridCell merge fail, elemNum_IncludeEdge search error!\n", exit(-1);
+            std::cout << "Pathl generate gridCell merge fail, elemNum_IncludeEdge search error!\n", system("pause");
         // 通过该边长度判断是否需要合并，低于模型最短边界边的一定倍数值时需要合并
         if (data_process.get_dist(su_mesh->node.at(edge_tp.form[0]).pos, su_mesh->node.at(edge_tp.form[1]).pos) <= su_mesh->shortest_border_edge * Max_steiner_point_internal)
         {
@@ -1441,7 +1441,7 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_rec
                     if (value_tp == -1)
                     {
                         std::cout << "Recovery_Boundary_edge run error, please check the program!\n";
-                        exit(-1);
+                        system("pause");
                     }
                     su_mesh->elem.at(elem_new[i].neig[j]).neig[value_tp] = path.at(i).elem_num;
                 }
@@ -1461,7 +1461,7 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_edge(_SU_MESH *su_mesh, EDGE edge_rec
         else
         {
             std::cout << "Recovery_Boundary_edge run error!\n";
-            exit(-1);
+            system("pause");
         }
     }
     else
@@ -1645,6 +1645,179 @@ void _BOUNDARY_RECOVERY::Decompose_Setl(std::vector<Setl> *set)
         // 当没有边刺穿待恢复边界面时，该集元不需要分解
         if (setl->intersec_num - setl->vertex_num == 0)
             continue;
+        // 当有1条边刺穿待恢复边界面时，该集元分解方式与边界边恢复中的单边型一致
+        else if (setl->intersec_num - setl->vertex_num == 1)
+        {
+            // 当有1条边刺穿待恢复边界面时，集元会分解成两个网格单元
+            setl->Decom_elem_num = 2;
+            setl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * setl->Decom_elem_num);
+            // 取出待分解的那条网格边
+            EDGE ExplodeEdge{setl->intersec_edge[0], setl->intersec_edge[1]};
+            // 得到待分解网格边在当前路径元内的相对网格边
+            EDGE ExplodeOppoEdge = mesh_process.Edge_Opposite_Edge(*setl, ExplodeEdge);
+            // 得到分解后的两个网格单元
+            if (setl->Decom_elem)
+            {
+                *(setl->Decom_elem + 0) = ELEM(ExplodeOppoEdge.form[0], ExplodeOppoEdge.form[1], ExplodeEdge.form[0], STEINER_NOD, -1, -1, -1, setl->neig[mesh_process.Elem_Include_Node(*setl, ExplodeEdge.form[1])]);
+                *(setl->Decom_elem + 1) = ELEM(ExplodeOppoEdge.form[0], ExplodeOppoEdge.form[1], ExplodeEdge.form[1], STEINER_NOD, -1, -1, -1, setl->neig[mesh_process.Elem_Include_Node(*setl, ExplodeEdge.form[0])]);
+            }
+        }
+        // 当有2条边刺穿待恢复边界面时，该集元分解方式与边界边恢复中的邻边型一致
+        else if (setl->intersec_num - setl->vertex_num == 2)
+        {
+            // 首先得到待分解的两条网格边
+            EDGE ExplodeEdge_1, ExplodeEdge_2;
+            memcpy(ExplodeEdge_1.form, setl->intersec_edge, sizeof(ExplodeEdge_1.form));
+            memcpy(ExplodeEdge_2.form, setl->intersec_edge + 2, sizeof(ExplodeEdge_2.form));
+            // 邻边型的两条待分解边包含一个相同节点，记录该相同节点编号，再记录 在该两条待分解边组成的网格面中 该相同节点相对的网格边
+            int ExplodeSameNode_num = -1;
+            EDGE OppoEdge;
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                    if (ExplodeEdge_1.form[i] == ExplodeEdge_2.form[j])
+                    {
+                        ExplodeSameNode_num = ExplodeEdge_1.form[i];
+                        OppoEdge.form[0] = ExplodeEdge_1.form[!i];
+                        OppoEdge.form[1] = ExplodeEdge_2.form[!j];
+                    }
+            }
+            // 得到与这两条待分解边组成的网格面在当前路径元内相对的节点编号
+            FACE face_tp{ExplodeSameNode_num, OppoEdge.form[0], OppoEdge.form[1]};
+            int face_pos1 = mesh_process.Face_Opposite_Node(*setl, face_tp), face_pos2 = -1;
+            int ExplodeOppoNode_num = setl->form[face_pos1];
+            // 邻边型的分解具有两种类型，“S”型和“Z”型，这两种类型相互拓扑相容
+            int elemNum_tp = setl->neig[face_pos1];
+            std::vector<Setl>::iterator setl_tp = std::find(set->begin(), set->end(), elemNum_tp);
+            if (setl_tp == set->end())
+                std::cout << "Decompose_Setl run error, the guess is that the set lookup failed!\n", system("pause");
+            else
+            {
+                int face_pos2 = mesh_process.Face_Opposite_Node(*setl_tp, face_tp);
+                if (setl_tp->Decom_type_two_sides[face_pos2] == 'S')
+                    setl->Decom_type_two_sides[face_pos1] = 'Z';
+                else
+                    setl->Decom_type_two_sides[face_pos1] = 'S';
+            }
+            // 邻边型会分解成三个网格单元
+            setl->Decom_elem_num = 3;
+            setl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * setl->Decom_elem_num);
+            // 用OppoEdge来判断正方向
+            // 这里为了后续网格单元生成的准确性与便利性，应将集元的节点顺序与OppoEdge的顺序相对应
+            if (OppoEdge.form[0] > OppoEdge.form[1])
+            {
+                OppoEdge.Sort();
+                std::swap(*(setl->pot + 0), *(setl->pot + 1));
+            }
+            // 得到分解后的三个网格单元
+            if (setl->Decom_elem)
+            {
+                if (setl->Decom_type_two_sides[face_pos1] == 'S')
+                {
+                    *setl->Decom_elem = ELEM(ExplodeSameNode_num, ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                    *(setl->Decom_elem + 1) = ELEM(OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                    *(setl->Decom_elem + 2) = ELEM(OppoEdge.form[0], OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, -1, -1, -1, setl->neig[mesh_process.Elem_Include_Node(*setl, ExplodeSameNode_num)]);
+                }
+                else
+                {
+                    *setl->Decom_elem = ELEM(ExplodeSameNode_num, ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                    *(setl->Decom_elem + 1) = ELEM(OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+                    *(setl->Decom_elem + 2) = ELEM(OppoEdge.form[0], OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, -1, -1, -1, setl->neig[mesh_process.Elem_Include_Node(*setl, ExplodeSameNode_num)]);
+                }
+            }
+        }
+        // 当有3条边刺穿待恢复边界面时
+        else if (setl->intersec_num - setl->vertex_num == 3)
+        {
+            // 首先得到待分解的三条网格边
+            EDGE ExplodeEdge[3];
+            memcpy(ExplodeEdge[0].form, setl->intersec_edge + 0, sizeof(ExplodeEdge[0].form));
+            memcpy(ExplodeEdge[1].form, setl->intersec_edge + 2, sizeof(ExplodeEdge[1].form));
+            memcpy(ExplodeEdge[2].form, setl->intersec_edge + 4, sizeof(ExplodeEdge[2].form));
+            // 这三条待分解边包含一个相同节点，记录该相同节点编号，再记录在集元内该节点相对的网格边
+            int ExplodeSameNode_num = -1;
+            FACE OppoFace;
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                    if (ExplodeEdge[0].form[i] == ExplodeEdge[1].form[j])
+                        ExplodeSameNode_num = ExplodeEdge[0].form[i];
+            OppoFace = mesh_process.Node_Opposite_Face(*setl, ExplodeSameNode_num);
+            int elemNum_tp = -1;
+            FACE face_tp;
+            int face_pos1 = -1, face_pos2 = -1;
+            std::vector<Setl>::iterator setl_tp;
+            // 这些网格面的分解具有两种类型，“S”型和“Z”型，这两种类型相互拓扑相容
+            // 当有3条边刺穿待恢复边界面时，每个边界面的分解类型遵循一定规律，总的类型分为两种“SSZ”以及"ZZS“
+            // 定义一组映射当编号分别为0、1、2、3、4时，当前网格面的分解类型为”S“、”Z“、”S“、”S“、”Z“
+            // 在进行具体网格面分解前，编号值初始化为2，对三个网格面，每当有网格面按照“S”类型分解，编号值加1；按照“Z”型分解，编号值-1，并且默认分解类型定义为“S”，且按照“SSZ”以及"ZZS“的类型追随分配下去
+            int serial_number = 3;
+            char Decompose_type[] = {'S', 'Z', 'S', 'S', 'Z'};
+            for (int i = 0; i < 3; i++)
+                for (int j = i + 1; j < 3; j++)
+                {
+                    face_tp = FACE{OppoFace.form[i], OppoFace.form[j], ExplodeSameNode_num};
+                    face_pos1 = mesh_process.Face_Opposite_Node(*setl, face_tp);
+                    elemNum_tp = setl->neig[face_pos1];
+                    setl_tp = std::find(set->begin(), set->end(), elemNum_tp);
+                    if (setl_tp == set->end())
+                        std::cout << "Decompose_Setl run error, the guess is that the set lookup failed!\n", system("pause");
+                    else
+                    {
+                        int face_pos2 = mesh_process.Face_Opposite_Node(*setl_tp, face_tp);
+                        if (setl_tp->Decom_type_two_sides[face_pos2] == 'S')
+                            setl->Decom_type_two_sides[face_pos1] = 'Z', serial_number--;
+                        else if (setl_tp->Decom_type_two_sides[face_pos2] == 'Z')
+                            setl->Decom_type_two_sides[face_pos1] = 'S', serial_number++;
+                        else
+                            switch (serial_number)
+                            {
+                            case 0:
+                                setl->Decom_type_two_sides[face_pos1] = 'S';
+                                serial_number--; // 最后一个
+                                break;
+                            case 1:
+                                setl->Decom_type_two_sides[face_pos1] = 'Z';
+                                serial_number--;
+                                break;
+                            case 2:
+                                setl->Decom_type_two_sides[face_pos1] = 'S';
+                                serial_number++;
+                                break;
+                            case 3:
+                                setl->Decom_type_two_sides[face_pos1] = 'S';
+                                serial_number++;
+                                break;
+                            case 4:
+                                setl->Decom_type_two_sides[face_pos1] = 'Z';
+                                serial_number++; // 最后一个
+                                break;
+                            default:
+                                std::cout << "Decompose_Setl run error, the serial_number have error value, the vertex_num is 3\n";
+                                system("pause");
+                            }
+                    }
+                }
+            // 当有3条边刺穿待恢复边界面时，集元会分解成四个网格单元
+            setl->Decom_elem_num = 4;
+            setl->Decom_elem = (ELEM *)malloc(sizeof(ELEM) * setl->Decom_elem_num);
+            // 这里为了后续网格单元生成的准确性与便利性，应将集元的节点顺序与face_tp的顺序相对应
+            // 得到分解后的四个网格单元
+            //if (setl->Decom_elem)
+            //{
+            //    if (setl->Decom_type_two_sides[face_pos1] == 'S')
+            //    {
+            //        *setl->Decom_elem = ELEM(ExplodeSameNode_num, ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            //        *(setl->Decom_elem + 1) = ELEM(OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            //        *(setl->Decom_elem + 2) = ELEM(OppoEdge.form[0], OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, -1, -1, -1, setl->neig[mesh_process.Elem_Include_Node(*setl, ExplodeSameNode_num)]);
+            //    }
+            //    else
+            //    {
+            //        *setl->Decom_elem = ELEM(ExplodeSameNode_num, ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            //        *(setl->Decom_elem + 1) = ELEM(OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, STEINER_NOD, -1, -1, -1, -1);
+            //        *(setl->Decom_elem + 2) = ELEM(OppoEdge.form[0], OppoEdge.form[1], ExplodeOppoNode_num, STEINER_NOD, -1, -1, -1, setl->neig[mesh_process.Elem_Include_Node(*setl, ExplodeSameNode_num)]);
+            //    }
+            //}
+        }
         else
             std::cout << "1 ";
     }

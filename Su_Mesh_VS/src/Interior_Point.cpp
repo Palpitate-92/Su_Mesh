@@ -65,7 +65,7 @@ void _INTERIOR_POINT::AutoRefine(_SU_MESH *su_mesh)
                 elemNum_Basis = mesh_process.Find_Elem_DirectIncludeNode(su_mesh, elemNum_Basis_Initial.at(cnt), *node_iter);
                 // 如果该值为-1，基单元查找失败
                 if (elemNum_Basis == -1)
-                    std::cout << "When insert interior point, base unit lookup failed, in_tetrahedron run error!\n", exit(-1);
+                    std::cout << "When insert interior point, base unit lookup failed, in_tetrahedron run error!\n", system("pause");
                 //// 如果该值为-2，代表出现5点共球情况，延迟插入该节点
                 //else if (elemNum_Basis == -2)
                 //{

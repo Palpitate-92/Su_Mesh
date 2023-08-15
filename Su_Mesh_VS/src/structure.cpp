@@ -269,13 +269,6 @@ Pathl::~Pathl()
     Decom_elem = nullptr;
 };
 
-Setl Setl::operator=(const ELEM &elem)
-{
-    memcpy(form, elem.form, sizeof(elem.form));
-    memcpy(neig, elem.neig, sizeof(elem.neig));
-    return *this;
-}
-
 Setl::Setl()
 {
     for (int i = 0; i < DIM + 1; i++)
@@ -295,7 +288,20 @@ Setl::Setl()
         contact_edge[i] = -1;
     Decom_elem = nullptr;
     Decom_elem_num = 0;
-    Decom_type_two_sides = '\0';
+    for (int i = 0; i < 4; i++)
+        Decom_type_two_sides[i] = '\0';
+}
+
+Setl Setl::operator=(const ELEM &elem)
+{
+    memcpy(form, elem.form, sizeof(elem.form));
+    memcpy(neig, elem.neig, sizeof(elem.neig));
+    return *this;
+}
+
+bool Setl::operator==(const int &value) const
+{
+    return (elem_num == value);
 }
 
 Setl::~Setl()

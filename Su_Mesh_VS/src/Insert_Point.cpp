@@ -13,7 +13,7 @@ int _INSERT_POINT::Insert_point(_SU_MESH *su_mesh, int nodeNum_Last_succ, int no
     {
         int elemNum_tp = mesh_process.Find_Elem_DirectIncludeNode(su_mesh, nodeNum_Last_succ == -1 ? -1 : su_mesh->node.at(nodeNum_Last_succ).elem, node_Insert);
         if (elemNum_tp == -1)
-            std::cout << "Boundary point lookup failed, in_tetrahedron run error, and the number of the current inserted boundary point is " << nodeNum_Insert << std::endl, exit(-1);
+            std::cout << "Boundary point lookup failed, in_tetrahedron run error, and the number of the current inserted boundary point is " << nodeNum_Insert << std::endl, system("pause");
         elemNum_Cavity.push_back(elemNum_tp);
     }
     // 如果是在插入内部点，则直接压入基单元编号到elemNum_Cavity
@@ -78,7 +78,7 @@ int _INSERT_POINT::Insert_point(_SU_MESH *su_mesh, int nodeNum_Last_succ, int no
     if (dangling_judge != -1)
     {
         std::cout << "The node " << dangling_judge << " is dangling!\n";
-        exit(-1);
+        system("pause");
     }
     // 对每个空腔边界面进行操作，生成待插入点与当前空腔边界面形成的网格单元，首先更新空腔边界面的相邻关系
     // 首先将elemNum_Cavity容器内全部元素压入su_mesh->elemNum_invalid
@@ -128,7 +128,7 @@ int _INSERT_POINT::Insert_point(_SU_MESH *su_mesh, int nodeNum_Last_succ, int no
         if (!mesh_process.Update_Djacency(su_mesh, *iter, "slow"))
         {
             std::cout << nodeNum_Insert << " Failed to update djacency\n";
-            exit(-1);
+            system("pause");
         }
     }
     std::vector<EDGE> edge_Cavity;         // 创建一个容器，用来储存所有空腔边界边
@@ -155,7 +155,7 @@ int _INSERT_POINT::Insert_point(_SU_MESH *su_mesh, int nodeNum_Last_succ, int no
         if (!mesh_process.Update_Djacency(su_mesh, face_tp, "slow"))
         {
             std::cout << nodeNum_Insert << " Failed to update djacency\n";
-            exit(-1);
+            system("pause");
         }
     }
     return 1;
