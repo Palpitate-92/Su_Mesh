@@ -222,6 +222,29 @@ FACE _MESH_PROCESS::elem_AdjacentFace(ELEM elem_tp1, ELEM elem_tp2)
     return face_tp;
 }
 
+EDGE _MESH_PROCESS::elem_AdjacentEdge(ELEM elem_tp1, ELEM elem_tp2, ELEM elem_tp3)
+{
+    EDGE edge_tp;
+    // 读入12个节点编号
+    int arr[] = {elem_tp1.form[0], elem_tp1.form[1], elem_tp1.form[2], elem_tp1.form[3],
+                 elem_tp2.form[0], elem_tp2.form[1], elem_tp2.form[2], elem_tp2.form[3],
+                 elem_tp3.form[0], elem_tp3.form[1], elem_tp3.form[2], elem_tp3.form[3]};
+    // 对这8个节点编号进行排序，便于判断相同节点编号的组数
+    std::sort(arr, arr + 12);
+    // 计数器，记录有几组相同的节点编号
+    int cnt = 0, ptr = 0;
+    for (int i = 0; i < 11; i++)
+    {
+        if (arr[i + 1] == arr[i])
+            cnt++;
+        else
+            cnt = 0;
+        if (cnt == 2)
+            edge_tp.form[ptr++] = arr[i];
+    }
+    return edge_tp;
+}
+
 EDGE _MESH_PROCESS::face_AdjacentEdge(FACE face_tp1, FACE face_tp2)
 {
     EDGE edge_tp;

@@ -37,6 +37,8 @@ public:
     FACE elem_AdjacentFace(ELEM elem_tp, int elemNum_tp);
     // 给定两个网格单元，返回该两个网格单元的相邻面
     FACE elem_AdjacentFace(ELEM elem_tp1, ELEM elem_tp2);
+    // 给定三个网格单元，返回该三个网格单元的相邻边
+    EDGE elem_AdjacentEdge(ELEM elem_tp1, ELEM elem_tp2, ELEM elem_tp3);
     // 给定两个网格面，返回该两个网格面的相邻边
     EDGE face_AdjacentEdge(FACE face_tp1, FACE face_tp2);
     // 得到该网格单元四个节点的密度控制信息的均值

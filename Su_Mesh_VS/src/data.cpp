@@ -17,3 +17,4 @@ extern const double c1 = 1e-3;                                  // Armijo准则�
 extern const double c2 = 0.9;                                   // Wolfe准则的常数
 extern const double Max_deviation_point_internal = 1e-4;        // 用于判断点是否在三角形内部时的最大误差
 extern const double Max_steiner_point_internal = 1.0;           // 在恢复边界边时，用于判断是否该对steiner点进行合并，该值为一比值，与模型最短边界边相乘值即为最大需合并的steiner点间距离
+extern const double point_pos_error = 1e-5;                     // 作为point与node类是否相等的判断误差

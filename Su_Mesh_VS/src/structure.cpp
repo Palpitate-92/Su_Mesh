@@ -226,7 +226,10 @@ Point Point::operator=(const NODE &node)
 
 bool Point::operator==(const NODE &node) const
 {
-    return (pos[0] == node.pos[0] && pos[1] == node.pos[1] && pos[2] == node.pos[2]);
+    //return (pos[0] == node.pos[0] && pos[1] == node.pos[1] && pos[2] == node.pos[2]);
+    return (std::abs(pos[0] - node.pos[0]) <= point_pos_error &&
+            std::abs(pos[1] - node.pos[1]) <= point_pos_error &&
+            std::abs(pos[2] - node.pos[2]) <= point_pos_error);
 }
 
 Pathl::Pathl()
@@ -289,7 +292,7 @@ Setl::Setl()
     Decom_elem = nullptr;
     Decom_elem_num = 0;
     for (int i = 0; i < 4; i++)
-        Decom_type_two_sides[i] = '\0';
+        Face_Decom_type[i] = '\0';
 }
 
 Setl Setl::operator=(const ELEM &elem)

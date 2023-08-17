@@ -44,11 +44,14 @@ public:
     // 集元分解，包含5种类型，分别是0、1、2、3、4条边刺穿待恢复边界面
     void Decompose_Setl(std::vector<Setl> *set);
     // 依据集元类型，将分解后的网格压入elem容器，形成集元的完整分解生成过程
-    void Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Setl> *set);
+    void Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Setl> *set, FACE face_recovery);
     // 恢复边界面
     void Recovery_Boundary_face(_SU_MESH *su_mesh, FACE face_recovery);
     // 边界恢复
-    void Recovery_Boundary(_SU_MESH *su_mesh);
+    // 插入Steiner点，实现保形边界恢复
+    void Insert_Steiner_Points(_SU_MESH *su_mesh);
+    // 移动Steiner点，实现约束边界恢复
+    void Move_Steiner_Points(_SU_MESH *su_mesh);
 
 private:
 public:

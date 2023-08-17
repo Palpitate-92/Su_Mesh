@@ -60,11 +60,11 @@ int main()
     // 将所有节点坐标向上取整
     //su_mesh.boundary_point.Rounding(&su_mesh);
     // 输出当前三角化信息文件
-    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Ini_Delaunay");
+    //su_mesh.file_ios.Write_File(&su_mesh, "1111\\Ini_Delaunay");
     // * 边界点插入
     su_mesh.boundary_point.Insert_BoundaryPoint(&su_mesh);
     // 输出当前三角化信息文件
-    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Boundary_Delaunay");
+    //su_mesh.file_ios.Write_File(&su_mesh, "1111\\Boundary_Delaunay");
     // 标记所有外部网格单元
 
     // 先移除初始Delaunay三角化的8个顶角节点与包含这些节点的所有网格单元，简化边界恢复步骤
@@ -72,7 +72,12 @@ int main()
     // 输出当前三角化信息文件
     //su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_1_Delaunay");
     // * 边界恢复
-    su_mesh.boundary_recovery.Recovery_Boundary(&su_mesh);
+    // * 插入Steiner点，实现保形边界恢复
+    su_mesh.boundary_recovery.Insert_Steiner_Points(&su_mesh);
+    // 输出当前三角化信息文件
+    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Before_Move_Steiner");
+    // * 移动Steiner点，实现约束边界恢复
+    su_mesh.boundary_recovery.Move_Steiner_Points(&su_mesh);
 
     // 简易判断网格各种信息是否有效
     su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
@@ -81,7 +86,10 @@ int main()
     double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
     // clock()以毫秒的形式展现，因此需要除以 CLOCKS_PER_SEC 来实现转换
     // static_cast<double>的作用是将结果转换为double类型
-    printf("CPU PROCESSING TIME: %f", elapsedTime);
+    printf("CPU PROCESSING TIME: %f\n", elapsedTime);
+
+    // 简易判断网格各种信息是否有效
+    su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
 
     // 移除剩余外部单元并缩减容器
     su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh, 2);
@@ -90,7 +98,7 @@ int main()
     su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
 
     // 输出当前三角化信息文件
-    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_Delaunay");
+    //su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_Delaunay");
     // 内部点生成与插入
     su_mesh.interior_point.AutoRefine(&su_mesh);
     // 简易判断网格各种信息是否有效
@@ -119,7 +127,7 @@ int main()
     // 简易判断网格各种信息是否有效
     su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
     // 输出网格质量优化后信息文件 Final_Delaunay
-    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Final_Delaunay");
+    //su_mesh.file_ios.Write_File(&su_mesh, "1111\\Final_Delaunay");
 
     // #include <ctime>
     // clock_t start, end;
