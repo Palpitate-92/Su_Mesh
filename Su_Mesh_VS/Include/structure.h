@@ -45,9 +45,11 @@ private:
 class NODE
 {
 private:
-    double pos[DIM]; // 节点几何坐标
-    int elem;        // 当前网格中包含该节点的任意单元标号
-    double spac;     // 对应节点理想单元尺寸值
+    double pos[DIM];       // 节点几何坐标
+    int elem;              // 当前网格中包含该节点的任意单元标号
+    double spac;           // 对应节点理想单元尺寸值
+    int Steiner_symbol;    // 判断该点是否是Steiner点，0代表不是，1代表是边界边上的Steiner点，2代表是边界面上的Steiner点
+    int Steiner_source[3]; // 若当前点是Steiner点，则储存该Steiner点的来源。若是边界边上的Steiner点，则储存该边界边编号；若是边界面上的Steiner点，则储存该边界面编号。
 
 public:
     NODE();
@@ -72,6 +74,8 @@ private:
     friend class _QUALITY;
     friend class _DATA_PROCESS;
     friend class Point;
+
+public:
 };
 
 // 声明网格面类

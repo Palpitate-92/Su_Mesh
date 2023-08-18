@@ -64,6 +64,8 @@ NODE::NODE()
         pos[i] = 0; // 节点坐标应该初始化为零
     elem = -1;
     spac = 0;
+    Steiner_symbol = 0;
+    memset(Steiner_source, -1, sizeof(Steiner_source));
 }
 
 NODE::NODE(double x, double y, double z)
@@ -73,13 +75,17 @@ NODE::NODE(double x, double y, double z)
     pos[2] = z;
     elem = -1;
     spac = 0;
+    Steiner_symbol = 0;
+    memset(Steiner_source, -1, sizeof(Steiner_source));
 }
 
 NODE::NODE(const Point &pot)
 {
     std::copy(pot.pos, pot.pos + 3, pos);
     elem = -1;
-    spac = -1;
+    spac = 0;
+    Steiner_symbol = 0;
+    memset(Steiner_source, -1, sizeof(Steiner_source));
 }
 
 NODE NODE::operator+(const NODE &node) const

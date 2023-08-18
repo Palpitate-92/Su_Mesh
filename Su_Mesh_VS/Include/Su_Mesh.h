@@ -50,8 +50,10 @@ private:
     double shortest_border_edge = 999;                                       // 储存最短边界边长度
     std::vector<EDGE> boundary_edge;                                         // 定义EDGE类容器，存放所有边界边
     int nodeNum_before_edge_recovery = -1, nodeNum_after_edge_recovery = -1; // 储存边界边恢复前后节点数目，便于后续移动边界边上steiner点
+    std::vector<EDGE> boundary_edge_Decom;                                   // 储存插入steiner点后边界边分解成的边界边段
     std::vector<FACE> boundary_face;                                         // 定义FACE类容器，存放边界面
     int nodeNum_before_face_recovery = -1, nodeNum_after_face_recovery = -1; // 储存边界面恢复前后节点数目，便于后续移动边界面上steiner点
+    std::vector<FACE> boundary_face_Decom;                                   // 储存插入steiner点后边界面分解成的边界面片
     int boundaryFace_num = -1;                                               // 定义初始六面体表面三角形网格数目
     int Delaunay_Frame_numPos[8] = {-1, -1, -1, -1, -1, -1, -1, -1};         // 声明一个变量，储存初始Delaunay三角化边框8个节点在node容器内的位置
 

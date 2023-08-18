@@ -154,6 +154,7 @@ int main()
  * * i=std::distance(elemNum_succ.begin(),iter)
  * * std::vector<NODE>().swap(node_Insert);               //
  * 初始化node_Insert，并释放容器空间
+ * p = (int*)malloc(sizeof(int) * n);
  */
 
 /*
