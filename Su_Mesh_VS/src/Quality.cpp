@@ -695,9 +695,7 @@ bool _QUALITY::Laplacian_Smoothing(_SU_MESH *su_mesh, int Laplacian_Smoothing_no
     // 将所有局部优化域的边界面压入face_Optimization_Domain，并调整面节点顺序，使得以
     // 面点1、面点2、面点3、待优化点的顺序是orient3D规定的正方向
     // 便于后续判断待优化点Laplacian光顺后是否有效
-    for (std::vector<int>::iterator iter = elemNum_IncludeNode.begin();
-         iter != elemNum_IncludeNode.end();
-         ++iter)
+    for (std::vector<int>::iterator iter = elemNum_IncludeNode.begin(); iter != elemNum_IncludeNode.end(); ++iter)
     {
         switch (mesh_process.ELEM_Include_Node(su_mesh->elem.at(*iter),
                                                Laplacian_Smoothing_nodeNum))
@@ -739,13 +737,9 @@ bool _QUALITY::Laplacian_Smoothing(_SU_MESH *su_mesh, int Laplacian_Smoothing_no
                                     : lowest_quality_before;
     }
     // 得到Laplacian光顺后节点位置
-    double x_value = 0, x_cnt = 0, y_value = 0, y_cnt = 0, z_value = 0,
-           z_cnt = 0; // 定义一系列变量，储存x、y与z方向总坐标之和与总点数
-    NODE node_tp = su_mesh->node.at(
-        Laplacian_Smoothing_nodeNum); // 定义一个变量，储存优化后节点，初始化为待优化点，便于储存待优化点的密度等信息
-    for (std::vector<FACE>::iterator iter = face_Optimization_Domain.begin();
-         iter != face_Optimization_Domain.end();
-         ++iter)
+    double x_value = 0, x_cnt = 0, y_value = 0, y_cnt = 0, z_value = 0, z_cnt = 0; // 定义一系列变量，储存x、y与z方向总坐标之和与总点数
+    NODE node_tp = su_mesh->node.at(Laplacian_Smoothing_nodeNum);                  // 定义一个变量，储存优化后节点，初始化为待优化点，便于储存待优化点的密度等信息
+    for (std::vector<FACE>::iterator iter = face_Optimization_Domain.begin(); iter != face_Optimization_Domain.end(); ++iter)
         // 一个局部优化域的边界面有三个节点
         for (int i = 0; i < DIM; i++)
         {

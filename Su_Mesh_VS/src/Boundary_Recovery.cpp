@@ -1,26 +1,15 @@
 #include "Su_Mesh.h"
 
-std::vector<int> _BOUNDARY_RECOVERY::External_Elem_Lookup(_SU_MESH *su_mesh)
+void _BOUNDARY_RECOVERY::External_Elem_Lookup(_SU_MESH *su_mesh, std::vector<int> *nodeNum_Remove, std::vector<int> *elemNum_Remove)
 {
+    _MESH_PROCESS mesh_process;
     // 采用着色法来确定外部单元，若两个网格单元相邻网格面为边界面，则其标记相反
-    std::vector<int> elemNum_External;                                           // 声明一个容器，用来储存外部网格单元编号
     int *external_elem_judge = (int *)malloc((su_mesh->elem_num) * sizeof(int)); // 作为每个网格单元的标记数组
     memset(external_elem_judge, 0, (su_mesh->elem_num) * sizeof(int));           // 1代表非外部单元，-1代表外部单元,0代表未被判断
     int ini_elemNum = 0;
-    // 该方法最重要的是确定初始单元及其内外部信息，此处从边界面入手，遍历边界面，在当前三角化内查找包含当前判断边界面的网格单元，若只有一个网格单元，则该网格单元必是内部单元
-    std::vector<int> elemNum_include_face;
-    _MESH_PROCESS mesh_process;
-    for (std::vector<FACE>::iterator iter = su_mesh->boundary_face.begin(); iter != su_mesh->boundary_face.end(); ++iter)
-    {
-        std::vector<int>().swap(elemNum_include_face);
-        mesh_process.FindAwl(su_mesh, *iter, &elemNum_include_face, "fast");
-        if (elemNum_include_face.size() == 1)
-        {
-            ini_elemNum = elemNum_include_face.front();
-            break;
-        }
-    }
-    external_elem_judge[ini_elemNum] = 1;
+    // 该方法最重要的是确定初始单元及其内外部信息，此处直接从包含初始Delaunay三角化边框节点的网格单元入手，该网格单元一定是外部网格单元
+    ini_elemNum = su_mesh->node.at(su_mesh->Delaunay_Frame_numPos[0]).elem;
+    external_elem_judge[ini_elemNum] = -1;
     std::deque<int> elemNum_wait;
     std::vector<int> elemNum_succ;
     elemNum_wait.push_back(ini_elemNum);
@@ -29,7 +18,7 @@ std::vector<int> _BOUNDARY_RECOVERY::External_Elem_Lookup(_SU_MESH *su_mesh)
     FACE face_tp;
     int elemNum_tp;
     int elemNum_tp_neig;
-    while (elemNum_succ.size() < su_mesh->elem_num)
+    while (int(elemNum_succ.size()) < su_mesh->elem_num)
     {
         elemNum_tp = elemNum_wait.front();
         elem_tp = su_mesh->elem.at(elemNum_tp);
@@ -49,18 +38,22 @@ std::vector<int> _BOUNDARY_RECOVERY::External_Elem_Lookup(_SU_MESH *su_mesh)
             elemNum_wait.push_back(elemNum_tp_neig);
             elemNum_succ.push_back(elemNum_tp_neig);
         }
+        if (external_elem_judge[elemNum_tp] == -1)
+            for (int j = 0; j < 4; j++)
+                if (elem_tp.form[j] >= su_mesh->InitNode_num) // 保证该点不是初始边界点
+                    if (std::find(nodeNum_Remove->begin(), nodeNum_Remove->end(), elem_tp.form[j]) == nodeNum_Remove->end())
+                        nodeNum_Remove->push_back(elem_tp.form[j]);
     }
     for (int i = 0; i < su_mesh->elem_num; i++)
     {
         if (external_elem_judge[i] == -1)
-            elemNum_External.push_back(i);
+            elemNum_Remove->push_back(i);
         if (external_elem_judge[i] == 0)
-            std::cout << i << ' ';
+            std::cout << i << " elem check error, External_Elem_Lookup fail !\n";
     }
     free(external_elem_judge);
     external_elem_judge = nullptr;
-    std::sort(elemNum_External.begin(), elemNum_External.end());
-    return elemNum_External;
+    return;
 }
 
 void _BOUNDARY_RECOVERY::ReplaceNode_two(_SU_MESH *su_mesh, int nodeNum_one, int nodeNum_two)
@@ -158,35 +151,33 @@ void _BOUNDARY_RECOVERY::Removal_LastElem(_SU_MESH *su_mesh, int elemNum_after)
     return;
 }
 
-void _BOUNDARY_RECOVERY::Removal_NodeElem(_SU_MESH *su_mesh, std::vector<int> elemNum_Remove, int *nodeNum_Remove, int nodeRemove_num, int type)
+void _BOUNDARY_RECOVERY::Removal_NodeElem(_SU_MESH *su_mesh, std::vector<int> nodeNum_Remove, std::vector<int> elemNum_Remove)
 {
     int cnt_node = 0; // 记录待删除节点的个数
-    if (type == 1)
+    // 为简化删除节点流程，当查找到待删除节点时，使用容器内最后一个有效节点来替换此位置，在程序结束时，删除最后cnt_node个节点，最大限度地保证了整个网格的相邻信息不变
+    // 为避免不必要的麻烦，将nodeNum_Remove降序排序，从nodeNum_Remove的第一个节点编号开始检索替换
+    sort(nodeNum_Remove.begin(), nodeNum_Remove.end(), std::greater<>());
+    // 将nodeNum_Remove内所有节点放到node容器最后
+    for (int i = 0; i < int(nodeNum_Remove.size()); i++)
     {
-        // 为简化删除节点流程，当查找到待删除节点时，使用容器内最后一个有效节点来替换此位置，在程序结束时，删除最后cnt_node个节点，最大限度地保证了整个网格的相邻信息不变
-        // 为避免不必要的麻烦，将nodeNum_Remove降序排序，从nodeNum_Remove的最后一个节点编号开始检索替换
-        std::sort(nodeNum_Remove, nodeNum_Remove + nodeRemove_num, std::greater<>());
-        // 将nodeNum_Remove内所有节点放到node容器最后
-        for (int i = 0; i < nodeRemove_num; i++)
+        // 将该节点与node容器的最后一个有效节点交换位置
+        // 如果该节点就位于node容器的最后一个有效节点位置，则不交换
+        if (nodeNum_Remove.at(i) == su_mesh->node_num - 1 - cnt_node)
         {
-            // 将该节点与node容器的最后一个有效节点交换位置
-            // 如果该节点就位于node容器的最后一个有效节点位置，则不交换
-            if (*(nodeNum_Remove + i) == su_mesh->node_num - 1 - cnt_node)
-            {
-                cnt_node++;
-                continue;
-            }
-            else
-                ReplaceNode_two(su_mesh, *(nodeNum_Remove + i), su_mesh->node_num - 1 - cnt_node++);
+            cnt_node++;
+            continue;
         }
+        else
+            ReplaceNode_two(su_mesh, nodeNum_Remove.at(i), su_mesh->node_num - 1 - cnt_node++);
     }
     int cnt_elem = 0; // 记录待删除网格单元的个数
     // 将elemNum_Remove内所有网格单元放到elem容器最后
-    for (int i = int(elemNum_Remove.size()) - 1; i >= 0; i--)
+    sort(elemNum_Remove.begin(), elemNum_Remove.end(), std::greater<>());
+    for (int i = 0; i < int(elemNum_Remove.size()); i++)
     {
         // 将该网格单元与elem容器的最后一个有效网格单元交换位置
         // 如果该网格单元就位于elem容器的最后一个有效网格单元位置，则不交换
-        if (elemNum_Remove.at(i) == su_mesh->elem.size() - 1 - cnt_elem)
+        if (elemNum_Remove.at(i) == su_mesh->elem_num - 1 - cnt_elem)
         {
             cnt_elem++;
             continue;
@@ -197,31 +188,27 @@ void _BOUNDARY_RECOVERY::Removal_NodeElem(_SU_MESH *su_mesh, std::vector<int> el
     int elemNum_after = su_mesh->elem_num - cnt_elem; // 储存删除elemNum_Remove内所有单元后网格单元数，避免node的elem值错误
     for (int i = 0; i < cnt_elem; i++)
         Removal_LastElem(su_mesh, elemNum_after);
-    if (type == 1)
-    {
-        for (int i = 0; i < cnt_node; i++)
-            Removal_LastNode(su_mesh);
-    }
+    for (int i = 0; i < cnt_node; i++)
+        Removal_LastNode(su_mesh);
     return;
 }
 
-void _BOUNDARY_RECOVERY::Removal_ExGrid(_SU_MESH *su_mesh, int type) // 去掉外部单元并缩减容器
+void _BOUNDARY_RECOVERY::Removal_ExGrid(_SU_MESH *su_mesh) // 去掉外部单元并缩减容器
 {
-    int *nodeNum_Remove = new int[8];
-    int nodeRemove_num = 8;
-    std::vector<int> elemNum_Remove; // 声明一个容器，用来储存待移除网格单元编号
-    if (type == 1)
-    {
-        std::copy(su_mesh->Delaunay_Frame_numPos, su_mesh->Delaunay_Frame_numPos + 8, nodeNum_Remove); // 声明数组，用来指向储存待移除节点的连续内存空间
-        for (int i = 0; i < su_mesh->elem_num; i++)
-            if (su_mesh->elem.at(i).form[3] >= su_mesh->InitNode_num)
-                elemNum_Remove.push_back(i);
-    }
-    if (type == 2)
-        elemNum_Remove = External_Elem_Lookup(su_mesh);
-    Removal_NodeElem(su_mesh, elemNum_Remove, nodeNum_Remove, nodeRemove_num, type); // 在node容器内删除节点与单元并更新所有信息
-    delete[] nodeNum_Remove;
-    nodeNum_Remove = nullptr;
+    std::vector<int> nodeNum_Remove;
+    std::vector<int> elemNum_Remove;
+    // 声明一个容器，用来储存待移除网格单元编号
+
+    //if (type == 1)
+    //{
+    //    std::copy(su_mesh->Delaunay_Frame_numPos, su_mesh->Delaunay_Frame_numPos + 8, nodeNum_Remove); // 声明数组，用来指向储存待移除节点的连续内存空间
+    //    for (int i = 0; i < su_mesh->elem_num; i++)
+    //        if (su_mesh->elem.at(i).form[3] >= su_mesh->InitNode_num)
+    //            elemNum_Remove.push_back(i);
+    //}
+    //if (type == 2)
+    External_Elem_Lookup(su_mesh, &nodeNum_Remove, &elemNum_Remove);
+    Removal_NodeElem(su_mesh, nodeNum_Remove, elemNum_Remove); // 在node容器内删除节点与单元并更新所有信息
     return;
 }
 
@@ -797,7 +784,7 @@ void _BOUNDARY_RECOVERY::Repair_Path(double shortest_dis, std::vector<Pathl> *pa
 void _BOUNDARY_RECOVERY::Pathl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Pathl> *path, EDGE edge_recovery)
 {
     _MESH_PROCESS mesh_process;
-    _DATA_PROCESS data_process;
+    //_DATA_PROCESS data_process;
     // 声明两个迭代器
     int elemNum_iter = -1;
     std::vector<FACE>::iterator face_iter;
@@ -1861,7 +1848,6 @@ void _BOUNDARY_RECOVERY::Decompose_Setl(std::vector<Setl> *set)
 void _BOUNDARY_RECOVERY::Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Setl> *set, FACE face_recovery)
 {
     _MESH_PROCESS mesh_process;
-    _DATA_PROCESS data_process;
     // 声明两个迭代器
     int elemNum_iter = -1;
     std::vector<FACE>::iterator face_iter;
@@ -1869,6 +1855,7 @@ void _BOUNDARY_RECOVERY::Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<S
     int *elemNum_judge = nullptr;
     int faceNum_cnt = 0;
     Setl setl;
+    FACE face_tp;
     // 声明两个容器，分别存储待更新相邻信息的网格面与相对应的网格单元编号
     std::vector<int> elemNum_adjacent;
     std::vector<FACE> face_adjacent;
@@ -1888,7 +1875,10 @@ void _BOUNDARY_RECOVERY::Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<S
         if (setl.intersec_num - setl.vertex_num == 0)
         {
             // 这种情况下不需要插入steiner点，储存当前边界面的分块信息
-            su_mesh->boundary_face_Decom.push_back(FACE(setl.vertex_nodeNum[0], setl.vertex_nodeNum[1], setl.vertex_nodeNum[2]));
+            face_tp = FACE(setl.vertex_nodeNum[0], setl.vertex_nodeNum[1], setl.vertex_nodeNum[2]);
+            face_tp.Sort();
+            if (std::find(su_mesh->boundary_face_Decom.begin(), su_mesh->boundary_face_Decom.end(), face_tp) == su_mesh->boundary_face_Decom.end())
+                su_mesh->boundary_face_Decom.push_back(face_tp);
             continue;
         }
         // 当有1条边刺穿待恢复边界面时，该集元处理方式与边界边恢复中的单边型一致
@@ -1906,7 +1896,10 @@ void _BOUNDARY_RECOVERY::Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<S
                 steiner_node_num = su_mesh->node_num++;
             }
             // 储存当前边界面的分块信息
-            su_mesh->boundary_face_Decom.push_back(FACE(setl.vertex_nodeNum[0], setl.vertex_nodeNum[1], steiner_node_num));
+            face_tp = FACE(setl.vertex_nodeNum[0], setl.vertex_nodeNum[1], steiner_node_num);
+            face_tp.Sort();
+            if (std::find(su_mesh->boundary_face_Decom.begin(), su_mesh->boundary_face_Decom.end(), face_tp) == su_mesh->boundary_face_Decom.end())
+                su_mesh->boundary_face_Decom.push_back(face_tp);
             // 根据steiner点编号，更新集元分解生成的网格单元的节点信息
             (setl.Decom_elem + 0)->form[3] = steiner_node_num;
             (setl.Decom_elem + 1)->form[3] = steiner_node_num;
@@ -1955,7 +1948,10 @@ void _BOUNDARY_RECOVERY::Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<S
                 }
             }
             // 储存当前边界面的分块信息
-            su_mesh->boundary_face_Decom.push_back(FACE(setl.vertex_nodeNum[0], *(steiner_node_num + 0), *(steiner_node_num + 1)));
+            face_tp = FACE(setl.vertex_nodeNum[0], *(steiner_node_num + 0), *(steiner_node_num + 1));
+            face_tp.Sort();
+            if (std::find(su_mesh->boundary_face_Decom.begin(), su_mesh->boundary_face_Decom.end(), face_tp) == su_mesh->boundary_face_Decom.end())
+                su_mesh->boundary_face_Decom.push_back(face_tp);
             // 根据steiner点编号，更新集元分解生成的网格单元的节点信息，然后更新相邻信息，插入elem容器，最后储存待判断网格面
             // 首先得到待分解的两条网格边
             EDGE ExplodeEdge_1, ExplodeEdge_2;
@@ -2030,7 +2026,6 @@ void _BOUNDARY_RECOVERY::Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<S
             std::cout << "Set initialized error, check the FindSet!\n", system("pause");
         // 更新集元与集元之间的相邻信息
         // 在face_adjacent容器内查找这些网格面，若不存在则直接压入容器并将这个网格面代表的网格单元编号一并压入容器elemNum_adjacent，若存在则取出相对于的网格面与网格单元编号，并进行相邻信息更新
-        FACE face_tp;
         int elemNum_tp = -1;
         // 保证数据有效
         if (face_judge == nullptr || elemNum_judge == nullptr)
@@ -2203,6 +2198,259 @@ void _BOUNDARY_RECOVERY::Recovery_Boundary_face(_SU_MESH *su_mesh, FACE face_rec
     return;
 }
 
+bool _BOUNDARY_RECOVERY::Split_Edge_Steiner_Point(_SU_MESH *su_mesh, int SteinerNodeNum_wait_split)
+{
+    _MESH_PROCESS mesh_process;
+    _DATA_PROCESS data_process;
+    _CAVITY cavity;
+
+    // 首先查找节点的Ball
+    std::vector<int> elemNum_IncludeNode;
+    mesh_process.FindBall_fast(su_mesh, SteinerNodeNum_wait_split, &elemNum_IncludeNode);
+    if (elemNum_IncludeNode.empty()) // 如果查找失败，返回false
+        return false;
+
+    // 然后在 被分解的边界面片(su_mesh->boundary_face_Decom) 内查找包含当前Steiner点的边界面
+    std::vector<int> face_num;
+    face_num = mesh_process.Find_face_from_FaceGroup(su_mesh->boundary_face_Decom, SteinerNodeNum_wait_split);
+    if (face_num.empty()) // 如果查找失败，返回false
+        return false;
+    // 在su_mesh->boundary_face_Decom内删除上述查找到的边界面并储存
+    std::vector<FACE> face_wait_process;
+    std::sort(face_num.begin(), face_num.end(), std::greater<int>()); // 逆序排序
+    for (std::vector<int>::iterator iter = face_num.begin(); iter != face_num.end(); ++iter)
+    {
+        face_wait_process.push_back(su_mesh->boundary_face_Decom.at(*iter));
+        su_mesh->boundary_face_Decom.erase(su_mesh->boundary_face_Decom.begin() + *iter);
+    }
+    // 进一步分析face_wait_process内边界面，将这些边界面视为一个环绕SteinerNodeNum_wait_split的环，储存其边界边（即这些边界面内不包含SteinerNodeNum_wait_split点的边界边）
+    std::vector<EDGE> edge_surround_Steiner;
+    for (std::vector<FACE>::iterator iter = face_wait_process.begin(); iter != face_wait_process.end(); ++iter)
+    {
+        for (int i = 0; i < 2; i++)
+            for (int j = i + 1; j < 3; j++)
+                if (iter->form[i] == SteinerNodeNum_wait_split || iter->form[j] == SteinerNodeNum_wait_split)
+                    continue;
+                else
+                    edge_surround_Steiner.push_back(EDGE(iter->form[i], iter->form[j]));
+    }
+
+    // 然后在 被分解的边界边集合(su_mesh->boundary_edge_Decom) 内查找包含当前Steiner点的边界边
+    std::vector<int> edge_num;
+    edge_num = mesh_process.Find_edge_from_EdgeSet(su_mesh->boundary_edge_Decom, SteinerNodeNum_wait_split);
+    if (edge_num.size() != 2) // 如果查找失败，返回false，此时face_num内有且只有两个值
+        return false;
+    // 在su_mesh->boundary_edge_Decom内删除上述查找到的边界边并储存
+    std::vector<EDGE> edge_wait_process;
+    std::sort(edge_num.begin(), edge_num.end(), std::greater<int>()); // 逆序排序
+    for (std::vector<int>::iterator iter = edge_num.begin(); iter != edge_num.end(); ++iter)
+    {
+        edge_wait_process.push_back(su_mesh->boundary_edge_Decom.at(*iter));
+        su_mesh->boundary_edge_Decom.erase(su_mesh->boundary_edge_Decom.begin() + *iter);
+    }
+    // 此时可以储存当前SteinerNodeNum_wait_split点分解后，还原的目标边界边
+    EDGE target_BoundaryEdge;
+    int cnt = 0;
+    for (std::vector<EDGE>::iterator iter = edge_wait_process.begin(); iter != edge_wait_process.end(); ++iter)
+    {
+        for (int i = 0; i < 2; i++)
+            if (iter->form[i] != SteinerNodeNum_wait_split)
+                target_BoundaryEdge.form[cnt++] = iter->form[i];
+    }
+    target_BoundaryEdge.Sort();
+
+    // 重连环绕SteinerNodeNum_wait_split的环，使target_BoundaryEdge存在，并生成一组新的边界面，这组边界面即是当前SteinerNodeNum_wait_split点分解后，还原的 目标边界面片的 更大的分块边界面片
+    std::vector<FACE> target_BoundaryFace;
+    int nodeNum_tp = target_BoundaryEdge.form[0]; // 取target_BoundaryEdge的任意一个节点，连接edge_surround_Steiner内不包含该节点的网格边，形成新的网格面
+    for (std::vector<EDGE>::iterator iter = edge_surround_Steiner.begin(); iter != edge_surround_Steiner.end(); ++iter)
+    {
+        if (iter->form[0] != nodeNum_tp && iter->form[1] != nodeNum_tp)
+        {
+            target_BoundaryFace.push_back(FACE(nodeNum_tp, iter->form[0], iter->form[1]));
+            target_BoundaryFace.back().Sort();
+        }
+    }
+
+    // 利用face_wait_process信息和染色法，将elemNum_IncludeNode分解为两个Ball
+    std::vector<int> elemNum_IncludeSplitNode[2];
+    int *elem_symbol = new int[int(elemNum_IncludeNode.size())];
+    elem_symbol[0] = 1;
+    std::deque<int> elemNum_wait;
+    std::vector<int> elemNum_succ;
+    elemNum_wait.push_back(0);                         // 这个编号不是节点编号，指的是elemNum_IncludeNode容器元素位置
+    elemNum_succ.push_back(elemNum_IncludeNode.at(0)); // 这个编号是节点编号
+    int Num_tp = -1, Num_iter = -1;
+    int elemNeigNum_tp = -1;
+    ELEM elem_tp;
+    FACE face_tp;
+    std::vector<int>::iterator elemNum_iter;
+    while (elemNum_succ.size() < elemNum_IncludeNode.size())
+    {
+        Num_tp = elemNum_wait.front();
+        elem_tp = su_mesh->elem.at(elemNum_IncludeNode.at(Num_tp));
+        elemNum_wait.pop_front();
+        for (int i = 0; i < DIM + 1; i++)
+        {
+            elemNeigNum_tp = elem_tp.neig[i];
+            if (elemNeigNum_tp == -1)
+                continue;
+            if (std::find(elemNum_succ.begin(), elemNum_succ.end(), elemNeigNum_tp) != elemNum_succ.end())
+                continue;
+            if ((elemNum_iter = std::find(elemNum_IncludeNode.begin(), elemNum_IncludeNode.end(), elemNeigNum_tp)) != elemNum_IncludeNode.end())
+            {
+                face_tp = mesh_process.Node_Opposite_Face(elem_tp, elem_tp.form[i]);
+                Num_iter = int(std::distance(elemNum_IncludeNode.begin(), elemNum_iter));
+                if (std::find(face_wait_process.begin(), face_wait_process.end(), face_tp) == face_wait_process.end())
+                    elem_symbol[Num_iter] = elem_symbol[Num_tp];
+                else
+                    elem_symbol[Num_iter] = -elem_symbol[Num_tp];
+                elemNum_wait.push_back(Num_iter);
+                elemNum_succ.push_back(elemNum_IncludeNode.at(Num_iter));
+            }
+        }
+    }
+    for (int i = 0; i < int(elemNum_IncludeNode.size()); i++)
+    {
+        if (*(elem_symbol + i) == 1)
+            elemNum_IncludeSplitNode[0].push_back(elemNum_IncludeNode.at(i));
+        else
+            elemNum_IncludeSplitNode[1].push_back(elemNum_IncludeNode.at(i));
+    }
+
+    // 分别储存两个Ball的边界面（删除face_wait_process中边界面并增加target_BoundaryFace中边界面），生成两个完整球面，并记录两个Ball原始体积，与其相邻信息
+    std::vector<FACE> face_IncludeSplitNode[2];
+    std::vector<FACE>::iterator face_iter;
+    std::vector<int> elemNum_adjacent; // 存储两个Ball的外边界中待更新相邻信息的网格面与相对应的网格单元编号
+    std::vector<FACE> face_adjacent;
+    double original_volume[2] = {0, 0};
+    int elemAdjacent_iter = -1;
+    for (int i = 0; i < 2; i++)
+    {
+        for (std::vector<int>::iterator iter = elemNum_IncludeSplitNode[i].begin(); iter != elemNum_IncludeSplitNode[i].end(); ++iter)
+        {
+            elem_tp = su_mesh->elem.at(*iter);
+            original_volume[i] += abs(data_process.tetrahedral_volume(su_mesh->node.at(elem_tp.form[0]), su_mesh->node.at(elem_tp.form[1]), su_mesh->node.at(elem_tp.form[2]), su_mesh->node.at(elem_tp.form[3])));
+            for (int j = 0; j < 4; j++)
+            {
+                face_tp = mesh_process.Node_Opposite_Face(elem_tp, elem_tp.form[j]);
+                if (mesh_process.FACE_Include_Node(face_tp, SteinerNodeNum_wait_split) != -1)
+                    continue;
+                face_IncludeSplitNode[i].push_back(face_tp);
+                elemNum_adjacent.push_back(elem_tp.neig[j]);
+                face_adjacent.push_back(face_tp);
+            }
+        }
+        face_IncludeSplitNode[i].insert(face_IncludeSplitNode[i].end(), target_BoundaryFace.begin(), target_BoundaryFace.end());
+    }
+
+    // 初始化两个Ball，并且记录网格单元编号
+    // 此处可以直接用 elemNum_IncludeNode
+    cavity.Initialize_Cavity(su_mesh, elemNum_IncludeNode);
+
+    // 分别对两个Ball进行插点重连操作，其外边界面已储存在face_IncludeSplitNode中，利用插点后的网格体积之和来判断当前插入点是否合法
+    // 待插入点初始化为Ball重心位置，若非法，则沿一定比例向SteinerNodeNum_wait_split点移动并且在此判断，直至合法
+    double volume = 0.0;
+    int elemNum_tp = -1, elemGenNum_tp = -1;
+    nodeNum_tp = -1;
+    NODE node_steiner = su_mesh->node.at(SteinerNodeNum_wait_split);
+    NODE node_insert[2];
+    double x_value = 0, x_cnt = 0, y_value = 0, y_cnt = 0, z_value = 0, z_cnt = 0; // 定义一系列变量，储存x、y与z方向总坐标之和与总点数
+    double vector[3] = {0.0, 0.0, 0.0};
+    for (int i = 0; i < 2; i++)
+    {
+        node_insert[i].spac = node_steiner.spac;
+        x_value = 0, x_cnt = 0, y_value = 0, y_cnt = 0, z_value = 0, z_cnt = 0;
+        // 求Ball重心位置
+        for (std::vector<FACE>::iterator iter = face_IncludeSplitNode[i].begin(); iter != face_IncludeSplitNode[i].end(); ++iter)
+            for (int j = 0; j < 3; j++)
+            {
+                x_value += su_mesh->node.at(iter->form[j]).pos[0];
+                x_cnt++;
+                y_value += su_mesh->node.at(iter->form[j]).pos[1];
+                y_cnt++;
+                z_value += su_mesh->node.at(iter->form[j]).pos[2];
+                z_cnt++;
+            }
+        node_insert[i].pos[0] = x_value / x_cnt, node_insert[i].pos[1] = y_value / y_cnt, node_insert[i].pos[2] = z_value / z_cnt;
+        vector[0] = node_steiner.pos[0] - node_insert[i].pos[0], vector[1] = node_steiner.pos[1] - node_insert[i].pos[1], vector[2] = node_steiner.pos[2] - node_insert[i].pos[2];
+        cnt = 0;
+        volume = 0;
+        // 查找合法节点位置
+        while (abs(volume - original_volume[i]) >= volume_error)
+        {
+            volume = 0;
+            if (cnt > 0)
+            {
+                node_insert[i].pos[0] += vector[0] * 0.5, node_insert[i].pos[1] += vector[1] * 0.5, node_insert[i].pos[2] += vector[2] * 0.5;
+                vector[0] = node_steiner.pos[0] - node_insert[i].pos[0], vector[1] = node_steiner.pos[1] - node_insert[i].pos[1], vector[2] = node_steiner.pos[2] - node_insert[i].pos[2];
+            }
+            // 求插入点后拟生成的网格单元体积总和
+            for (std::vector<FACE>::iterator iter = face_IncludeSplitNode[i].begin(); iter != face_IncludeSplitNode[i].end(); ++iter)
+                volume += abs(data_process.tetrahedral_volume(su_mesh->node.at(iter->form[0]), su_mesh->node.at(iter->form[1]), su_mesh->node.at(iter->form[2]), node_insert[i]));
+            cnt++;
+            if (cnt > 13)
+                std::cout << SteinerNodeNum_wait_split << " Edge steiner point split error!\n", system("pause");
+        }
+        // 将其插入node容器
+        su_mesh->node.push_back(node_insert[i]);
+        nodeNum_tp = su_mesh->node_num++;
+        // 开始生成网格单元
+        for (std::vector<FACE>::iterator iter = face_IncludeSplitNode[i].begin(); iter != face_IncludeSplitNode[i].end(); ++iter)
+        {
+            elem_tp = ELEM(iter->form[0], iter->form[1], iter->form[2], nodeNum_tp);
+            elem_tp.Sort();
+            if (elemNum_IncludeNode.empty())
+            {
+                su_mesh->elem.push_back(elem_tp);
+                elemGenNum_tp = su_mesh->elem_num++;
+            }
+            else
+            {
+                elemGenNum_tp = elemNum_IncludeNode.back();
+                elemNum_IncludeNode.pop_back();
+                su_mesh->elem.at(elemGenNum_tp) = elem_tp;
+            }
+            mesh_process.Renew_NodeElem(su_mesh, elemGenNum_tp);
+            for (int m = 0; m < 2; m++)
+                for (int n = m + 1; n < 3; n++)
+                    for (int k = n + 1; k < 4; k++)
+                    {
+                        face_tp = FACE(elem_tp.form[m], elem_tp.form[n], elem_tp.form[k]);
+                        if ((face_iter = std::find(face_adjacent.begin(), face_adjacent.end(), face_tp)) == face_adjacent.end())
+                        {
+                            face_adjacent.push_back(face_tp);
+                            elemNum_adjacent.push_back(elemGenNum_tp);
+                        }
+                        else
+                        {
+                            elemAdjacent_iter = std::distance(face_adjacent.begin(), face_iter);
+                            if (elemAdjacent_iter < int(elemNum_adjacent.size()))
+                                elemNum_tp = elemNum_adjacent.at(elemAdjacent_iter);
+                            else
+                                std::cout << "Split_Edge_Steiner_Point, the ball generate error!\n", system("pause");
+                            // 从容器内删除这两个值
+                            face_adjacent.erase(face_iter);
+                            elemNum_adjacent.erase(elemNum_adjacent.begin() + elemAdjacent_iter);
+                            // 修改包含该网格面的两个网格单元的相邻信息
+                            su_mesh->elem.at(elemGenNum_tp).neig[mesh_process.Face_Opposite_Node(su_mesh->elem.at(elemGenNum_tp), face_tp)] = elemNum_tp;
+                            su_mesh->elem.at(elemNum_tp).neig[mesh_process.Face_Opposite_Node(su_mesh->elem.at(elemNum_tp), face_tp)] = elemGenNum_tp;
+                        }
+                    }
+        }
+    }
+
+    // 检查生成的目标边界边与目标边界面是否是原始网格边界边与边界面，若不是则继续压入相应容器
+    if (std::find(su_mesh->boundary_edge.begin(), su_mesh->boundary_edge.end(), target_BoundaryEdge) == su_mesh->boundary_edge.end())
+        su_mesh->boundary_edge_Decom.push_back(target_BoundaryEdge);
+    for (std::vector<FACE>::iterator iter = target_BoundaryFace.begin(); iter != target_BoundaryFace.end(); iter++)
+        if (std::find(su_mesh->boundary_face.begin(), su_mesh->boundary_face.end(), *iter) == su_mesh->boundary_face.end())
+            su_mesh->boundary_face_Decom.push_back(*iter);
+
+    delete[] elem_symbol;
+    elem_symbol = nullptr;
+    return true;
+}
+
 void _BOUNDARY_RECOVERY::Insert_Steiner_Points(_SU_MESH *su_mesh)
 {
     _MESH_PROCESS mesh_process;
@@ -2262,18 +2510,68 @@ void _BOUNDARY_RECOVERY::Insert_Steiner_Points(_SU_MESH *su_mesh)
     return;
 }
 
-void _BOUNDARY_RECOVERY::Move_Steiner_Points(_SU_MESH *su_mesh)
+void _BOUNDARY_RECOVERY::Split_Steiner_Points(_SU_MESH *su_mesh)
 {
     _MESH_PROCESS mesh_process;
-    // 先移动边界边上的Steiner点
-    std::vector<int> elemNum_IncludeNode;
+    // 先分解移动边界边上的Steiner点
     for (int i = su_mesh->nodeNum_before_edge_recovery; i < su_mesh->nodeNum_after_edge_recovery; i++)
-    {
-        mesh_process.FindBall_fast(su_mesh, i, &elemNum_IncludeNode);
-        if (elemNum_IncludeNode.empty())
-            std::cout << "1\n";
-    }
+        if (!Split_Edge_Steiner_Point(su_mesh, i))
+        {
+            std::cout << "Steiner point split error, check the program!\n";
+            mesh_process.Judge_the_validity_of_information(su_mesh);
+        }
     // 利用节点找分段边界边找分块边界面，分段边界面的节点形成一个环，球内剩余节点为外部节点，再进行网格分解
+
+    // 删除边界边上无效Steiner点，先将其替换到node容器末尾，再进行删除操作
+    int nodeNum_tp = -1;
+    std::vector<int> elemNum_IncludeNode;
+    for (int i = su_mesh->nodeNum_after_edge_recovery - 1; i >= su_mesh->nodeNum_before_edge_recovery; i--)
+    {
+        nodeNum_tp = su_mesh->node_num - 1;
+        // 如果本来就在末尾，则直接删除
+        if (i == nodeNum_tp)
+        {
+            su_mesh->node.pop_back();
+            su_mesh->node_num--;
+            continue;
+        }
+        std::vector<int>().swap(elemNum_IncludeNode);
+        mesh_process.FindBall_fast(su_mesh, nodeNum_tp, &elemNum_IncludeNode); // 查找包含node容器末尾节点的所有网格单元编号
+        // 修改elem容器内值
+        for (std::vector<int>::iterator iter = elemNum_IncludeNode.begin(); iter != elemNum_IncludeNode.end(); ++iter)
+            su_mesh->elem.at(*iter).form[mesh_process.Elem_Include_Node(su_mesh->elem.at(*iter), nodeNum_tp)] = i, su_mesh->elem.at(*iter).Sort();
+        // 替换节点位置
+        std::swap(su_mesh->node.at(nodeNum_tp), su_mesh->node.at(i));
+        // 避免初始边界点被修改
+        if (nodeNum_tp < su_mesh->InitNode_num + 8 || i < su_mesh->InitNode_num + 8)
+            std::cout << "InitNode being change!\n";
+        su_mesh->node.pop_back();
+        su_mesh->node_num--;
+    }
+    //mesh_process.Judge_the_validity_of_information(su_mesh);
+    return;
+}
+
+void _BOUNDARY_RECOVERY::Restore_Judgment(_SU_MESH *su_mesh)
+{
+    _MESH_PROCESS mesh_process;
+    // 检查所有不在当前三角化内的边界边
+    std::vector<int> elemNum;
+    for (std::vector<EDGE>::iterator iter = su_mesh->boundary_edge.begin(); iter != su_mesh->boundary_edge.end(); ++iter)
+    {
+        std::vector<int>().swap(elemNum);
+        mesh_process.FindRing(su_mesh, *iter, &elemNum, "fast");
+        if (elemNum.empty())
+            std::cout << "Boundart edge formed by " << iter->form[0] << ' ' << iter->form[1] << " is not recovered!\n";
+    }
+    // 再检查边界面
+    for (std::vector<FACE>::iterator iter = su_mesh->boundary_face.begin(); iter != su_mesh->boundary_face.end(); ++iter)
+    {
+        std::vector<int>().swap(elemNum);
+        mesh_process.FindAwl(su_mesh, *iter, &elemNum, "fast");
+        if (elemNum.empty())
+            std::cout << "Boundart face formed by " << iter->form[0] << ' ' << iter->form[1] << ' ' << iter->form[2] << " is not recovered!\n";
+    }
     return;
 }
 

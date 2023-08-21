@@ -15,7 +15,7 @@ class _BOUNDARY_RECOVERY
 {
 public:
     // 根据边界信息，查找所有外部单元
-    std::vector<int> External_Elem_Lookup(_SU_MESH *su_mesh);
+    void External_Elem_Lookup(_SU_MESH *su_mesh, std::vector<int> *nodeNum_Remove, std::vector<int> *elemNum_Remove);
     // 在node容器内交换两个节点位置，并更新网格相邻信息
     void ReplaceNode_two(_SU_MESH *su_mesh, int nodeNum_one, int nodeNum_two);
     // 在elem容器内交换两个单元位置，并更新网格相邻信息
@@ -25,9 +25,9 @@ public:
     // 在elem容器内删除最后一个单元并更新所有信息，需要给定单元删除后的网格单元数量
     void Removal_LastElem(_SU_MESH *su_mesh, int elemNum_after);
     // 在node容器内删除节点与单元，type类型跟随Removal_ExGrid函数
-    void Removal_NodeElem(_SU_MESH *su_mesh, std::vector<int> elemNum_Remove, int *nodeNum_Remove, int nodeRemove_num, int type);
-    // 去掉外部单元并缩减容器，包含两种移除方式，第一种移除初始Delaunay三角化的8个顶角节点与包含这些节点的所有网格单元，第二种根据边界恢复后的边界信息移除剩下所有外部单元
-    void Removal_ExGrid(_SU_MESH *su_mesh, int type);
+    void Removal_NodeElem(_SU_MESH *su_mesh, std::vector<int> nodeNum_Remove, std::vector<int> elemNum_Remove);
+    // 去掉外部单元并缩减容器
+    void Removal_ExGrid(_SU_MESH *su_mesh);
     // 查找路径（path）
     std::vector<Pathl> FindPath(_SU_MESH *su_mesh, EDGE edge_recovery);
     // 路径元分解，包含6种类型，单边型（包含点边型）、对边型、邻边型、点面型、边面型和双面型
@@ -47,11 +47,15 @@ public:
     void Setl_Generate_GridCell(_SU_MESH *su_mesh, std::vector<Setl> *set, FACE face_recovery);
     // 恢复边界面
     void Recovery_Boundary_face(_SU_MESH *su_mesh, FACE face_recovery);
+    // 分解边界上的Steiner点，总体原则是通过边界边（或者分块的边界边），将Steiner点的Ball剖分成两个Ball，分别对这两个Ball进行插点重连，待插点（即分解后的Steiner点）初始化为两个Ball各自的重心位置，若该点位置非法，则将其往原始Steiner点位置逐步移动直至合法，返回是否成功分解
+    bool Split_Edge_Steiner_Point(_SU_MESH *su_mesh, int SteinerNodeNum_wait_split);
     // 边界恢复
     // 插入Steiner点，实现保形边界恢复
     void Insert_Steiner_Points(_SU_MESH *su_mesh);
-    // 移动Steiner点，实现约束边界恢复
-    void Move_Steiner_Points(_SU_MESH *su_mesh);
+    // 分解移动Steiner点，实现约束边界恢复
+    void Split_Steiner_Points(_SU_MESH *su_mesh);
+    // 判断是否所有边界边、边界面都被恢复
+    void Restore_Judgment(_SU_MESH *su_mesh);
 
 private:
 public:

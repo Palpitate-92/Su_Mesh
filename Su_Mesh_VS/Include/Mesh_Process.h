@@ -25,6 +25,8 @@ public:
     EDGE Edge_Opposite_Edge(ELEM elem_tp, EDGE edge_tp);
     // 给定一个网格面与网格面的任意一条边，返回与该边相对的节点编号
     int Face_Opposite_Node(FACE face_tp, EDGE edge_tp);
+    // 给定一个网格边与网格边的任意一个节点编号，判断该网格边是否包含该节点编号，并返回该节点编号在该网格边的form中位置，返回-1则代表不包含
+    int Edge_Include_Node(EDGE edge_tp, int nodeNum_tp);
     // 给定一个网格面与网格面的任意一个节点编号，判断该网格面是否包含该节点编号，并返回该节点编号在该网格面的form中位置，返回-1则代表不包含
     int FACE_Include_Node(FACE face_tp, int nodeNum_tp);
     // 给定一个网格面与网格面的任意一个节点编号，返回与该节点相对的网格边
@@ -64,6 +66,10 @@ public:
     void FindAwl(_SU_MESH *su_mesh, FACE face_tp, std::vector<int> *elemNum_IncludeFace, std::string judgment);
     // 更新包含某个网格面的网格单元的相邻关系
     bool Update_Djacency(_SU_MESH *su_mesh, FACE face_tp, std::string judgment);
+    // 给定一组网格边集合，给定一个网格节点编号，从该组网格边集合里查找包含该网格节点的网格边,返回这些网格边在该组网格边集合中的编号顺序
+    std::vector<int> Find_edge_from_EdgeSet(std::vector<EDGE> edge_set, int nodeNum_tp);
+    // 给定一组网格面片，给定一个网格节点编号，从该组网格面片里查找包含该网格节点的网格面片,返回这些网格面片在该组网格面片中的编号顺序
+    std::vector<int> Find_face_from_FaceGroup(std::vector<FACE> face_group, int nodeNum_tp);
 
     // 简易判断网格各种信息是否有效
     void Judge_the_validity_of_information(_SU_MESH *su_mesh);

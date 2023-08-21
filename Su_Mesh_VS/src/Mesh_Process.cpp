@@ -118,6 +118,14 @@ int _MESH_PROCESS::Face_Opposite_Node(FACE face_tp, EDGE edge_tp)
     return -1;
 }
 
+int _MESH_PROCESS::Edge_Include_Node(EDGE edge_tp, int nodeNum_tp)
+{
+    for (int i = 0; i < DIM - 1; i++)
+        if (edge_tp.form[i] == nodeNum_tp)
+            return i;
+    return -1;
+}
+
 int _MESH_PROCESS::FACE_Include_Node(FACE face_tp, int nodeNum_tp)
 {
     for (int i = 0; i < DIM; i++)
@@ -497,6 +505,32 @@ bool _MESH_PROCESS::Update_Djacency(_SU_MESH *su_mesh, FACE face_tp, std::string
     else if (elemNum_IncludeFace.size() == 1) // 初始Delaunay三角化四边形边框边
         su_mesh->elem.at(elemNum_IncludeFace.at(0)).neig[Face_Opposite_Node(su_mesh->elem.at(elemNum_IncludeFace.at(0)), face_tp)] = -1;
     return true;
+}
+
+std::vector<int> _MESH_PROCESS::Find_edge_from_EdgeSet(std::vector<EDGE> edge_set, int nodeNum_tp)
+{
+    std::vector<int> edge_num;
+    int cnt = 0;
+    for (std::vector<EDGE>::iterator iter = edge_set.begin(); iter != edge_set.end(); ++iter)
+    {
+        if (Edge_Include_Node(*iter, nodeNum_tp) != -1)
+            edge_num.push_back(cnt);
+        cnt++;
+    }
+    return edge_num;
+}
+
+std::vector<int> _MESH_PROCESS::Find_face_from_FaceGroup(std::vector<FACE> face_group, int nodeNum_tp)
+{
+    std::vector<int> face_num;
+    int cnt = 0;
+    for (std::vector<FACE>::iterator iter = face_group.begin(); iter != face_group.end(); ++iter)
+    {
+        if (FACE_Include_Node(*iter, nodeNum_tp) != -1)
+            face_num.push_back(cnt);
+        cnt++;
+    }
+    return face_num;
 }
 
 void _MESH_PROCESS::Judge_the_validity_of_information(_SU_MESH *su_mesh)

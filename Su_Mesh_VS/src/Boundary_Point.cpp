@@ -22,6 +22,7 @@ void _BOUNDARY_POINT::IniDelaunay(_SU_MESH *su_mesh, int aaa)
                     su_mesh->shortest_border_edge = value_tp;
                 edge_tp.form[0] = face_iter->form[i];
                 edge_tp.form[1] = face_iter->form[j];
+                edge_tp.Sort();
                 if (std::find(su_mesh->boundary_edge.begin(), su_mesh->boundary_edge.end(), edge_tp) == su_mesh->boundary_edge.end())
                     su_mesh->boundary_edge.push_back(edge_tp);
             }

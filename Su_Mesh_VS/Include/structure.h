@@ -20,6 +20,7 @@ private:
 
 public:
     ELEM(); // 构造函数，初始化所有值
+    ELEM(int nodeNum_1, int nodeNum_2, int nodeNum_3, int nodeNum_4);
     ELEM(int nodeNum_1, int nodeNum_2, int nodeNum_3, int nodeNum_4, int elemNum_1, int elemNum_2, int elemNum_3, int elemNum_4);
     void Swap(int i, int j);            // 交换form、neig数组1i、j位置上的值
     void Sort();                        // 快速交换elem结构体的form数组，使其从小到大排列

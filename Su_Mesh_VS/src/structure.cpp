@@ -10,6 +10,17 @@ ELEM::ELEM()
     quality = -1;
 }
 
+ELEM::ELEM(int nodeNum_1, int nodeNum_2, int nodeNum_3, int nodeNum_4)
+{
+    form[0] = nodeNum_1;
+    form[1] = nodeNum_2;
+    form[2] = nodeNum_3;
+    form[3] = nodeNum_4;
+    for (int i = 0; i < DIM + 1; i++)
+        neig[i] = -1;
+    quality = -1;
+}
+
 ELEM::ELEM(int nodeNum_1, int nodeNum_2, int nodeNum_3, int nodeNum_4, int elemNum_1, int elemNum_2, int elemNum_3, int elemNum_4)
 {
     form[0] = nodeNum_1;

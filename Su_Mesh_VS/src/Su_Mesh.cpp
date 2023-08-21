@@ -76,11 +76,15 @@ int main()
     su_mesh.boundary_recovery.Insert_Steiner_Points(&su_mesh);
     // 输出当前三角化信息文件
     su_mesh.file_ios.Write_File(&su_mesh, "1111\\Before_Move_Steiner");
-    // * 移动Steiner点，实现约束边界恢复
-    su_mesh.boundary_recovery.Move_Steiner_Points(&su_mesh);
+    // * 分解移动Steiner点，实现约束边界恢复
+    su_mesh.boundary_recovery.Split_Steiner_Points(&su_mesh);
+    // 判断是否所有边界边、边界面都被恢复
+    su_mesh.boundary_recovery.Restore_Judgment(&su_mesh);
 
-    // 简易判断网格各种信息是否有效
-    su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
+    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_Delaunay");
+
+    // 移除所有外部单元并缩减容器
+    su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh);
 
     end = clock();
     double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
@@ -91,14 +95,8 @@ int main()
     // 简易判断网格各种信息是否有效
     su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
 
-    // 移除剩余外部单元并缩减容器
-    su_mesh.boundary_recovery.Removal_ExGrid(&su_mesh, 2);
-
-    // 简易判断网格各种信息是否有效
-    su_mesh.mesh_process.Judge_the_validity_of_information(&su_mesh);
-
     // 输出当前三角化信息文件
-    //su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_Delaunay");
+    su_mesh.file_ios.Write_File(&su_mesh, "1111\\Removal_Delaunay");
     // 内部点生成与插入
     su_mesh.interior_point.AutoRefine(&su_mesh);
     // 简易判断网格各种信息是否有效
